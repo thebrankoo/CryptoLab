@@ -1,0 +1,12 @@
+framework module CryptoLab {
+	umbrella header "CryptoLab.h"
+	
+	export *
+	module * { export * }
+}
+
+module OpenSSL [system][extern_c] {
+//	header "/Users/branko/Documents/master/CryptoWrapper/include/openssl/md5.h"
+	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/md5.h"
+	export *
+}

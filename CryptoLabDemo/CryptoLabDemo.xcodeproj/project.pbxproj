@@ -1,0 +1,316 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19B147161E3E36960077162C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B147151E3E36960077162C /* AppDelegate.swift */; };
+		19B147181E3E36960077162C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B147171E3E36960077162C /* ViewController.swift */; };
+		19B1471B1E3E36960077162C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B147191E3E36960077162C /* Main.storyboard */; };
+		19B1471D1E3E36960077162C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B1471C1E3E36960077162C /* Assets.xcassets */; };
+		19B147201E3E36960077162C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B1471E1E3E36960077162C /* LaunchScreen.storyboard */; };
+		19B147291E3E371E0077162C /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B147281E3E371E0077162C /* CryptoLab.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		19B147121E3E36960077162C /* CryptoLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B147151E3E36960077162C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		19B147171E3E36960077162C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		19B1471A1E3E36960077162C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		19B1471C1E3E36960077162C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		19B1471F1E3E36960077162C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		19B147211E3E36960077162C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19B147281E3E371E0077162C /* CryptoLab.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoLab.framework; path = "../../../../Library/Developer/Xcode/DerivedData/CryptoLab-dncwisadobtqlkeeffjjeazckkkp/Build/Products/Debug-iphoneos/CryptoLab.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		19B1470F1E3E36960077162C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B147291E3E371E0077162C /* CryptoLab.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19B147091E3E36960077162C = {
+			isa = PBXGroup;
+			children = (
+				19B147141E3E36960077162C /* CryptoLabDemo */,
+				19B147271E3E36D00077162C /* Frameworks */,
+				19B147131E3E36960077162C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		19B147131E3E36960077162C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19B147121E3E36960077162C /* CryptoLabDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		19B147141E3E36960077162C /* CryptoLabDemo */ = {
+			isa = PBXGroup;
+			children = (
+				19B147151E3E36960077162C /* AppDelegate.swift */,
+				19B147171E3E36960077162C /* ViewController.swift */,
+				19B147191E3E36960077162C /* Main.storyboard */,
+				19B1471C1E3E36960077162C /* Assets.xcassets */,
+				19B1471E1E3E36960077162C /* LaunchScreen.storyboard */,
+				19B147211E3E36960077162C /* Info.plist */,
+			);
+			path = CryptoLabDemo;
+			sourceTree = "<group>";
+		};
+		19B147271E3E36D00077162C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19B147281E3E371E0077162C /* CryptoLab.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		19B147111E3E36960077162C /* CryptoLabDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19B147241E3E36960077162C /* Build configuration list for PBXNativeTarget "CryptoLabDemo" */;
+			buildPhases = (
+				19B1470E1E3E36960077162C /* Sources */,
+				19B1470F1E3E36960077162C /* Frameworks */,
+				19B147101E3E36960077162C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CryptoLabDemo;
+			productName = CryptoLabDemo;
+			productReference = 19B147121E3E36960077162C /* CryptoLabDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		19B1470A1E3E36960077162C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Branko Popovic";
+				TargetAttributes = {
+					19B147111E3E36960077162C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 19B1470D1E3E36960077162C /* Build configuration list for PBXProject "CryptoLabDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 19B147091E3E36960077162C;
+			productRefGroup = 19B147131E3E36960077162C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				19B147111E3E36960077162C /* CryptoLabDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		19B147101E3E36960077162C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B147201E3E36960077162C /* LaunchScreen.storyboard in Resources */,
+				19B1471D1E3E36960077162C /* Assets.xcassets in Resources */,
+				19B1471B1E3E36960077162C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		19B1470E1E3E36960077162C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B147181E3E36960077162C /* ViewController.swift in Sources */,
+				19B147161E3E36960077162C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		19B147191E3E36960077162C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19B1471A1E3E36960077162C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		19B1471E1E3E36960077162C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19B1471F1E3E36960077162C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		19B147221E3E36960077162C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		19B147231E3E36960077162C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		19B147251E3E36960077162C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CryptoLabDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thebranko.CryptoLabDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		19B147261E3E36960077162C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CryptoLabDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thebranko.CryptoLabDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		19B1470D1E3E36960077162C /* Build configuration list for PBXProject "CryptoLabDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19B147221E3E36960077162C /* Debug */,
+				19B147231E3E36960077162C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		19B147241E3E36960077162C /* Build configuration list for PBXNativeTarget "CryptoLabDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19B147251E3E36960077162C /* Debug */,
+				19B147261E3E36960077162C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 19B1470A1E3E36960077162C /* Project object */;
+}
