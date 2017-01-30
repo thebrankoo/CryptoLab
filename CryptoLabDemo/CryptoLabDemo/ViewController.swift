@@ -15,7 +15,13 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		
 		//MARK: test code
-		DemoClass.shared.printMD5Length()
+		//DemoClass.shared.printMD5Length()
+		
+		
+		//Hashing functions
+		let hashFunction = MD5Hash()
+		let data = "Test primer".data(using: .utf8)
+		print("Hash code: \(hashFunction.hash(data: data!).hexEncodedString())")
 		
 	}
 
@@ -23,7 +29,14 @@ class ViewController: UIViewController {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+	
 
 
 }
 
+
+extension Data {
+	func hexEncodedString() -> String {
+		return map { String(format: "%02hhx", $0) }.joined()
+	}
+}

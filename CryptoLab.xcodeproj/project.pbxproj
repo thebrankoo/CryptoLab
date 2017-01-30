@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19F657BF1E3FD73700271872 /* HashFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F657BE1E3FD73700271872 /* HashFunction.swift */; };
 		19F9B1431E3E33CA007CE1BD /* CryptoLab.h in Headers */ = {isa = PBXBuildFile; fileRef = 19F9B1411E3E33CA007CE1BD /* CryptoLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19F9B14F1E3E3463007CE1BD /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B14E1E3E3463007CE1BD /* openssl.framework */; };
 		19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F9B1521E3E3569007CE1BD /* DemoClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19F657BE1E3FD73700271872 /* HashFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunction.swift; sourceTree = "<group>"; };
 		19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CryptoLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F9B1411E3E33CA007CE1BD /* CryptoLab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CryptoLab.h; sourceTree = "<group>"; };
 		19F9B1421E3E33CA007CE1BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,6 +35,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19F657BD1E3FD71F00271872 /* Hash functions */ = {
+			isa = PBXGroup;
+			children = (
+				19F657BE1E3FD73700271872 /* HashFunction.swift */,
+			);
+			name = "Hash functions";
+			sourceTree = "<group>";
+		};
 		19F9B1341E3E33CA007CE1BD = {
 			isa = PBXGroup;
 			children = (
@@ -52,6 +62,7 @@
 		19F9B1401E3E33CA007CE1BD /* CryptoLab */ = {
 			isa = PBXGroup;
 			children = (
+				19F657BD1E3FD71F00271872 /* Hash functions */,
 				19F9B1511E3E355B007CE1BD /* Demo class */,
 				19F9B1411E3E33CA007CE1BD /* CryptoLab.h */,
 				19F9B1421E3E33CA007CE1BD /* Info.plist */,
@@ -158,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
+				19F657BF1E3FD73700271872 /* HashFunction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +345,7 @@
 				19F9B1481E3E33CA007CE1BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
