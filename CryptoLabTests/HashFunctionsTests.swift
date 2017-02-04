@@ -1,26 +1,26 @@
 //
-//  CryptoLabTests.swift
-//  CryptoLabTests
+//  HashFunctionsTests.swift
+//  CryptoLab
 //
-//  Created by Branko Popovic on 2/1/17.
+//  Created by Branko Popovic on 2/4/17.
 //  Copyright © 2017 Branko Popovic. All rights reserved.
 //
 
 import XCTest
 import CryptoLab
 
-class CryptoLabTests: XCTestCase {
+class HashFunctionsTests: XCTestCase {
+    
+ fileprivate let defaultTestString = "Test string"
 	
-	fileprivate let defaultTestString = "Test string"
+	override func setUp() {
+		super.setUp()
+		// Put setup code here. This method is called before the invocation of each test method in the class.
+	}
 	
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-	
-    override func tearDown() {
-        super.tearDown()
-    }
+	override func tearDown() {
+		super.tearDown()
+	}
 	
 	//MARK: Testing hashing function correctness
 	//Comparation results were obtained from: http://www.sha1-online.com/ if not specified differently
