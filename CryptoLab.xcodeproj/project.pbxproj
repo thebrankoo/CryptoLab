@@ -7,14 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19F657BF1E3FD73700271872 /* HashFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F657BE1E3FD73700271872 /* HashFunction.swift */; };
+		198A32931E427AFD000E5370 /* CryptoLabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198A32921E427AFD000E5370 /* CryptoLabTests.swift */; };
+		198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */; };
+		19F657BF1E3FD73700271872 /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F657BE1E3FD73700271872 /* HashFunctions.swift */; };
 		19F9B1431E3E33CA007CE1BD /* CryptoLab.h in Headers */ = {isa = PBXBuildFile; fileRef = 19F9B1411E3E33CA007CE1BD /* CryptoLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19F9B14F1E3E3463007CE1BD /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B14E1E3E3463007CE1BD /* openssl.framework */; };
 		19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F9B1521E3E3569007CE1BD /* DemoClass.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		198A32961E427AFD000E5370 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19F9B1351E3E33CA007CE1BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19F9B13D1E3E33CA007CE1BD;
+			remoteInfo = CryptoLab;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		19F657BE1E3FD73700271872 /* HashFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunction.swift; sourceTree = "<group>"; };
+		198A32901E427AFD000E5370 /* CryptoLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		198A32921E427AFD000E5370 /* CryptoLabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoLabTests.swift; sourceTree = "<group>"; };
+		198A32941E427AFD000E5370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19F657BE1E3FD73700271872 /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctions.swift; sourceTree = "<group>"; };
 		19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CryptoLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F9B1411E3E33CA007CE1BD /* CryptoLab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CryptoLab.h; sourceTree = "<group>"; };
 		19F9B1421E3E33CA007CE1BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -24,6 +39,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		198A328D1E427AFD000E5370 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19F9B13A1E3E33CA007CE1BD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -35,10 +58,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		198A32911E427AFD000E5370 /* CryptoLabTests */ = {
+			isa = PBXGroup;
+			children = (
+				198A32921E427AFD000E5370 /* CryptoLabTests.swift */,
+				198A32941E427AFD000E5370 /* Info.plist */,
+			);
+			path = CryptoLabTests;
+			sourceTree = "<group>";
+		};
 		19F657BD1E3FD71F00271872 /* Hash functions */ = {
 			isa = PBXGroup;
 			children = (
-				19F657BE1E3FD73700271872 /* HashFunction.swift */,
+				19F657BE1E3FD73700271872 /* HashFunctions.swift */,
 			);
 			name = "Hash functions";
 			sourceTree = "<group>";
@@ -47,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				19F9B1401E3E33CA007CE1BD /* CryptoLab */,
+				198A32911E427AFD000E5370 /* CryptoLabTests */,
 				19F9B13F1E3E33CA007CE1BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */,
+				198A32901E427AFD000E5370 /* CryptoLabTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +136,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		198A328F1E427AFD000E5370 /* CryptoLabTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 198A329A1E427AFD000E5370 /* Build configuration list for PBXNativeTarget "CryptoLabTests" */;
+			buildPhases = (
+				198A328C1E427AFD000E5370 /* Sources */,
+				198A328D1E427AFD000E5370 /* Frameworks */,
+				198A328E1E427AFD000E5370 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				198A32971E427AFD000E5370 /* PBXTargetDependency */,
+			);
+			name = CryptoLabTests;
+			productName = CryptoLabTests;
+			productReference = 198A32901E427AFD000E5370 /* CryptoLabTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		19F9B13D1E3E33CA007CE1BD /* CryptoLab */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19F9B1461E3E33CA007CE1BD /* Build configuration list for PBXNativeTarget "CryptoLab" */;
@@ -126,9 +178,14 @@
 		19F9B1351E3E33CA007CE1BD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Branko Popovic";
 				TargetAttributes = {
+					198A328F1E427AFD000E5370 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
 					19F9B13D1E3E33CA007CE1BD = {
 						CreatedOnToolsVersion = 8.2.1;
 						LastSwiftMigration = 0820;
@@ -149,11 +206,19 @@
 			projectRoot = "";
 			targets = (
 				19F9B13D1E3E33CA007CE1BD /* CryptoLab */,
+				198A328F1E427AFD000E5370 /* CryptoLabTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		198A328E1E427AFD000E5370 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19F9B13C1E3E33CA007CE1BD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,18 +229,56 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		198A328C1E427AFD000E5370 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				198A32931E427AFD000E5370 /* CryptoLabTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19F9B1391E3E33CA007CE1BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
-				19F657BF1E3FD73700271872 /* HashFunction.swift in Sources */,
+				19F657BF1E3FD73700271872 /* HashFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		198A32971E427AFD000E5370 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19F9B13D1E3E33CA007CE1BD /* CryptoLab */;
+			targetProxy = 198A32961E427AFD000E5370 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		198A32981E427AFD000E5370 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CryptoLabTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thebranko.CryptoLabTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		198A32991E427AFD000E5370 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CryptoLabTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thebranko.CryptoLabTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		19F9B1441E3E33CA007CE1BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -329,6 +432,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		198A329A1E427AFD000E5370 /* Build configuration list for PBXNativeTarget "CryptoLabTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				198A32981E427AFD000E5370 /* Debug */,
+				198A32991E427AFD000E5370 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		19F9B1381E3E33CA007CE1BD /* Build configuration list for PBXProject "CryptoLab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

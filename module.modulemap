@@ -8,5 +8,7 @@ framework module CryptoLab {
 module OpenSSL [system][extern_c] {
 //	header "/Users/branko/Documents/master/CryptoWrapper/include/openssl/md5.h"
 	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/md5.h"
+	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/sha.h"
+	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/evp.h"
 	export *
 }

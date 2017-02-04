@@ -21,6 +21,7 @@ class ViewController: UIViewController {
 		//Hashing functions
 		let hashFunction = MD5Hash()
 		let data = "Test primer".data(using: .utf8)
+		print("Data to hash: \(data?.hexEncodedString())")
 		print("Hash code: \(hashFunction.hash(data: data!).hexEncodedString())")
 		
 	}
