@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		193BEEB21E4614B600383028 /* OldFuncitonKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */; };
+		193BEEB41E46266C00383028 /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB31E46266C00383028 /* HashFunctions.swift */; };
 		198A32931E427AFD000E5370 /* CryptoLabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198A32921E427AFD000E5370 /* CryptoLabTests.swift */; };
 		198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */; };
-		19F657BF1E3FD73700271872 /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F657BE1E3FD73700271872 /* HashFunctions.swift */; };
+		19F657BF1E3FD73700271872 /* CoreHashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F657BE1E3FD73700271872 /* CoreHashFunctions.swift */; };
 		19F9B1431E3E33CA007CE1BD /* CryptoLab.h in Headers */ = {isa = PBXBuildFile; fileRef = 19F9B1411E3E33CA007CE1BD /* CryptoLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19F9B14F1E3E3463007CE1BD /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B14E1E3E3463007CE1BD /* openssl.framework */; };
 		19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F9B1521E3E3569007CE1BD /* DemoClass.swift */; };
@@ -28,10 +29,11 @@
 
 /* Begin PBXFileReference section */
 		193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldFuncitonKeeper.swift; sourceTree = "<group>"; };
+		193BEEB31E46266C00383028 /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctions.swift; sourceTree = "<group>"; };
 		198A32901E427AFD000E5370 /* CryptoLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		198A32921E427AFD000E5370 /* CryptoLabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoLabTests.swift; sourceTree = "<group>"; };
 		198A32941E427AFD000E5370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19F657BE1E3FD73700271872 /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctions.swift; sourceTree = "<group>"; };
+		19F657BE1E3FD73700271872 /* CoreHashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreHashFunctions.swift; sourceTree = "<group>"; };
 		19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CryptoLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F9B1411E3E33CA007CE1BD /* CryptoLab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CryptoLab.h; sourceTree = "<group>"; };
 		19F9B1421E3E33CA007CE1BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,8 +74,9 @@
 		19F657BD1E3FD71F00271872 /* Hash functions */ = {
 			isa = PBXGroup;
 			children = (
-				19F657BE1E3FD73700271872 /* HashFunctions.swift */,
+				19F657BE1E3FD73700271872 /* CoreHashFunctions.swift */,
 				193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */,
+				193BEEB31E46266C00383028 /* HashFunctions.swift */,
 			);
 			name = "Hash functions";
 			sourceTree = "<group>";
@@ -245,8 +248,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
-				19F657BF1E3FD73700271872 /* HashFunctions.swift in Sources */,
+				19F657BF1E3FD73700271872 /* CoreHashFunctions.swift in Sources */,
 				193BEEB21E4614B600383028 /* OldFuncitonKeeper.swift in Sources */,
+				193BEEB41E46266C00383028 /* HashFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

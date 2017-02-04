@@ -14,16 +14,6 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//MARK: test code
-		//DemoClass.shared.printMD5Length()
-		
-		
-		//Hashing functions
-		let hashFunction = MD5Hash()
-		let data = "Test primer".data(using: .utf8)
-		print("Data to hash: \(data?.hexEncodedString())")
-		print("Hash code: \(hashFunction.hash(data: data!).hexEncodedString())")
-		
 	}
 
 	override func didReceiveMemoryWarning() {
