@@ -22,28 +22,6 @@ class CryptoLabTests: XCTestCase {
         super.tearDown()
     }
 	
-	//MARK: Testing deterministic property of hashing functions
-	
-    func testMD5Deterministic() {
-		let testData = defaultTestString.data(using: .utf8)!
-		let hashFunc = MD5Hash()
-		
-		let hashA = hashFunc.hash(data: testData)
-		let hashB = hashFunc.hash(data: testData)
-		
-		XCTAssert(hashA == hashB, "MD5 hash not deterministic!")
-    }
-	
-	func testSHA1Deterministic() {
-		let testData = defaultTestString.data(using: .utf8)!
-		let hashFunc = SHA1Hash()
-		
-		let hashA = hashFunc.hash(data: testData)
-		let hashB = hashFunc.hash(data: testData)
-		
-		XCTAssert(hashA == hashB, "SHA1 hash not deterministic!")
-	}
-	
 	//MARK: Testing hashing function correctness
 	//Comparation results were obtained from: http://www.sha1-online.com/ if not specified differently
 	

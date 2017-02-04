@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		193BEEB21E4614B600383028 /* OldFuncitonKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */; };
 		198A32931E427AFD000E5370 /* CryptoLabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198A32921E427AFD000E5370 /* CryptoLabTests.swift */; };
 		198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */; };
 		19F657BF1E3FD73700271872 /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F657BE1E3FD73700271872 /* HashFunctions.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldFuncitonKeeper.swift; sourceTree = "<group>"; };
 		198A32901E427AFD000E5370 /* CryptoLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		198A32921E427AFD000E5370 /* CryptoLabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoLabTests.swift; sourceTree = "<group>"; };
 		198A32941E427AFD000E5370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				19F657BE1E3FD73700271872 /* HashFunctions.swift */,
+				193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */,
 			);
 			name = "Hash functions";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			files = (
 				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
 				19F657BF1E3FD73700271872 /* HashFunctions.swift in Sources */,
+				193BEEB21E4614B600383028 /* OldFuncitonKeeper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +443,7 @@
 				198A32991E427AFD000E5370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		19F9B1381E3E33CA007CE1BD /* Build configuration list for PBXProject "CryptoLab" */ = {
 			isa = XCConfigurationList;
