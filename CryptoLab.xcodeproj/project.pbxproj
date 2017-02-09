@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		193BEEB21E4614B600383028 /* OldFuncitonKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */; };
-		193BEEB41E46266C00383028 /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB31E46266C00383028 /* HashFunctions.swift */; };
 		193BEEB61E46342900383028 /* HashFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB51E46342900383028 /* HashFunctionsTests.swift */; };
 		198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */; };
-		19F657BF1E3FD73700271872 /* CoreHashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F657BE1E3FD73700271872 /* CoreHashFunctions.swift */; };
 		19F9B1431E3E33CA007CE1BD /* CryptoLab.h in Headers */ = {isa = PBXBuildFile; fileRef = 19F9B1411E3E33CA007CE1BD /* CryptoLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19F9B14F1E3E3463007CE1BD /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B14E1E3E3463007CE1BD /* openssl.framework */; };
 		19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F9B1521E3E3569007CE1BD /* DemoClass.swift */; };
+		19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */; };
+		19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */; };
+		19FB5FE71E4C6D9700F6212E /* OldFuncitonKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE41E4C6D9700F6212E /* OldFuncitonKeeper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,18 +28,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldFuncitonKeeper.swift; sourceTree = "<group>"; };
-		193BEEB31E46266C00383028 /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctions.swift; sourceTree = "<group>"; };
 		193BEEB51E46342900383028 /* HashFunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctionsTests.swift; sourceTree = "<group>"; };
 		198A32901E427AFD000E5370 /* CryptoLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		198A32941E427AFD000E5370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19F657BE1E3FD73700271872 /* CoreHashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreHashFunctions.swift; sourceTree = "<group>"; };
 		19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CryptoLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F9B1411E3E33CA007CE1BD /* CryptoLab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CryptoLab.h; sourceTree = "<group>"; };
 		19F9B1421E3E33CA007CE1BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19F9B14E1E3E3463007CE1BD /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = Frameworks/openssl.framework; sourceTree = SOURCE_ROOT; };
 		19F9B1501E3E349C007CE1BD /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = SOURCE_ROOT; };
 		19F9B1521E3E3569007CE1BD /* DemoClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoClass.swift; sourceTree = "<group>"; };
+		19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreHashFunctions.swift; path = "Hash Functions/CoreHashFunctions.swift"; sourceTree = "<group>"; };
+		19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashFunctions.swift; path = "Hash Functions/HashFunctions.swift"; sourceTree = "<group>"; };
+		19FB5FE41E4C6D9700F6212E /* OldFuncitonKeeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OldFuncitonKeeper.swift; path = "Hash Functions/OldFuncitonKeeper.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +74,9 @@
 		19F657BD1E3FD71F00271872 /* Hash functions */ = {
 			isa = PBXGroup;
 			children = (
-				19F657BE1E3FD73700271872 /* CoreHashFunctions.swift */,
-				193BEEB11E4614B600383028 /* OldFuncitonKeeper.swift */,
-				193BEEB31E46266C00383028 /* HashFunctions.swift */,
+				19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */,
+				19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */,
+				19FB5FE41E4C6D9700F6212E /* OldFuncitonKeeper.swift */,
 			);
 			name = "Hash functions";
 			sourceTree = "<group>";
@@ -102,6 +102,7 @@
 		19F9B1401E3E33CA007CE1BD /* CryptoLab */ = {
 			isa = PBXGroup;
 			children = (
+				19FB5FE11E4C6CF600F6212E /* Cipher */,
 				19F657BD1E3FD71F00271872 /* Hash functions */,
 				19F9B1511E3E355B007CE1BD /* Demo class */,
 				19F9B1411E3E33CA007CE1BD /* CryptoLab.h */,
@@ -126,6 +127,13 @@
 				19F9B1521E3E3569007CE1BD /* DemoClass.swift */,
 			);
 			name = "Demo class";
+			sourceTree = "<group>";
+		};
+		19FB5FE11E4C6CF600F6212E /* Cipher */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cipher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,10 +255,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */,
 				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
-				19F657BF1E3FD73700271872 /* CoreHashFunctions.swift in Sources */,
-				193BEEB21E4614B600383028 /* OldFuncitonKeeper.swift in Sources */,
-				193BEEB41E46266C00383028 /* HashFunctions.swift in Sources */,
+				19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */,
+				19FB5FE71E4C6D9700F6212E /* OldFuncitonKeeper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
