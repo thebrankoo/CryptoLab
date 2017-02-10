@@ -15,6 +15,8 @@
 		19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */; };
 		19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */; };
 		19FB5FE71E4C6D9700F6212E /* OldFuncitonKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE41E4C6D9700F6212E /* OldFuncitonKeeper.swift */; };
+		19FB5FE91E4C6E1C00F6212E /* Ciphers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE81E4C6E1C00F6212E /* Ciphers.swift */; };
+		19FB5FEB1E4C73EF00F6212E /* CipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreHashFunctions.swift; path = "Hash Functions/CoreHashFunctions.swift"; sourceTree = "<group>"; };
 		19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashFunctions.swift; path = "Hash Functions/HashFunctions.swift"; sourceTree = "<group>"; };
 		19FB5FE41E4C6D9700F6212E /* OldFuncitonKeeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OldFuncitonKeeper.swift; path = "Hash Functions/OldFuncitonKeeper.swift"; sourceTree = "<group>"; };
+		19FB5FE81E4C6E1C00F6212E /* Ciphers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ciphers.swift; path = Cipher/Ciphers.swift; sourceTree = "<group>"; };
+		19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			children = (
 				198A32941E427AFD000E5370 /* Info.plist */,
 				193BEEB51E46342900383028 /* HashFunctionsTests.swift */,
+				19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */,
 			);
 			path = CryptoLabTests;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 		19FB5FE11E4C6CF600F6212E /* Cipher */ = {
 			isa = PBXGroup;
 			children = (
+				19FB5FE81E4C6E1C00F6212E /* Ciphers.swift */,
 			);
 			name = Cipher;
 			sourceTree = "<group>";
@@ -247,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FB5FEB1E4C73EF00F6212E /* CipherTests.swift in Sources */,
 				193BEEB61E46342900383028 /* HashFunctionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +266,7 @@
 				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
 				19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */,
 				19FB5FE71E4C6D9700F6212E /* OldFuncitonKeeper.swift in Sources */,
+				19FB5FE91E4C6E1C00F6212E /* Ciphers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
