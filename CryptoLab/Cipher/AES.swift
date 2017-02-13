@@ -51,6 +51,15 @@ public enum BlockCipherMode {
 	}
 }
 
+enum AESError: Error {
+	case noInitParameters(reason: String)
+}
+
+enum CipherGeneralError: Error {
+	case cipherProcessFail(reason: String)
+	case invalidKey(reason: String)
+}
+
 public class AESCipher: NSObject {
 	static let ivSize = 16
 	let key: Data?
@@ -59,21 +68,69 @@ public class AESCipher: NSObject {
 	
 	fileprivate var aesCipher: UnsafePointer<EVP_CIPHER>?
 	
-	public init(key: Data, iv: Data, blockMode: BlockCipherMode) {
+	public init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
 		self.key = key
 		self.iv = iv
 		self.blockMode = blockMode
-		
 		super.init()
+		
+		if isValid(cipherKey: key) == false { throw CipherGeneralError.invalidKey(reason: "AES Key must be of size: 16, 24 or 32 bytes") }
+		decideAESCipher()
 	}
 	
-	public func encrypt() {
+	public func encrypt(data: Data) throws -> Data {
 		
+		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
+		
+		let ctx = EVP_CIPHER_CTX_new()
+		
+		if let key = self.key, let iv = self.iv {
+			
+			let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
+			let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
+			
+			var resultData = [UInt8](repeating: UInt8(), count: key.count)
+			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
+			
+			let initCheck = EVP_EncryptInit(ctx, self.aesCipher, keyPointer, ivPointer)
+			if initCheck == 0 {
+				throw CipherGeneralError.cipherProcessFail(reason: "Encryption INIT fail")
+			}
+			
+			let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
+			if updateCheck == 0 {
+				throw CipherGeneralError.cipherProcessFail(reason: "Encryption UPDATE fail")
+			}
+			
+			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
+			if finalCheck == 0 {
+				throw CipherGeneralError.cipherProcessFail(reason: "Encryption FINAL fail")
+			}
+			
+			let result = Data(resultData)
+		
+			return result
+		}
+		
+		throw AESError.noInitParameters(reason: "Cipher key or initialization vector is not set")
 	}
 	
-	public func decrypt() {
+	public func decrypt(data: Data) {
+//		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
+//		let ctx = EVP_CIPHER_CTX_new()
+//		
+//		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key! as NSData).bytes.bindMemory(to: UInt8.self, capacity: key!.count))
+//		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv! as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv!.count))
+//		
+//		var resultData = [UInt8](repeating: UInt8(), count: 32)
+//		let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 		
+//		EVP_DecryptInit(ctx, self.aesCipher, keyPointer, ivPointer)
+//		EVP_DecryptUpdate(ctx, resultData, resultSize, dataPointer, Int32(data.count))
+//		EVP_DecryptFinal(<#T##ctx: UnsafeMutablePointer<EVP_CIPHER_CTX>!##UnsafeMutablePointer<EVP_CIPHER_CTX>!#>, <#T##outm: UnsafeMutablePointer<UInt8>!##UnsafeMutablePointer<UInt8>!#>, <#T##outl: UnsafeMutablePointer<Int32>!##UnsafeMutablePointer<Int32>!#>)
 	}
+	
+	//MARK: Private funcs
 	
 	fileprivate func decideAESCipher() {
 		if let keySize = key?.count, let bcm = blockMode {
@@ -124,36 +181,9 @@ public class AESCipher: NSObject {
 			}
 		}
 	}
-}
-
-public class GeneralCipher: NSObject {
 	
-	public func testCipher() -> Data  {
-		let ctx = EVP_CIPHER_CTX_new()
-		
-		let keydata = "testkey".data(using: .utf8)!
-		let keydataPointer = UnsafeMutablePointer<UInt8>(mutating: (keydata as NSData).bytes.bindMemory(to: UInt8.self, capacity: keydata.count))
-		
-		let ivdata = "randomIvData".data(using: .utf8)!
-		let ivdataPointer = UnsafeMutablePointer<UInt8>(mutating: (ivdata as NSData).bytes.bindMemory(to: UInt8.self, capacity: ivdata.count))
-		
-		let encData = "Test Enc String".data(using: .utf8)!
-		let encDataPointer = UnsafeMutablePointer<UInt8>(mutating: (encData as NSData).bytes.bindMemory(to: UInt8.self, capacity: encData.count))
-		
-		var resultData = [UInt8](repeating: UInt8(), count: Int(16))
-		let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-
-		
-		
-		let evpCipher = EVP_aes_128_cbc()!
-		
-		EVP_EncryptInit(ctx, evpCipher, keydataPointer, ivdataPointer)
-		EVP_EncryptUpdate(ctx, &resultData, resultSize, encDataPointer, Int32(encData.count))
-		EVP_EncryptFinal(ctx, &resultData, resultSize)
-		
-		let result = Data(resultData)
-		
-		return result
+	fileprivate func isValid(cipherKey key: Data) -> Bool {
+		if let _ = AESKeySize(rawValue: key.count) { return true}
+		return false
 	}
-	
 }

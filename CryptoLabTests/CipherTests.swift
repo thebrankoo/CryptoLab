@@ -22,8 +22,36 @@ class CipherTests: XCTestCase {
     }
     
 	func testExample() {
-		let result = GeneralCipher().testCipher()
-		print("AES Test \(result.hexEncodedString())")
+		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee,	0x47, 0x6d, 0x29, 0x88, 0x7f, 0x61, 0x1e, 0xe0])
+		let ivArray = [UInt8]([0x74, 0xfc, 0xbc, 0x0a, 0x51, 0xf5, 0x99, 0x98, 0x49, 0x7c, 0xfb, 0xfa, 0xac, 0x76, 0xae, 0x99 ])
+		let keyData = Data(bytes: keyArray)
+		let ivData = Data(bytes: ivArray)
+		
+		do {
+			let aesEnc = try AESCipher(key: keyData, iv: ivData, blockMode: .cbc)
+		
+			do {
+				let result = try aesEnc.encrypt(data: "Neki test".data(using: .utf8)!)
+				print("AES Test \(result.hexEncodedString())")
+			}
+			catch let error {
+				print("AES Enc \(error)")
+			}
+		}
+		catch let error {
+			print("AES Init \(error)")
+		}
+		
+	}
+	
+	func testRSA() {
+		let testString = "test string"
+		let rsa = RSACipher()
+		if let ecrypt = rsa.encrypt(data: testString.data(using: .utf8)!) {
+			if let decrypt = rsa.decrypt(data: ecrypt) {
+				XCTAssert(testString.data(using: .utf8) == decrypt)
+			}
+		}
 	}
 		
 }

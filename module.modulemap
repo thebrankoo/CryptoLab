@@ -10,5 +10,8 @@ module OpenSSL [system][extern_c] {
 	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/md5.h"
 	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/sha.h"
 	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/evp.h"
+	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/rsa.h"
+	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/bio.h"
+	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/pem.h"
 	export *
 }
