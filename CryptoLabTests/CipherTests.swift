@@ -46,12 +46,16 @@ class CipherTests: XCTestCase {
 	
 	func testRSA() {
 		let testString = "test string"
-		let rsa = RSACipher()
+		let rsa = RSACipher(padding: .sslv23)
+		
 		if let ecrypt = rsa.encrypt(data: testString.data(using: .utf8)!) {
 			if let decrypt = rsa.decrypt(data: ecrypt) {
-				XCTAssert(testString.data(using: .utf8) == decrypt)
+				XCTAssert(testString.data(using: .utf8)! == decrypt)
+				return
 			}
 		}
+		
+		XCTAssert(false)
 	}
 		
 }
