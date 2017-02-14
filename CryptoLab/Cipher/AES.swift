@@ -61,14 +61,58 @@ enum CipherGeneralError: Error {
 }
 
 public class AESCipher: NSObject {
+	
+	public var iv: Data? {
+		return coreCipher.iv
+	}
+	
+	public var key: Data? {
+		return coreCipher.key
+	}
+	
+	private let coreCipher: AESCoreCipher
+	
+	public init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
+		do {
+			coreCipher = try AESCoreCipher(key: key, iv: iv, blockMode: blockMode)
+		}
+		catch let error {
+			throw error
+		}
+		
+		super.init()
+	}
+	
+	public func encrypt(data toEncrypt: Data) throws -> Data {
+		do {
+			let data: Data = try coreCipher.encrypt(data: toEncrypt)
+			return data
+		}
+		catch let error {
+			throw error
+		}
+	}
+	
+	public func decrypt(data toDecrypt: Data) throws -> Data {
+		do {
+			let data: Data = try coreCipher.decrypt(data: toDecrypt)
+			return data
+		}
+		catch let error {
+			throw error
+		}
+	}
+}
+
+class AESCoreCipher: NSObject {
 	static let ivSize = 16
-	let key: Data?
-	let iv: Data?
-	let blockMode: BlockCipherMode?
+	fileprivate let key: Data?
+	fileprivate let iv: Data?
+	private let blockMode: BlockCipherMode?
 	
 	fileprivate var aesCipher: UnsafePointer<EVP_CIPHER>?
 	
-	public init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
+	init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
 		self.key = key
 		self.iv = iv
 		self.blockMode = blockMode
@@ -78,7 +122,7 @@ public class AESCipher: NSObject {
 		decideAESCipher()
 	}
 	
-	public func encrypt(data: Data) throws -> Data {
+	fileprivate func encrypt(data: Data) throws -> Data {
 		
 		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 		
@@ -115,7 +159,8 @@ public class AESCipher: NSObject {
 		throw AESError.noInitParameters(reason: "Cipher key or initialization vector is not set")
 	}
 	
-	public func decrypt(data: Data) {
+	fileprivate func decrypt(data: Data) throws -> Data {
+		return Data()
 //		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 //		let ctx = EVP_CIPHER_CTX_new()
 //		
@@ -129,9 +174,7 @@ public class AESCipher: NSObject {
 //		EVP_DecryptUpdate(ctx, resultData, resultSize, dataPointer, Int32(data.count))
 //		EVP_DecryptFinal(<#T##ctx: UnsafeMutablePointer<EVP_CIPHER_CTX>!##UnsafeMutablePointer<EVP_CIPHER_CTX>!#>, <#T##outm: UnsafeMutablePointer<UInt8>!##UnsafeMutablePointer<UInt8>!#>, <#T##outl: UnsafeMutablePointer<Int32>!##UnsafeMutablePointer<Int32>!#>)
 	}
-	
-	//MARK: Private funcs
-	
+
 	fileprivate func decideAESCipher() {
 		if let keySize = key?.count, let bcm = blockMode {
 			if AESKeySize.isAES128(keySize: keySize) && BlockCipherMode.isBlockModeCBC(blockMode: bcm) {

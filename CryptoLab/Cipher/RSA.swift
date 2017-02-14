@@ -130,7 +130,7 @@ class RSACoreCipher: NSObject {
 		let encryptedSize = RSA_public_encrypt(Int32(dataSize), dataPointer, encryptedPointer, rsaStruct, padding)
 		
 		if encryptedSize == -1 {
-			//printCryptoError()
+			printCryptoError()
 			return nil
 		}
 		
@@ -140,17 +140,27 @@ class RSACoreCipher: NSObject {
 	private func decrypt(data dataToDecode:Data, rsaKey: UnsafeMutablePointer<RSA>) -> Data? {
 		let rsaStruct = rsaKey
 		let dataPointer = (dataToDecode as NSData).bytes.bindMemory(to: UInt8.self, capacity: dataToDecode.count)
-		let dataSize = 4098 //dataToDecode.count
+		let dataSize = 11//4098 //dataToDecode.count
 		let decryptedPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: dataSize)
 		
 		let decryptedSize = RSA_private_decrypt(Int32(dataSize), dataPointer, decryptedPointer, rsaStruct, padding)
 		
 		if decryptedSize == -1 {
-			//printCryptoError()
+			printCryptoError()
 			return nil
 		}
 		
 		return Data(bytes: UnsafePointer<UInt8>(decryptedPointer), count: Int(decryptedSize))
+	}
+	
+	
+	fileprivate func printCryptoError(){
+		ERR_load_CRYPTO_strings()
+		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
+		ERR_error_string(ERR_get_error(), err)
+		print("ENC ERROR \(String(cString: err))")
+		err.deinitialize()
+		err.deallocate(capacity: 130)
 	}
 }
 
@@ -347,8 +357,8 @@ class RSAKeychain: NSObject {
 	fileprivate func printCryptoError(){
 		ERR_load_CRYPTO_strings()
 		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
-		//ERR_error_string(ERR_get_error(), err)
-		//logger.debug("ENC ERROR \(String(cString: err))")
+		ERR_error_string(ERR_get_error(), err)
+		print("ENC ERROR \(String(cString: err))")
 		err.deinitialize()
 		err.deallocate(capacity: 130)
 	}
