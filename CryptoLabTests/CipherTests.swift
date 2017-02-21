@@ -24,21 +24,25 @@ class CipherTests: XCTestCase {
 	func testExample() {
 		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee,	0x47, 0x6d, 0x29, 0x88, 0x7f, 0x61, 0x1e, 0xe0])
 		let keyData = Data(bytes: keyArray)
-		let ivData = Data(bytes: ivArray)
+		let ivData = Data(bytes: keyArray)
 		
 		do {
 			let aesEnc = try AESCipher(key: keyData, iv: ivData, blockMode: .cbc)
-		
+			
 			do {
 				let result = try aesEnc.encrypt(data: "Neki test".data(using: .utf8)!)
+				let aesDec = try aesEnc.decrypt(data: result)
 				print("AES Test \(result.hexEncodedString())")
+				print("AES Dec \(String(data: aesDec, encoding: .utf8))")
 			}
 			catch let error {
 				print("AES Enc \(error)")
+				XCTAssert(false)
 			}
 		}
 		catch let error {
 			print("AES Init \(error)")
+			XCTAssert(false)
 		}
 		
 	}

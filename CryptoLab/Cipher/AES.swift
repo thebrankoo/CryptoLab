@@ -9,6 +9,38 @@
 import Foundation
 import OpenSSL
 
+//public protocol BlockCipherEncryptor {
+//	var coreCipher: AESCoreCipher {get set}
+//	func update(withDataBlock data: Data) throws
+//	func finish() throws -> Data
+//}
+//
+//extension BlockCipherEncryptor {
+//	func update(withDataBlock data: Data) throws {
+//		do {
+//			try coreCipher.updateEncryption(data: data)
+//		}
+//		catch let error {
+//			throw error
+//		}
+//	}
+//	
+//	func finish() throws -> Data {
+//		do {
+//			let finalData = try coreCipher.finishEncryption()
+//			return finalData
+//		}
+//		catch let error{
+//			throw error
+//		}
+//	}
+//}
+//
+//protocol BlockCipherDecryptor {
+//	func update(withDataBlock data: Data) throws
+//	func finish() throws -> Data
+//}
+
 enum AESKeySize: Int {
 	case aes128 = 16
 	case aes256 = 32
@@ -70,7 +102,7 @@ public class AESCipher: NSObject {
 		return coreCipher.key
 	}
 	
-	private let coreCipher: AESCoreCipher
+	fileprivate let coreCipher: AESCoreCipher
 	
 	public init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
 		do {
@@ -83,7 +115,11 @@ public class AESCipher: NSObject {
 		super.init()
 	}
 	
-	public func encrypt(data toEncrypt: Data) throws -> Data {
+	public func makeBlockEncryptor() -> AESBlockEncryption {
+		return AESBlockEncryption(aesCipher: self)
+	}
+	
+	public func encrypt (data toEncrypt: Data) throws -> Data {
 		do {
 			let data: Data = try coreCipher.encrypt(data: toEncrypt)
 			return data
@@ -104,13 +140,42 @@ public class AESCipher: NSObject {
 	}
 }
 
+public class AESBlockEncryption: NSObject {
+	fileprivate let aesCipher: AESCipher
+	
+	init(aesCipher cipher: AESCipher) {
+		aesCipher = cipher
+		super.init()
+	}
+	
+	public func update(withDataBlock data: Data) throws {
+		do {
+			try aesCipher.coreCipher.updateEncryption(data: data)
+		}
+		catch let error {
+			throw error
+		}
+	}
+
+	public func finish() throws -> Data {
+		do {
+			let finalData = try aesCipher.coreCipher.finishEncryption()
+			return finalData
+		}
+		catch let error{
+			throw error
+		}
+	}
+}
+
 class AESCoreCipher: NSObject {
 	static let ivSize = 16
 	fileprivate let key: Data?
 	fileprivate let iv: Data?
-	private let blockMode: BlockCipherMode?
 	
-	fileprivate var aesCipher: UnsafePointer<EVP_CIPHER>?
+	private let blockMode: BlockCipherMode?
+	private var aesCipher: UnsafePointer<EVP_CIPHER>?
+	private var context: UnsafeMutablePointer<EVP_CIPHER_CTX>?
 	
 	init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
 		self.key = key
@@ -124,43 +189,97 @@ class AESCoreCipher: NSObject {
 	
 	fileprivate func encrypt(data: Data) throws -> Data {
 		
-		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
-		
-		let ctx = EVP_CIPHER_CTX_new()
-		
-		if let key = self.key, let iv = self.iv {
+		do {
+			try updateEncryption(data: data)
+			let finalData = try finishEncryption()
+			return finalData
+		}
+		catch {
+			throw CipherGeneralError.cipherProcessFail(reason: "Encrypt Failed")
+		}
+	}
+	
+	fileprivate func updateEncryption(data toUpdate: Data) throws {
+		if let key = key, let iv = iv {
 			
-			let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
-			let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
+			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (toUpdate as NSData).bytes.bindMemory(to: UInt8.self, capacity: toUpdate.count))
 			
+			if !isUpdateInProcess() {
+				do {
+					try initEncryption(withKey: key, andIV: iv)
+				}
+				catch let error {
+					throw error
+				}
+			}
+			
+			if let ctx = context {
+				var resultData = [UInt8](repeating: UInt8(), count: key.count)
+				let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
+				
+				let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(toUpdate.count))
+				if updateCheck == 0 {
+					throw CipherGeneralError.cipherProcessFail(reason: "Update Encryption UPDATE fail")
+				}
+			}
+			
+		}
+		
+	}
+
+	fileprivate func initEncryption(withKey key: Data, andIV iv: Data) throws {
+		self.context = EVP_CIPHER_CTX_new()
+		
+		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
+		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
+		let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
+		if initCheck == 0 {
+			throw CipherGeneralError.cipherProcessFail(reason: "Update Encryption INIT fail")
+		}
+	}
+	
+	fileprivate func finishEncryption() throws -> Data {
+		if let ctx = context, let key = key {
 			var resultData = [UInt8](repeating: UInt8(), count: key.count)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-			
-			let initCheck = EVP_EncryptInit(ctx, self.aesCipher, keyPointer, ivPointer)
-			if initCheck == 0 {
-				throw CipherGeneralError.cipherProcessFail(reason: "Encryption INIT fail")
-			}
-			
-			let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
-			if updateCheck == 0 {
-				throw CipherGeneralError.cipherProcessFail(reason: "Encryption UPDATE fail")
-			}
-			
 			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
 			if finalCheck == 0 {
 				throw CipherGeneralError.cipherProcessFail(reason: "Encryption FINAL fail")
 			}
 			
 			let result = Data(resultData)
-		
+			self.context = nil
 			return result
 		}
-		
-		throw AESError.noInitParameters(reason: "Cipher key or initialization vector is not set")
+		else {
+			throw CipherGeneralError.cipherProcessFail(reason: "Encryption invalid or missing parameters")
+		}
+	}
+	
+	fileprivate func isUpdateInProcess() -> Bool {
+		if let _  = context {return true}
+		return false
 	}
 	
 	fileprivate func decrypt(data: Data) throws -> Data {
-		return Data()
+	
+		if let iv = self.iv, let key = self.key {
+			do {
+				try initDecryption(withKey: key, andIV: iv)
+				try updateDecryption(withData: data)
+				let finishData = try finishDecryption()
+				return finishData
+			}
+			catch let error {
+				throw error
+			}
+		}
+		else {
+			throw CipherGeneralError.cipherProcessFail(reason: "Decrypt AES No key or iv")
+		}
+	}
+	
+////		return Data()
 //		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 //		let ctx = EVP_CIPHER_CTX_new()
 //		
@@ -169,12 +288,66 @@ class AESCoreCipher: NSObject {
 //		
 //		var resultData = [UInt8](repeating: UInt8(), count: 32)
 //		let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-		
+//		
 //		EVP_DecryptInit(ctx, self.aesCipher, keyPointer, ivPointer)
-//		EVP_DecryptUpdate(ctx, resultData, resultSize, dataPointer, Int32(data.count))
-//		EVP_DecryptFinal(<#T##ctx: UnsafeMutablePointer<EVP_CIPHER_CTX>!##UnsafeMutablePointer<EVP_CIPHER_CTX>!#>, <#T##outm: UnsafeMutablePointer<UInt8>!##UnsafeMutablePointer<UInt8>!#>, <#T##outl: UnsafeMutablePointer<Int32>!##UnsafeMutablePointer<Int32>!#>)
+//		EVP_DecryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
+////		EVP_DecryptUpdate(ctx, nil, nil, dataPointer, Int32(data.count))
+//		EVP_DecryptFinal(ctx, &resultData, resultSize)
+//		
+//		return Data(resultData)
+	
+	fileprivate func initDecryption(withKey key: Data, andIV iv: Data) throws {
+		
+		self.context = EVP_CIPHER_CTX_new()
+		
+		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
+		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
+		
+		let initStatus = EVP_DecryptInit(self.context!, self.aesCipher, keyPointer, ivPointer)
+		if initStatus == 0 {
+			throw CipherGeneralError.cipherProcessFail(reason: "AES Decryption status = 0")
+		}
+	}
+	
+	fileprivate func updateDecryption(withData data: Data) throws {
+		
+		if let key = key, let iv = iv {
+			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
+//			let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
+//			let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
+			var resultData = [UInt8](repeating: UInt8(), count: 32)
+			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
+			
+			if let ctx = self.context {
+				let updateStatus = EVP_DecryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
+				if updateStatus == 0 {
+					throw CipherGeneralError.cipherProcessFail(reason: "AES Update Status = 0")
+				}
+			}
+		}
+		else {
+			throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt no key or iv")
+		}
+		//EVP_DecryptInit(ctx, self.aesCipher, keyPointer, ivPointer)
 	}
 
+	fileprivate func finishDecryption() throws -> Data {
+		if let ctx = context {
+			var resultData = [UInt8](repeating: UInt8(), count: 32)
+			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
+			let finishStatus = EVP_DecryptFinal(ctx, &resultData, resultSize)
+			
+			if finishStatus == 0 {
+				throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt Status = 0")
+			}
+			self.context = nil
+			return Data(resultData)
+		}
+		else {
+			throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt Fail")
+		}
+	}
+	
 	fileprivate func decideAESCipher() {
 		if let keySize = key?.count, let bcm = blockMode {
 			if AESKeySize.isAES128(keySize: keySize) && BlockCipherMode.isBlockModeCBC(blockMode: bcm) {
