@@ -20,7 +20,17 @@ class CipherTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+	
+	func testBlowfish() {
+		let bf = BlowfishCoreCipher(key: "neki key proizvoljni".data(using: .utf8)!)
+		let data = bf.ecbEncrypt(data: "1234567891011".data(using: .utf8)!)
+		let decData = bf.ecbDecrypt(data: data)
+		
+		print("BF \(data.hexEncodedString())")
+		print("BF Dec \(String(data: decData, encoding: .utf8))")
+		
+	}
+	
 	func testExample() {
 		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee,	0x47, 0x6d, 0x29, 0x88, 0x7f, 0x61, 0x1e, 0xe0])
 		let keyData = Data(bytes: keyArray)

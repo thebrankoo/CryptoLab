@@ -176,6 +176,9 @@ class AESCoreCipher: NSObject {
 	private let blockMode: BlockCipherMode?
 	private var aesCipher: UnsafePointer<EVP_CIPHER>?
 	private var context: UnsafeMutablePointer<EVP_CIPHER_CTX>?
+
+	private var decContext: UnsafeMutablePointer<EVP_CIPHER_CTX>?
+
 	
 	init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
 		self.key = key
@@ -229,7 +232,7 @@ class AESCoreCipher: NSObject {
 
 	fileprivate func initEncryption(withKey key: Data, andIV iv: Data) throws {
 		self.context = EVP_CIPHER_CTX_new()
-		
+//		EVP_CIPHER_CTX_set_padding(self.context!, PKCS5)
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
@@ -248,6 +251,7 @@ class AESCoreCipher: NSObject {
 			}
 			
 			let result = Data(resultData)
+			EVP_CIPHER_CTX_cleanup(self.context)
 			self.context = nil
 			return result
 		}
@@ -298,28 +302,31 @@ class AESCoreCipher: NSObject {
 	
 	fileprivate func initDecryption(withKey key: Data, andIV iv: Data) throws {
 		
-		self.context = EVP_CIPHER_CTX_new()
+		self.decContext = EVP_CIPHER_CTX_new()
 		
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		
-		let initStatus = EVP_DecryptInit(self.context!, self.aesCipher, keyPointer, ivPointer)
+		let initStatus = EVP_DecryptInit(self.decContext!, self.aesCipher, keyPointer, ivPointer)
 		if initStatus == 0 {
 			throw CipherGeneralError.cipherProcessFail(reason: "AES Decryption status = 0")
 		}
 	}
 	
+	fileprivate var decryptionResultSize: Int32 = 0
+	
 	fileprivate func updateDecryption(withData data: Data) throws {
 		
 		if let key = key, let iv = iv {
+			
 			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
-//			let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
-//			let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
+
 			var resultData = [UInt8](repeating: UInt8(), count: 32)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			
-			if let ctx = self.context {
+			if let ctx = self.decContext {
 				let updateStatus = EVP_DecryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
+				decryptionResultSize += resultSize.pointee
 				if updateStatus == 0 {
 					throw CipherGeneralError.cipherProcessFail(reason: "AES Update Status = 0")
 				}
@@ -332,12 +339,15 @@ class AESCoreCipher: NSObject {
 	}
 
 	fileprivate func finishDecryption() throws -> Data {
-		if let ctx = context {
-			var resultData = [UInt8](repeating: UInt8(), count: 32)
+		
+		if let ctx = decContext {
+			let bufsize = decryptionResultSize //4096 + EVP_CIPHER_CTX_block_size(ctx)
+			var resultData = [UInt8](repeating: UInt8(), count: Int(bufsize))
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-			let finishStatus = EVP_DecryptFinal(ctx, &resultData, resultSize)
+			let finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize) //EVP_DecryptFinal(ctx, &resultData, resultSize)
 			
 			if finishStatus == 0 {
+				printCryptoError()
 				throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt Status = 0")
 			}
 			self.context = nil
@@ -401,5 +411,14 @@ class AESCoreCipher: NSObject {
 	fileprivate func isValid(cipherKey key: Data) -> Bool {
 		if let _ = AESKeySize(rawValue: key.count) { return true}
 		return false
+	}
+	
+	fileprivate func printCryptoError(){
+		ERR_load_CRYPTO_strings()
+		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
+		ERR_error_string(ERR_get_error(), err)
+		print("ENC ERROR \(String(cString: err))")
+		err.deinitialize()
+		err.deallocate(capacity: 130)
 	}
 }
