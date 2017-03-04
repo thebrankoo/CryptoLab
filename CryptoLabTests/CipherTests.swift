@@ -70,6 +70,21 @@ class CipherTests: XCTestCase {
 		
 		XCTAssert(false)
 	}
+	
+	func testHMAC() {
+		
+		let toHmac = "neki data".data(using: .utf8)!
+		let key = "neki key".data(using: .utf8)!
+		
+		let hmac = HMACAuth(key: key, hashFunction: .md5)
+		
+		let data = hmac.authenticationCode(forData: toHmac)
+		print("FIrst Hash Data \(data?.hexEncodedString())")
+		
+		hmac.update(withData: toHmac)
+		let data2 = hmac.finish()
+		print("Second Hash Data \(data2?.hexEncodedString())")
+	}
 		
 }
 
