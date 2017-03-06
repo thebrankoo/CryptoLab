@@ -9,38 +9,6 @@
 import Foundation
 import OpenSSL
 
-//public protocol BlockCipherEncryptor {
-//	var coreCipher: AESCoreCipher {get set}
-//	func update(withDataBlock data: Data) throws
-//	func finish() throws -> Data
-//}
-//
-//extension BlockCipherEncryptor {
-//	func update(withDataBlock data: Data) throws {
-//		do {
-//			try coreCipher.updateEncryption(data: data)
-//		}
-//		catch let error {
-//			throw error
-//		}
-//	}
-//	
-//	func finish() throws -> Data {
-//		do {
-//			let finalData = try coreCipher.finishEncryption()
-//			return finalData
-//		}
-//		catch let error{
-//			throw error
-//		}
-//	}
-//}
-//
-//protocol BlockCipherDecryptor {
-//	func update(withDataBlock data: Data) throws
-//	func finish() throws -> Data
-//}
-
 enum AESKeySize: Int {
 	case aes128 = 16
 	case aes256 = 32
@@ -59,26 +27,26 @@ enum AESKeySize: Int {
 	}
 }
 
-public enum BlockCipherMode {
+public enum AESBlockCipherMode {
 	case cbc
 	case ecb
 	case cfb
 	case ofb //dont reuse iv
 	case ctr //dont reuse iv
 	
-	public static func isBlockModeCBC(blockMode: BlockCipherMode) -> Bool {
+	public static func isBlockModeCBC(blockMode: AESBlockCipherMode) -> Bool {
 		return .cbc == blockMode
 	}
-	public static func isBlockModeECB(blockMode: BlockCipherMode) -> Bool {
+	public static func isBlockModeECB(blockMode: AESBlockCipherMode) -> Bool {
 		return .ecb == blockMode
 	}
-	public static func isBlockModeCFB(blockMode: BlockCipherMode) -> Bool {
+	public static func isBlockModeCFB(blockMode: AESBlockCipherMode) -> Bool {
 		return .cfb == blockMode
 	}
-	public static func isBlockModeOFB(blockMode: BlockCipherMode) -> Bool {
+	public static func isBlockModeOFB(blockMode: AESBlockCipherMode) -> Bool {
 		return .ofb == blockMode
 	}
-	public static func isBlockModeCTR(blockMode: BlockCipherMode) -> Bool {
+	public static func isBlockModeCTR(blockMode: AESBlockCipherMode) -> Bool {
 		return .ctr == blockMode
 	}
 }
@@ -104,7 +72,7 @@ public class AESCipher: NSObject {
 	
 	fileprivate let coreCipher: AESCoreCipher
 	
-	public init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
+	public init(key: Data, iv: Data, blockMode: AESBlockCipherMode) throws {
 		do {
 			coreCipher = try AESCoreCipher(key: key, iv: iv, blockMode: blockMode)
 		}
@@ -173,14 +141,14 @@ class AESCoreCipher: NSObject {
 	fileprivate let key: Data?
 	fileprivate let iv: Data?
 	
-	private let blockMode: BlockCipherMode?
+	private let blockMode: AESBlockCipherMode?
 	private var aesCipher: UnsafePointer<EVP_CIPHER>?
 	private var context: UnsafeMutablePointer<EVP_CIPHER_CTX>?
 
 	private var decContext: UnsafeMutablePointer<EVP_CIPHER_CTX>?
 
 	
-	init(key: Data, iv: Data, blockMode: BlockCipherMode) throws {
+	init(key: Data, iv: Data, blockMode: AESBlockCipherMode) throws {
 		self.key = key
 		self.iv = iv
 		self.blockMode = blockMode
@@ -316,9 +284,6 @@ class AESCoreCipher: NSObject {
 	fileprivate var decryptionResultSize: Int32 = 0
 	
 	fileprivate func updateDecryption(withData data: Data) throws {
-		
-		if let key = key, let iv = iv {
-			
 			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 
 			var resultData = [UInt8](repeating: UInt8(), count: 32)
@@ -331,24 +296,23 @@ class AESCoreCipher: NSObject {
 					throw CipherGeneralError.cipherProcessFail(reason: "AES Update Status = 0")
 				}
 			}
-		}
-		else {
-			throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt no key or iv")
-		}
-		//EVP_DecryptInit(ctx, self.aesCipher, keyPointer, ivPointer)
 	}
 
 	fileprivate func finishDecryption() throws -> Data {
 		
 		if let ctx = decContext {
-			let bufsize = decryptionResultSize //4096 + EVP_CIPHER_CTX_block_size(ctx)
-			var resultData = [UInt8](repeating: UInt8(), count: Int(bufsize))
+			var resultData = [UInt8]()
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-			let finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize) //EVP_DecryptFinal(ctx, &resultData, resultSize)
+			var finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize) //EVP_DecryptFinal(ctx, &resultData, resultSize)
 			
-			if finishStatus == 0 {
-				printCryptoError()
-				throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt Status = 0")
+			if finishStatus == 1 {
+				resultData = [UInt8](repeating: UInt8(), count: Int(resultSize.pointee))
+				finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize)
+				
+				if finishStatus == 0 {
+					printCryptoError()
+					throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt Status = 0")
+				}
 			}
 			self.context = nil
 			return Data(resultData)
@@ -360,49 +324,49 @@ class AESCoreCipher: NSObject {
 	
 	fileprivate func decideAESCipher() {
 		if let keySize = key?.count, let bcm = blockMode {
-			if AESKeySize.isAES128(keySize: keySize) && BlockCipherMode.isBlockModeCBC(blockMode: bcm) {
+			if AESKeySize.isAES128(keySize: keySize) && AESBlockCipherMode.isBlockModeCBC(blockMode: bcm) {
 				aesCipher = EVP_aes_128_cbc()
 			}
-			else if AESKeySize.isAES128(keySize: keySize) && BlockCipherMode.isBlockModeECB(blockMode: bcm) {
+			else if AESKeySize.isAES128(keySize: keySize) && AESBlockCipherMode.isBlockModeECB(blockMode: bcm) {
 				aesCipher = EVP_aes_128_ecb()
 			}
-			else if AESKeySize.isAES128(keySize: keySize) && BlockCipherMode.isBlockModeCFB(blockMode: bcm) {
+			else if AESKeySize.isAES128(keySize: keySize) && AESBlockCipherMode.isBlockModeCFB(blockMode: bcm) {
 				aesCipher = EVP_aes_128_cfb1()
 			}
-			else if AESKeySize.isAES128(keySize: keySize) && BlockCipherMode.isBlockModeOFB(blockMode: bcm) {
+			else if AESKeySize.isAES128(keySize: keySize) && AESBlockCipherMode.isBlockModeOFB(blockMode: bcm) {
 				aesCipher = EVP_aes_128_ofb()
 			}
-			else if AESKeySize.isAES128(keySize: keySize) && BlockCipherMode.isBlockModeCTR(blockMode: bcm) {
+			else if AESKeySize.isAES128(keySize: keySize) && AESBlockCipherMode.isBlockModeCTR(blockMode: bcm) {
 				aesCipher = EVP_aes_128_ctr()
 			}
-			else if AESKeySize.isAES256(keySize: keySize) && BlockCipherMode.isBlockModeCBC(blockMode: bcm) {
+			else if AESKeySize.isAES256(keySize: keySize) && AESBlockCipherMode.isBlockModeCBC(blockMode: bcm) {
 				aesCipher = EVP_aes_256_cbc()
 			}
-			else if AESKeySize.isAES256(keySize: keySize) && BlockCipherMode.isBlockModeECB(blockMode: bcm) {
+			else if AESKeySize.isAES256(keySize: keySize) && AESBlockCipherMode.isBlockModeECB(blockMode: bcm) {
 				aesCipher = EVP_aes_256_ecb()
 			}
-			else if AESKeySize.isAES256(keySize: keySize) && BlockCipherMode.isBlockModeCFB(blockMode: bcm) {
+			else if AESKeySize.isAES256(keySize: keySize) && AESBlockCipherMode.isBlockModeCFB(blockMode: bcm) {
 				aesCipher = EVP_aes_256_cfb1()
 			}
-			else if AESKeySize.isAES256(keySize: keySize) && BlockCipherMode.isBlockModeOFB(blockMode: bcm) {
+			else if AESKeySize.isAES256(keySize: keySize) && AESBlockCipherMode.isBlockModeOFB(blockMode: bcm) {
 				aesCipher = EVP_aes_256_ofb()
 			}
-			else if AESKeySize.isAES256(keySize: keySize) && BlockCipherMode.isBlockModeCTR(blockMode: bcm) {
+			else if AESKeySize.isAES256(keySize: keySize) && AESBlockCipherMode.isBlockModeCTR(blockMode: bcm) {
 				aesCipher = EVP_aes_256_ctr()
 			}
-			else if AESKeySize.isAES192(keySize: keySize) && BlockCipherMode.isBlockModeCBC(blockMode: bcm) {
+			else if AESKeySize.isAES192(keySize: keySize) && AESBlockCipherMode.isBlockModeCBC(blockMode: bcm) {
 				aesCipher = EVP_aes_192_cbc()
 			}
-			else if AESKeySize.isAES192(keySize: keySize) && BlockCipherMode.isBlockModeECB(blockMode: bcm) {
+			else if AESKeySize.isAES192(keySize: keySize) && AESBlockCipherMode.isBlockModeECB(blockMode: bcm) {
 				aesCipher = EVP_aes_192_ecb()
 			}
-			else if AESKeySize.isAES192(keySize: keySize) && BlockCipherMode.isBlockModeCFB(blockMode: bcm) {
+			else if AESKeySize.isAES192(keySize: keySize) && AESBlockCipherMode.isBlockModeCFB(blockMode: bcm) {
 				aesCipher = EVP_aes_192_cfb1()
 			}
-			else if AESKeySize.isAES192(keySize: keySize) && BlockCipherMode.isBlockModeOFB(blockMode: bcm) {
+			else if AESKeySize.isAES192(keySize: keySize) && AESBlockCipherMode.isBlockModeOFB(blockMode: bcm) {
 				aesCipher = EVP_aes_192_ofb()
 			}
-			else if AESKeySize.isAES192(keySize: keySize) && BlockCipherMode.isBlockModeCTR(blockMode: bcm) {
+			else if AESKeySize.isAES192(keySize: keySize) && AESBlockCipherMode.isBlockModeCTR(blockMode: bcm) {
 				aesCipher = EVP_aes_192_ctr()
 			}
 		}

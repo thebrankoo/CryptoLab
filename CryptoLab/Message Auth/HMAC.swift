@@ -9,19 +9,6 @@
 import Foundation
 import OpenSSL
 
-/*
-OPENSSL_EXPORT const EVP_MD *EVP_md4(void);
-OPENSSL_EXPORT const EVP_MD *EVP_md5(void);
-OPENSSL_EXPORT const EVP_MD *EVP_sha1(void);
-OPENSSL_EXPORT const EVP_MD *EVP_sha224(void);
-OPENSSL_EXPORT const EVP_MD *EVP_sha256(void);
-OPENSSL_EXPORT const EVP_MD *EVP_sha384(void);
-OPENSSL_EXPORT const EVP_MD *EVP_sha512(void);
-/* EVP_md5_sha1 is a TLS-specific |EVP_MD| which computes the concatenation of
-* MD5 and SHA-1, as used in TLS 1.1 and below. */
-OPENSSL_EXPORT const EVP_MD *EVP_md5_sha1(void);
-*/
-
 public enum AuthHashFunction {
 	case md4
 	case md5
@@ -122,6 +109,7 @@ class HMACCoreAuth: NSObject {
 		super.init()
 	}
 	
+	//MARK: Auth Code
 	fileprivate func authenticationCode(forData data: Data) -> (result: UnsafeMutablePointer<UInt8>?, resultSize: UnsafeMutablePointer<UInt32>) {
 		let dataPointer = data.makeUInt8DataPointer()
 		let dataLen = Int(data.count)
@@ -157,4 +145,95 @@ class HMACCoreAuth: NSObject {
 		self.context = nil
 		return (resultData, resultSize)
 	}
+}
+
+class HMACSignVerifyUnit: NSObject {
+	var context: UnsafeMutablePointer<EVP_MD_CTX>
+	let hashFunction: AuthHashFunction
+	let key: Data
+	
+	init(key: Data, hashFunction: AuthHashFunction) {
+		context = EVP_MD_CTX_create()
+		self.hashFunction = hashFunction
+		self.key = key
+		
+		super.init()
+	}
+	
+	func initSignUnit(){
+		let digestInitError = EVP_DigestInit_ex(context, hashFunction.value(), nil)
+		if digestInitError != 1 {
+			//init error
+		}
+		if let pkey = generateEVPPkey(fromData: key) {
+			let digestSignInitError = EVP_DigestSignInit(context, nil, hashFunction.value(), nil, pkey)
+			if digestSignInitError != 1 {
+				//init error
+			}
+		}
+		else {
+			//init error
+		}
+	}
+	
+	func updateSignUnit(withData data: Data) {
+		//let updateError = EVP_Update  // EVP_DigestSignUpdate(context, data.makeUInt8DataPointer(), data.count)
+		
+//		if updateError != 1 {
+//			//update error
+//		}
+	}
+	
+	func finalSignUnit() -> UnsafeMutablePointer<UInt8> {
+		let result = UnsafeMutablePointer<UInt8>.allocate(capacity: MemoryLayout<UInt8.Stride>.size)
+		let resultSize = UnsafeMutablePointer<Int>.allocate(capacity: MemoryLayout<Int.Stride>.size)
+		let finalError = EVP_DigestSignFinal(context, result, resultSize)
+		
+		if finalError != 1 {
+			//final error
+		}
+		
+		return result
+	}
+	
+	func initVerifyUnit() {
+		context = EVP_MD_CTX_create()
+		let digestInitError = EVP_DigestInit_ex(context, hashFunction.value(), nil)
+		if digestInitError != 1 {
+			//init error
+		}
+		if let pkey = generateEVPPkey(fromData: key) {
+			let digestSignInitError = EVP_DigestSignInit(context, nil, hashFunction.value(), nil, pkey)
+			if digestSignInitError != 1 {
+				//init error
+			}
+		}
+		else {
+			//init error
+		}
+	}
+	
+	func generateEVPPkey(fromData data: Data) -> UnsafeMutablePointer<EVP_PKEY>? {
+		let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
+		BIO_write(bioStruct, ((data as NSData?)?.bytes)!, Int32(data.count))
+		
+		let pkey = PEM_read_bio_PUBKEY(bioStruct, nil, nil, nil)
+		
+		return pkey
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

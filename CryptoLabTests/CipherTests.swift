@@ -23,7 +23,7 @@ class CipherTests: XCTestCase {
 	
 	func testBlowfish() {
 		let bf = BlowfishCoreCipher(key: "neki key proizvoljni".data(using: .utf8)!)
-		let data = bf.ecbEncrypt(data: "1234567891011".data(using: .utf8)!)
+		let data = bf.ecbEncrypt(data: "12345678".data(using: .utf8)!)
 		let decData = bf.ecbDecrypt(data: data)
 		
 		print("BF \(data.hexEncodedString())")
@@ -32,7 +32,7 @@ class CipherTests: XCTestCase {
 	}
 	
 	func testExample() {
-		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee,	0x47, 0x6d, 0x29, 0x88, 0x7f, 0x61, 0x1e, 0xe0])
+		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
 		let keyData = Data(bytes: keyArray)
 		let ivData = Data(bytes: keyArray)
 		
@@ -44,6 +44,7 @@ class CipherTests: XCTestCase {
 				let aesDec = try aesEnc.decrypt(data: result)
 				print("AES Test \(result.hexEncodedString())")
 				print("AES Dec \(String(data: aesDec, encoding: .utf8))")
+				XCTAssert(String(data: aesDec, encoding: .utf8) == "Neki test", "AES Strings are not the same")
 			}
 			catch let error {
 				print("AES Enc \(error)")

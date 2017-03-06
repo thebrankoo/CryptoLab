@@ -23,7 +23,7 @@ public class BlowfishCoreCipher: NSObject {
 	}
 	
 	public func ecbEncrypt(data toEncrypt: Data) -> Data {
-		var outArray = Data.makeUInt8EmptyArray(ofSize: 118)
+		var outArray = Data.makeUInt8EmptyArray(ofSize: 8)
 		let inArray = toEncrypt.makeUInt8DataPointer()
 		
 		BF_ecb_encrypt(inArray, &outArray, blowfishKey, BF_ENCRYPT)
@@ -32,7 +32,7 @@ public class BlowfishCoreCipher: NSObject {
 	}
 	
 	public func ecbDecrypt(data toDecrypt: Data) -> Data {
-		var outArray = Data.makeUInt8EmptyArray(ofSize: 118)
+		var outArray = Data.makeUInt8EmptyArray(ofSize: 8)
 		let inArray = toDecrypt.makeUInt8DataPointer()
 		
 		BF_ecb_encrypt(inArray, &outArray, blowfishKey, BF_DECRYPT)
