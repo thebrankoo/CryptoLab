@@ -251,22 +251,7 @@ class AESCoreCipher: NSObject {
 		}
 	}
 	
-////		return Data()
-//		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
-//		let ctx = EVP_CIPHER_CTX_new()
-//		
-//		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key! as NSData).bytes.bindMemory(to: UInt8.self, capacity: key!.count))
-//		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv! as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv!.count))
-//		
-//		var resultData = [UInt8](repeating: UInt8(), count: 32)
-//		let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-//		
-//		EVP_DecryptInit(ctx, self.aesCipher, keyPointer, ivPointer)
-//		EVP_DecryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
-////		EVP_DecryptUpdate(ctx, nil, nil, dataPointer, Int32(data.count))
-//		EVP_DecryptFinal(ctx, &resultData, resultSize)
-//		
-//		return Data(resultData)
+	//MARK: Decryption
 	
 	fileprivate func initDecryption(withKey key: Data, andIV iv: Data) throws {
 		

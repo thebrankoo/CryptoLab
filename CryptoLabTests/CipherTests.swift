@@ -32,6 +32,7 @@ class CipherTests: XCTestCase {
 	}
 	
 	func testExample() {
+		//let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
 		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
 		let keyData = Data(bytes: keyArray)
 		let ivData = Data(bytes: keyArray)
@@ -56,6 +57,19 @@ class CipherTests: XCTestCase {
 			XCTAssert(false)
 		}
 		
+	}
+	
+	func testDES() {
+		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
+		let keyData = Data(bytes: keyArray)
+		let ivData = Data(bytes: keyArray)
+		let toEnc = "to enc string".data(using: .utf8)
+		
+		let desEnc = try? DESCoreCipher(key: keyData, iv: ivData, blockMode: .cbc)
+		let r1 = try? desEnc?.encrypt(data: toEnc!)
+		let r2 = try? desEnc?.decrypt(data: r1!!)
+		
+		XCTAssert(r2!! == toEnc, "DES TEST FAILED")
 	}
 	
 	func testRSA() {
