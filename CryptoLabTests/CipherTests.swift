@@ -21,6 +21,11 @@ class CipherTests: XCTestCase {
         super.tearDown()
     }
 	
+	func testGeneral() {
+		DSACore.sign(data: "afasfsafasf".data(using: .utf8)!)
+		
+	}
+	
 	func testBlowfish() {
 		let bf = BlowfishCoreCipher(key: "neki key proizvoljni".data(using: .utf8)!)
 		let data = bf.ecbEncrypt(data: "12345678".data(using: .utf8)!)
