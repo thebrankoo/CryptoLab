@@ -22,16 +22,16 @@ class CipherTests: XCTestCase {
     }
 	
 	func testGeneral() {
-//		DSACore(key:"asdas".data(using: .utf8)).generateDSA()
-//		let sig = "afasfsafasf".data(using: .utf8)!
-//		if let s = DSACore.sign(data: sig) {
-//			let v = DSACore.verify(data: s, signature: sig)
-//			print("Signature Verify status: \(v)")
-//		}
+		let digest = "neki test za potpis".data(using: .utf8)!
+		let dsa = DSAAuth()
 		
-		let dsa = DSACore()
-		let key = dsa.extractPublicKey()
-		let privKey = dsa.extractPrivateKey()
+		if let sig = dsa.sign(data: digest) {
+			let verify = dsa.verify(signature: sig, digest: digest)
+			XCTAssert(verify)
+		}
+		else {
+			XCTAssert(false)
+		}
 		
 	}
 	

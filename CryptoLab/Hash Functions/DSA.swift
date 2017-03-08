@@ -9,11 +9,44 @@
 import Foundation
 import OpenSSL
 
-public class DSACore: NSObject {
+public class DSAAuth: NSObject {
 	
-	let pubKey: Data?
-	let privKey: Data?
-	var dsaKey: UnsafeMutablePointer<DSA>?
+	fileprivate let dsaCore: DSACore
+	
+	public var privateKey: String? {
+		return dsaCore.extractPrivateKey()
+	}
+	
+	public var publicKey: String? {
+		return dsaCore.extractPublicKey()
+	}
+	
+	public override init() {
+		dsaCore = DSACore()
+		super.init()
+	}
+	
+	public init(publicKey: Data, privateKey: Data) {
+		dsaCore = DSACore(publicKey: publicKey, privateKey: privateKey)
+		super.init()
+	}
+	
+	public func sign(data: Data) -> Data? {
+		let signature = dsaCore.sign(data: data)
+		return signature
+	}
+	
+	public func verify(signature: Data, digest: Data) -> Bool {
+		let verifyResult = dsaCore.verify(signature: signature, digest: digest)
+		return verifyResult
+	}
+}
+
+class DSACore: NSObject {
+	
+	fileprivate let pubKey: Data?
+	fileprivate let privKey: Data?
+	fileprivate var dsaKey: UnsafeMutablePointer<DSA>?
 	
 	init(publicKey: Data, privateKey: Data) {
 		self.pubKey = publicKey
@@ -22,7 +55,7 @@ public class DSACore: NSObject {
 		dsaKey = generateDSA(fromPublicKey: publicKey, andPrivateKey: privateKey)
 	}
 	
-	public override init() {
+	override init() {
 		pubKey = Data()
 		privKey = Data()
 		super.init()
@@ -31,7 +64,7 @@ public class DSACore: NSObject {
 	
 	//MARK: DSA Key generator
 	
-	func generateDSA(fromPublicKey pubK: Data, andPrivateKey privK: Data) -> UnsafeMutablePointer<DSA>? {
+	fileprivate func generateDSA(fromPublicKey pubK: Data, andPrivateKey privK: Data) -> UnsafeMutablePointer<DSA>? {
 		if let dsa = generateDSA(fromPublicKey: pubK){
 			let dsaPointer = UnsafeMutablePointer<UnsafeMutablePointer<DSA>?>.allocate(capacity: Int(DSA_size(dsa)))
 			dsaPointer.initialize(to: dsa)
@@ -45,7 +78,7 @@ public class DSACore: NSObject {
 		return nil
 	}
 	
-	func generateDSA(fromPublicKey pubK: Data) -> UnsafeMutablePointer<DSA>? {
+	fileprivate func generateDSA(fromPublicKey pubK: Data) -> UnsafeMutablePointer<DSA>? {
 		
 		let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
 		BIO_write(bioStruct, ((pubK as NSData?)?.bytes)!, Int32(pubK.count))
@@ -55,11 +88,11 @@ public class DSACore: NSObject {
 		return dsaNew
 	}
 	
-	public func generateDSA() {
+	fileprivate func generateDSA() {
 		dsaKey = generateDSAPrivPubKeys(key: generateDSAKeyWithParameters())
 	}
 	
-	func generateDSAPrivPubKeys(key: UnsafeMutablePointer<DSA>?) -> UnsafeMutablePointer<DSA>? {
+	fileprivate func generateDSAPrivPubKeys(key: UnsafeMutablePointer<DSA>?) -> UnsafeMutablePointer<DSA>? {
 		
 		let dsaError = DSA_generate_key(key)
 		
@@ -70,7 +103,7 @@ public class DSACore: NSObject {
 		return key
 	}
 	
-	func generateDSAKeyWithParameters() -> UnsafeMutablePointer<DSA>? {
+	fileprivate func generateDSAKeyWithParameters() -> UnsafeMutablePointer<DSA>? {
 		let bits = 1024
 		let des = DSA_generate_parameters(Int32(bits), nil, 0, nil, nil, nil, nil)
 		return des
@@ -79,7 +112,7 @@ public class DSACore: NSObject {
 	
 	//MARK: Key extractor
 	
-	public func extractPublicKey() -> String? {
+	fileprivate func extractPublicKey() -> String? {
 		
 		if let dsaKey = dsaKey {
 			let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
@@ -116,7 +149,7 @@ public class DSACore: NSObject {
 		return nil
 	}
 	
-	public func extractPrivateKey() -> String? {
+	fileprivate func extractPrivateKey() -> String? {
 		if let dsaKey = dsaKey {
 			let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
 			let error = PEM_write_bio_DSAPrivateKey(bioStruct, dsaKey, nil, nil, 0, nil, nil)
