@@ -11,16 +11,52 @@ import OpenSSL
 
 public class DSACore: NSObject {
 	
-	let key: Data?
-	public static var dsaKey: UnsafeMutablePointer<DSA>?
+	let pubKey: Data?
+	let privKey: Data?
+	var dsaKey: UnsafeMutablePointer<DSA>?
 	
-	public init(key: Data?) {
-		self.key = key
+	init(publicKey: Data, privateKey: Data) {
+		self.pubKey = publicKey
+		self.privKey = privateKey
 		super.init()
+		dsaKey = generateDSA(fromPublicKey: publicKey, andPrivateKey: privateKey)
+	}
+	
+	public override init() {
+		pubKey = Data()
+		privKey = Data()
+		super.init()
+		generateDSA()
+	}
+	
+	//MARK: DSA Key generator
+	
+	func generateDSA(fromPublicKey pubK: Data, andPrivateKey privK: Data) -> UnsafeMutablePointer<DSA>? {
+		if let dsa = generateDSA(fromPublicKey: pubK){
+			let dsaPointer = UnsafeMutablePointer<UnsafeMutablePointer<DSA>?>.allocate(capacity: Int(DSA_size(dsa)))
+			dsaPointer.initialize(to: dsa)
+			
+			let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
+			BIO_write(bioStruct, ((privK as NSData?)?.bytes)!, Int32(privK.count))
+			let dsaNew = PEM_read_bio_DSAPrivateKey(bioStruct, dsaPointer, nil, nil)
+			BIO_free(bioStruct)
+			return dsaNew
+		}
+		return nil
+	}
+	
+	func generateDSA(fromPublicKey pubK: Data) -> UnsafeMutablePointer<DSA>? {
+		
+		let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
+		BIO_write(bioStruct, ((pubK as NSData?)?.bytes)!, Int32(pubK.count))
+		
+		let dsaNew = PEM_read_bio_DSA_PUBKEY(bioStruct, nil, nil, nil)
+		BIO_free(bioStruct)
+		return dsaNew
 	}
 	
 	public func generateDSA() {
-		DSACore.dsaKey = generateDSAPrivPubKeys(key: generateDSAKeyWithParameters())
+		dsaKey = generateDSAPrivPubKeys(key: generateDSAKeyWithParameters())
 	}
 	
 	func generateDSAPrivPubKeys(key: UnsafeMutablePointer<DSA>?) -> UnsafeMutablePointer<DSA>? {
@@ -41,7 +77,77 @@ public class DSACore: NSObject {
 
 	}
 	
-	public class func sign(data: Data) -> Data? {
+	//MARK: Key extractor
+	
+	public func extractPublicKey() -> String? {
+		
+		if let dsaKey = dsaKey {
+			let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
+			let error = PEM_write_bio_DSA_PUBKEY(bioStruct, dsaKey)
+			
+			if error != 1 {
+				print("PEM Write error")
+				return nil
+			}
+			
+			let size: size_t = BIO_ctrl_pending(bioStruct)
+			let key = UnsafeMutablePointer<CChar>.allocate(capacity: size)
+			
+			let priLen = BIO_read(bioStruct, key, Int32(size+1))
+			BIO_free(bioStruct)
+			if priLen != Int32(size) {
+				return nil
+			}
+			
+			let convertResult = String.init(cString: key)
+			var trimmedString = convertResult
+			
+			while true {
+				if trimmedString.characters.last == "\n" || trimmedString.characters.last == "-" {
+					break
+				}
+				else {
+					trimmedString.remove(at: trimmedString.characters.index(before: trimmedString.endIndex))
+				}
+			}
+			
+			return trimmedString
+		}
+		return nil
+	}
+	
+	public func extractPrivateKey() -> String? {
+		if let dsaKey = dsaKey {
+			let bioStruct : UnsafeMutablePointer<BIO> = BIO_new(BIO_s_mem())
+			let error = PEM_write_bio_DSAPrivateKey(bioStruct, dsaKey, nil, nil, 0, nil, nil)
+			
+			if error != 1 {
+				//error handle
+				return nil
+			}
+			
+			let size : size_t = BIO_ctrl_pending(bioStruct)
+			let key = UnsafeMutablePointer<CChar>.allocate(capacity: size)
+			let priLen = BIO_read(bioStruct, key, Int32(size+1))
+			
+			BIO_free(bioStruct)
+			
+			if priLen != Int32(size) {
+				//logger.debug("PPKey len diff error")
+				return nil
+			}
+			
+			let convertResult  = String.init(cString: key)
+			
+			return convertResult
+		}
+		return nil
+	}
+	
+	
+	//MARK: Sign/Verifiy
+	
+	fileprivate func sign(data: Data) -> Data? {
 		let dataPointer = data.makeUInt8DataPointer()
 		let dataSize = data.count
 		let size = UInt32(DSA_size(self.dsaKey!))
@@ -59,7 +165,7 @@ public class DSACore: NSObject {
 		return Data(bytes: result, count: Int(dsaSize.pointee))
 	}
 	
-	public class func verify(signature: Data, digest: Data) -> Bool {
+	fileprivate func verify(signature: Data, digest: Data) -> Bool {
 		let sigPointer = signature.makeUInt8DataPointer()
 		let sigSize = signature.count
 		
@@ -69,7 +175,7 @@ public class DSACore: NSObject {
 		let error = DSA_verify(1, digestPointer, Int32(digestSize), sigPointer, Int32(sigSize), dsaKey!)
 		
 		if error == -1 {
-			printCryptoError()
+			//printCryptoError()
 			return false
 		}
 		else if error == 0 {
@@ -79,14 +185,14 @@ public class DSACore: NSObject {
 		return true
 	}
 	
-	class func printCryptoError(){
-		ERR_load_CRYPTO_strings()
-		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
-		ERR_error_string(ERR_get_error(), err)
-		print("ENC ERROR \(String(cString: err))")
-		print("Fuc error \(ERR_func_error_string(114))")
-		print("Reason error \(ERR_reason_error_string(155))")
-		err.deinitialize()
-		err.deallocate(capacity: 130)
-	}
+//	class func printCryptoError(){
+//		ERR_load_CRYPTO_strings()
+//		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
+//		ERR_error_string(ERR_get_error(), err)
+//		print("ENC ERROR \(String(cString: err))")
+//		print("Fuc error \(ERR_func_error_string(114))")
+//		print("Reason error \(ERR_reason_error_string(155))")
+//		err.deinitialize()
+//		err.deallocate(capacity: 130)
+//	}
 }
