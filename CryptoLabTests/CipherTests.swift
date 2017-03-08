@@ -22,7 +22,12 @@ class CipherTests: XCTestCase {
     }
 	
 	func testGeneral() {
-		DSACore.sign(data: "afasfsafasf".data(using: .utf8)!)
+		DSACore(key:"asdas".data(using: .utf8)).generateDSA()
+		let sig = "afasfsafasf".data(using: .utf8)!
+		if let s = DSACore.sign(data: sig) {
+			let v = DSACore.verify(data: s, signature: sig)
+			print("Signature Verify status: \(v)")
+		}
 		
 	}
 	
