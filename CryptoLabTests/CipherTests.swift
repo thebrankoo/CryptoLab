@@ -24,6 +24,7 @@ class CipherTests: XCTestCase {
 	func testGeneral() {
 		let digest = "neki test za potpis".data(using: .utf8)!
 		let dsa = DSAAuth()
+		let dsa1 = DSAAuth()
 		
 		if let sig = dsa.sign(data: digest) {
 			let verify = dsa.verify(signature: sig, digest: digest)
@@ -36,9 +37,9 @@ class CipherTests: XCTestCase {
 	}
 	
 	func testBlowfish() {
-		let bf = BlowfishCoreCipher(key: "neki key proizvoljni".data(using: .utf8)!)
-		let data = bf.ecbEncrypt(data: "12345678".data(using: .utf8)!)
-		let decData = bf.ecbDecrypt(data: data)
+		let bf = BlowfishCipher(key: "neki key proizvoljni".data(using: .utf8)!)
+		let data = bf.encrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8), mode: .cbc)!  //cbcEncrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8)!)
+		let decData = bf.decrypt(data: data, withIV: "12345678".data(using: .utf8), mode: .cbc)!
 		
 		print("BF \(data.hexEncodedString())")
 		print("BF Dec \(String(data: decData, encoding: .utf8))")
