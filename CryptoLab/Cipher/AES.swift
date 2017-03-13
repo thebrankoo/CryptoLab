@@ -51,13 +51,26 @@ public enum AESBlockCipherMode {
 	}
 }
 
-enum AESError: Error {
-	case noInitParameters(reason: String)
-}
-
-enum CipherGeneralError: Error {
-	case cipherProcessFail(reason: String)
-	case invalidKey(reason: String)
+struct AESErrorReason {
+	static var openSSLError: String {
+		return "OpenSSL Error: " + cryptoOpenSSLError()
+	}
+	
+	static let cipherEncryption = "AES Encryption Error - " + openSSLError
+	
+	static let cipherInit = "AES Init Error - " + openSSLError
+	static let cipherUpdate = "AES Update Error - " + openSSLError
+	static let cipherFinish = "AES Finish Error - " + openSSLError
+	
+	static func cryptoOpenSSLError() -> String {
+		ERR_load_CRYPTO_strings()
+		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
+		ERR_error_string(ERR_get_error(), err)
+		//print("ENC ERROR \(String(cString: err))")
+		err.deinitialize()
+		err.deallocate(capacity: 130)
+		return String(cString: err)
+	}
 }
 
 public class AESCipher: NSObject {
@@ -154,7 +167,7 @@ class AESCoreCipher: NSObject {
 		self.blockMode = blockMode
 		super.init()
 		
-		if isValid(cipherKey: key) == false { throw CipherGeneralError.invalidKey(reason: "AES Key must be of size: 16, 24 or 32 bytes") }
+		if isValid(cipherKey: key) == false { throw CipherError.invalidKey(reason: "AES Key must be of size: 16, 24 or 32 bytes") }
 		decideAESCipher()
 	}
 	
@@ -166,7 +179,7 @@ class AESCoreCipher: NSObject {
 			return finalData
 		}
 		catch {
-			throw CipherGeneralError.cipherProcessFail(reason: "Encrypt Failed")
+			throw  CipherError.cipherProcessFail(reason: AESErrorReason.cipherEncryption)
 		}
 	}
 	
@@ -190,7 +203,7 @@ class AESCoreCipher: NSObject {
 				
 				let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(toUpdate.count))
 				if updateCheck == 0 {
-					throw CipherGeneralError.cipherProcessFail(reason: "Update Encryption UPDATE fail")
+					throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherUpdate)
 				}
 			}
 			
@@ -205,7 +218,7 @@ class AESCoreCipher: NSObject {
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
 		if initCheck == 0 {
-			throw CipherGeneralError.cipherProcessFail(reason: "Update Encryption INIT fail")
+			throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherUpdate)
 		}
 	}
 	
@@ -215,7 +228,7 @@ class AESCoreCipher: NSObject {
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
 			if finalCheck == 0 {
-				throw CipherGeneralError.cipherProcessFail(reason: "Encryption FINAL fail")
+				throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherFinish)
 			}
 			
 			let result = Data(resultData)
@@ -224,7 +237,7 @@ class AESCoreCipher: NSObject {
 			return result
 		}
 		else {
-			throw CipherGeneralError.cipherProcessFail(reason: "Encryption invalid or missing parameters")
+			throw CipherError.cipherProcessFail(reason: "AES Encryption invalid or missing parameters")
 		}
 	}
 	
@@ -233,8 +246,9 @@ class AESCoreCipher: NSObject {
 		return false
 	}
 	
+	//MARK: Decryption
 	fileprivate func decrypt(data: Data) throws -> Data {
-	
+		
 		if let iv = self.iv, let key = self.key {
 			do {
 				try initDecryption(withKey: key, andIV: iv)
@@ -247,11 +261,9 @@ class AESCoreCipher: NSObject {
 			}
 		}
 		else {
-			throw CipherGeneralError.cipherProcessFail(reason: "Decrypt AES No key or iv")
+			throw CipherError.cipherProcessFail(reason: "AES Decrypt no key or iv")
 		}
 	}
-	
-	//MARK: Decryption
 	
 	fileprivate func initDecryption(withKey key: Data, andIV iv: Data) throws {
 		
@@ -262,7 +274,7 @@ class AESCoreCipher: NSObject {
 		
 		let initStatus = EVP_DecryptInit(self.decContext!, self.aesCipher, keyPointer, ivPointer)
 		if initStatus == 0 {
-			throw CipherGeneralError.cipherProcessFail(reason: "AES Decryption status = 0")
+			throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherInit)
 		}
 	}
 	
@@ -278,7 +290,7 @@ class AESCoreCipher: NSObject {
 				let updateStatus = EVP_DecryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
 				decryptionResultSize += resultSize.pointee
 				if updateStatus == 0 {
-					throw CipherGeneralError.cipherProcessFail(reason: "AES Update Status = 0")
+					throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherUpdate)
 				}
 			}
 	}
@@ -296,14 +308,14 @@ class AESCoreCipher: NSObject {
 				
 				if finishStatus == 0 {
 					printCryptoError()
-					throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt Status = 0")
+					throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherFinish)
 				}
 			}
 			self.context = nil
 			return Data(resultData)
 		}
 		else {
-			throw CipherGeneralError.cipherProcessFail(reason: "AES Decrypt Fail")
+			throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherFinish)
 		}
 	}
 	

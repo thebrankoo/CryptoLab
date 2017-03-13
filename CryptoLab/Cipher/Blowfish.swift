@@ -181,7 +181,7 @@ class BlowfishCoreCipher: NSObject {
 //		
 //		BF_ofb64_encrypt(inArray, &outArray, initv.count, blowfishKey, iv, &num)
 
-		let data = ofb64Decrypt(data: toDecrypt, withIV: initv)
+		let data = cfb64Decrypt(data: toDecrypt, withIV: initv)
 		
 		return data
 	}

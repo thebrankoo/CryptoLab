@@ -38,8 +38,8 @@ class CipherTests: XCTestCase {
 	
 	func testBlowfish() {
 		let bf = BlowfishCipher(key: "neki key proizvoljni".data(using: .utf8)!)
-		let data = bf.encrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8), mode: .cbc)!  //cbcEncrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8)!)
-		let decData = bf.decrypt(data: data, withIV: "12345678".data(using: .utf8), mode: .cbc)!
+		let data = bf.encrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8), mode: .ofb64)!  //cbcEncrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8)!)
+		let decData = bf.decrypt(data: data, withIV: "12345678".data(using: .utf8), mode: .ofb64)!
 		
 		print("BF \(data.hexEncodedString())")
 		print("BF Dec \(String(data: decData, encoding: .utf8))")

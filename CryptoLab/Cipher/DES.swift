@@ -70,7 +70,7 @@ public class DESCoreCipher: NSObject {
 			return finalData
 		}
 		catch {
-			throw CipherGeneralError.cipherProcessFail(reason: "Encrypt Failed")
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class DESCoreCipher: NSObject {
 			}
 		}
 		else {
-			throw CipherGeneralError.cipherProcessFail(reason: "Decrypt AES No key or iv")
+			throw CipherError.cipherProcessFail(reason: "Decrypt AES No key or iv")
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class DESCoreCipher: NSObject {
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		let initCheck = EVP_EncryptInit(context!, self.desCipher, keyPointer, ivPointer)
 		if initCheck == 0 {
-			throw CipherGeneralError.cipherProcessFail(reason: "Update Encryption INIT fail")
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherInit)
 		}
 	}
 	
@@ -125,7 +125,7 @@ public class DESCoreCipher: NSObject {
 				
 				let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(toUpdate.count))
 				if updateCheck == 0 {
-					throw CipherGeneralError.cipherProcessFail(reason: "Update Encryption UPDATE fail")
+					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 				}
 			}
 			
@@ -138,7 +138,7 @@ public class DESCoreCipher: NSObject {
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
 			if finalCheck == 0 {
-				throw CipherGeneralError.cipherProcessFail(reason: "Encryption FINAL fail")
+				throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 			}
 			
 			let result = Data(resultData)
@@ -147,7 +147,7 @@ public class DESCoreCipher: NSObject {
 			return result
 		}
 		else {
-			throw CipherGeneralError.cipherProcessFail(reason: "Encryption invalid or missing parameters")
+			throw CipherError.cipherProcessFail(reason: "Encryption invalid or missing parameters")
 		}
 	}
 	
@@ -164,7 +164,7 @@ public class DESCoreCipher: NSObject {
 		
 		let initStatus = EVP_DecryptInit(self.decContext!, self.desCipher, keyPointer, ivPointer)
 		if initStatus == 0 {
-			throw CipherGeneralError.cipherProcessFail(reason: "DES Decryption status = 0")
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherInit)
 		}
 	}
 	
@@ -178,7 +178,7 @@ public class DESCoreCipher: NSObject {
 			let updateStatus = EVP_DecryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
 			decryptionResultSize += resultSize.pointee
 			if updateStatus == 0 {
-				throw CipherGeneralError.cipherProcessFail(reason: "DES Update Status = 0")
+				throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 			}
 		}
 	}
@@ -195,15 +195,14 @@ public class DESCoreCipher: NSObject {
 				finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize)
 				
 				if finishStatus == 0 {
-					//printCryptoError()
-					throw CipherGeneralError.cipherProcessFail(reason: "DES Decrypt Status = 0")
+					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 				}
 			}
 			self.context = nil
 			return Data(resultData)
 		}
 		else {
-			throw CipherGeneralError.cipherProcessFail(reason: "DES Decrypt Fail")
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 		}
 	}
 

@@ -55,14 +55,24 @@ public class RSACipher: NSObject {
 		super.init()
 	}
 	
-	public func encrypt(data dataToEncrypt: Data) -> Data? {
-		let finalData = coreCipher?.encrypt(data: dataToEncrypt)
-		return finalData
+	public func encrypt(data dataToEncrypt: Data) throws -> Data? {
+		do {
+			let finalData = try coreCipher?.encrypt(data: dataToEncrypt)
+			return finalData
+		}
+		catch let error {
+			throw error
+		}
 	}
 	
-	public func decrypt(data dataToDecrypt: Data) -> Data? {
-		let finalData = coreCipher?.decrypt(data: dataToDecrypt)
-		return finalData
+	public func decrypt(data dataToDecrypt: Data) throws -> Data? {
+		do {
+			let finalData = try coreCipher?.decrypt(data: dataToDecrypt)
+			return finalData
+		}
+		catch let error {
+			throw error
+		}
 	}
 }
 
@@ -103,23 +113,39 @@ class RSACoreCipher: NSObject {
 	
 	//MARK: Core Cipher Interface
 	
-	func encrypt(data dataToEncode: Data) -> Data? {
+	func encrypt(data dataToEncode: Data) throws -> Data {
 		if let rsaKey = self.keychain?.rsaKeyPair {
-			return encrypt(data: dataToEncode, rsaKey: rsaKey)
+			do {
+				let encData = try encrypt(data: dataToEncode, rsaKey: rsaKey)
+				return encData
+			}
+			catch let error {
+				throw error
+			}
 		}
-		return nil
+		else {
+			throw CipherError.invalidKey(reason: "RSA Key doesn't exists")
+		}
 	}
 	
-	func decrypt(data dataToDecode:Data) -> Data? {
+	func decrypt(data dataToDecode:Data) throws -> Data {
 		if let rsaKey = self.keychain?.rsaKeyPair {
-			return decrypt(data: dataToDecode, rsaKey: rsaKey)
+			do {
+				let decData = try decrypt(data: dataToDecode, rsaKey: rsaKey)
+				return decData
+			}
+			catch let error {
+				throw error
+			}
 		}
-		return nil
+		else {
+			throw CipherError.invalidKey(reason: "RSA Key doesn't exists")
+		}
 	}
 	
 	//MARK: Core Cipher privates
 	
-	private func encrypt(data dataToEncode: Data, rsaKey: UnsafeMutablePointer<RSA>) -> Data? {
+	private func encrypt(data dataToEncode: Data, rsaKey: UnsafeMutablePointer<RSA>) throws -> Data {
 		let rsaStruct =  UnsafeMutablePointer(rsaKey)
 		
 		let dataPointer = (dataToEncode as NSData).bytes.bindMemory(to: UInt8.self, capacity: dataToEncode.count)
@@ -130,14 +156,13 @@ class RSACoreCipher: NSObject {
 		let encryptedSize = RSA_public_encrypt(Int32(dataSize), dataPointer, encryptedPointer, rsaStruct, padding)
 		
 		if encryptedSize == -1 {
-			printCryptoError()
-			return nil
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherEncryption)
 		}
 		
 		return Data(bytes: UnsafePointer<UInt8>(encryptedPointer), count: Int(encryptedSize))
 	}
 	
-	private func decrypt(data dataToDecode:Data, rsaKey: UnsafeMutablePointer<RSA>) -> Data? {
+	private func decrypt(data dataToDecode:Data, rsaKey: UnsafeMutablePointer<RSA>) throws -> Data {
 		let rsaStruct = rsaKey
 		let dataPointer = (dataToDecode as NSData).bytes.bindMemory(to: UInt8.self, capacity: dataToDecode.count)
 		let dataSize = 11//4098 //dataToDecode.count
@@ -146,8 +171,7 @@ class RSACoreCipher: NSObject {
 		let decryptedSize = RSA_private_decrypt(Int32(dataSize), dataPointer, decryptedPointer, rsaStruct, padding)
 		
 		if decryptedSize == -1 {
-			printCryptoError()
-			return nil
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherDecryption)
 		}
 		
 		return Data(bytes: UnsafePointer<UInt8>(decryptedPointer), count: Int(decryptedSize))
