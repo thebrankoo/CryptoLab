@@ -29,6 +29,23 @@ public enum RSAPadding {
 	}
 }
 
+public enum RSASignatureType {
+	case md5
+	case sha1
+	case ripemd160
+	
+	func signatureType() -> Int32 {
+		switch self {
+		case .md5:
+			return NID_md5
+		case .sha1:
+			return NID_sha1
+		case .ripemd160:
+			return NID_ripemd160
+		}
+	}
+}
+
 public class RSACipher: NSObject {
 	
 	private let coreCipher: RSACoreCipher?
@@ -73,6 +90,15 @@ public class RSACipher: NSObject {
 		catch let error {
 			throw error
 		}
+	}
+	
+	public func sign(data toSign: Data, type: RSASignatureType) -> Data? {
+		return coreCipher?.sign(data: toSign, type: type)
+	}
+	
+	public func verify(data toVerify: Data, signature: Data, type: RSASignatureType) -> Bool {
+		if let coreCipher = coreCipher {return coreCipher.verify(data: toVerify, signature: signature, type: type)}
+		return false
 	}
 }
 
@@ -177,15 +203,55 @@ class RSACoreCipher: NSObject {
 		return Data(bytes: UnsafePointer<UInt8>(decryptedPointer), count: Int(decryptedSize))
 	}
 	
+	/*
+	func verifySignature(_ signature:Data, textMessage:String, publicKey: String)->Bool {
 	
-	fileprivate func printCryptoError(){
-		ERR_load_CRYPTO_strings()
-		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
-		ERR_error_string(ERR_get_error(), err)
-		print("ENC ERROR \(String(cString: err))")
-		err.deinitialize()
-		err.deallocate(capacity: 130)
+	let shaTextData = applySHA1OnString(textMessage)
+	
+	let signaturePointer = UnsafeMutablePointer<UInt8>(mutating: (signature as NSData).bytes.bindMemory(to: UInt8.self, capacity: signature.count))
+	let rsaKeyPair = TCPPKeyManager.sharedInstance.rsaFromPublicKeyString(publicKey)
+	
+	let status = RSA_verify(NID_sha1, shaTextData, UInt32(SHA_DIGEST_LENGTH), signaturePointer, 256, rsaKeyPair)
+	
+	return status == 1
+	
+	
+	
 	}
+	
+	*/
+	
+	fileprivate func sign(data toSign: Data, type: RSASignatureType) -> Data? {
+		if let rsaKey = self.keychain?.rsaKeyPair {
+			let toSignPoiner = toSign.makeUInt8DataPointer()
+			let toSignSize = toSign.count
+			let rsaSize = RSA_size(rsaKey)
+			var signature = Data.makeUInt8EmptyArray(ofSize: Int(rsaSize))
+			let signatureSize = UnsafeMutablePointer<UInt32>.allocate(capacity: MemoryLayout<UInt32>.size)
+			
+			let error = RSA_sign(type.signatureType(), toSignPoiner, UInt32(toSignSize), &signature, signatureSize, rsaKey)
+			
+			if error != 1 {
+				return nil
+			}
+			
+			return Data(signature)
+		}
+		return nil
+	}
+	
+	fileprivate func verify(data toVerify: Data, signature: Data, type: RSASignatureType) -> Bool {
+		if let rsaKey = self.keychain?.rsaKeyPair {
+			//let ver = SHA1Hash().hash(data: toVerify)
+			let signaturePointer = signature.makeUInt8DataPointer()
+			let status = RSA_verify(type.signatureType(), toVerify.makeUInt8DataPointer(), UInt32(toVerify.count), signaturePointer, UInt32(signature.count), rsaKey)
+			
+			return status == 1
+		}
+		
+		return false
+	}
+	
 }
 
 class RSAKeychain: NSObject {

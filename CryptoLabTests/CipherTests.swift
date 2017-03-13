@@ -91,14 +91,28 @@ class CipherTests: XCTestCase {
 		let testString = "test string"
 		let rsa = RSACipher(padding: .sslv23)
 		
-		if let ecrypt = rsa.encrypt(data: testString.data(using: .utf8)!) {
-			if let decrypt = rsa.decrypt(data: ecrypt) {
+		do {
+		if let ecrypt = try rsa.encrypt(data: testString.data(using: .utf8)!) {
+			if let decrypt = try rsa.decrypt(data: ecrypt) {
 				XCTAssert(testString.data(using: .utf8)! == decrypt)
 				return
 			}
 		}
+		}
+		catch let err {
+			XCTAssert(false, err.localizedDescription)
+		}
 		
 		XCTAssert(false)
+	}
+	
+	func testRSASign()  {
+		let rsa = RSACipher(padding: .sslv23)
+		
+		let data = rsa.sign(data: "neki data to sign".data(using: .utf8)!, type: .ripemd160)
+		let verif = rsa.verify(data: "neki data to sign".data(using: .utf8)!, signature: data!, type: .ripemd160)
+		
+		XCTAssert(verif)
 	}
 	
 	func testHMAC() {
