@@ -16,73 +16,92 @@ public enum BlowfishEncryptMode {
 	case cfb64
 }
 
-public class BlowfishCipher: NSObject {
+public class BlowfishCipher: NSObject, Cryptor {
 	fileprivate let coreCipher: BlowfishCoreCipher
 	public let key: Data
 	
-	public init(key: Data) {
-		coreCipher = BlowfishCoreCipher(key: key)
+	public init(key: Data, iv: Data?, encryptionMode: BlowfishEncryptMode) {
+		coreCipher = BlowfishCoreCipher(key: key, iv: iv, encryptionMode: encryptionMode)
 		self.key = key
 		super.init()
 	}
 	
-	public func encrypt(data toEncrypt: Data, withIV iv: Data?, mode: BlowfishEncryptMode) -> Data? {
-		switch mode {
-		case .ecb:
-			return coreCipher.ecbEncrypt(data: toEncrypt)
-		case .cbc:
-			if let iv = iv {
-				return coreCipher.cbcEncrypt(data: toEncrypt, withIV: iv)
-			}
-			return nil
-			
-		case .ofb64:
-			if let iv = iv {
-				return coreCipher.ofb64Encrypt(data: toEncrypt, withIV: iv)
-			}
-			return nil
-		case .cfb64:
-			if let iv = iv {
-				return coreCipher.cfb64Encrypt(data: toEncrypt, withIV: iv)
-			}
-			return nil
+	public func encrypt(data dataToEncrypt: Data) throws -> Data {
+		if let encrypted = coreCipher.encrypt(data: dataToEncrypt) {
+			return encrypted
 		}
+		throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherEncryption)
 	}
 	
-	public func decrypt(data toEncrypt: Data, withIV iv: Data?, mode: BlowfishEncryptMode) -> Data? {
-		switch mode {
-		case .ecb:
-			return coreCipher.ecbDecrypt(data: toEncrypt)
-		case .cbc:
-			if let iv = iv {
-				return coreCipher.cbcDecrypt(data: toEncrypt, withIV: iv)
-			}
-			return nil
-			
-		case .ofb64:
-			if let iv = iv {
-				return coreCipher.ofb64Decrypt(data: toEncrypt, withIV: iv)
-			}
-			return nil
-		case .cfb64:
-			if let iv = iv {
-				return coreCipher.cfb64Decrypt(data: toEncrypt, withIV: iv)
-			}
-			return nil
+	public func decrypt(data dataToDecrypt: Data) throws -> Data {
+		if let decrypted = coreCipher.decrypt(data: dataToDecrypt) {
+			return decrypted
 		}
+		throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherDecryption)
 	}
 }
 
 class BlowfishCoreCipher: NSObject {
 	private let blowfishKey: UnsafeMutablePointer<BF_KEY>
 	fileprivate let key: Data
+	fileprivate let iv: Data?
+	fileprivate let mode: BlowfishEncryptMode
 	
-	fileprivate init(key: Data) {
+	fileprivate init(key: Data, iv: Data?, encryptionMode: BlowfishEncryptMode) {
 		self.key = key
 		self.blowfishKey = UnsafeMutablePointer<BF_KEY>.allocate(capacity: MemoryLayout<BF_KEY>.size)
+		self.iv = iv
+		self.mode = encryptionMode
 		
 		BF_set_key(blowfishKey, Int32(key.count), key.makeUInt8DataPointer())
 		super.init()
+	}
+	
+	fileprivate func encrypt(data toEncrypt: Data) -> Data? {
+		switch mode {
+		case .ecb:
+			return ecbEncrypt(data: toEncrypt)
+		case .cbc:
+			if let iv = iv {
+				return cbcEncrypt(data: toEncrypt, withIV: iv)
+			}
+			return nil
+			
+		case .ofb64:
+			if let iv = iv {
+				return ofb64Encrypt(data: toEncrypt, withIV: iv)
+			}
+			return nil
+		case .cfb64:
+			if let iv = iv {
+				return cfb64Encrypt(data: toEncrypt, withIV: iv)
+			}
+			return nil
+		}
+	}
+	
+	fileprivate func decrypt(data toDecrypt: Data) -> Data? {
+		switch mode {
+		case .ecb:
+			return ecbDecrypt(data: toDecrypt)
+		case .cbc:
+			if let iv = iv {
+				return cbcDecrypt(data: toDecrypt, withIV: iv)
+			}
+			return nil
+			
+		case .ofb64:
+			if let iv = iv {
+				return ofb64Decrypt(data: toDecrypt, withIV: iv)
+			}
+			return nil
+		case .cfb64:
+			if let iv = iv {
+				return cfb64Decrypt(data: toDecrypt, withIV: iv)
+			}
+			return nil
+		}
+
 	}
 	
 	/**

@@ -46,7 +46,7 @@ public enum RSASignatureType {
 	}
 }
 
-public class RSACipher: NSObject {
+public class RSACipher: NSObject, Cryptor {
 	
 	private let coreCipher: RSACoreCipher?
 	
@@ -72,20 +72,24 @@ public class RSACipher: NSObject {
 		super.init()
 	}
 	
-	public func encrypt(data dataToEncrypt: Data) throws -> Data? {
+	public func encrypt(data dataToEncrypt: Data) throws -> Data {
 		do {
-			let finalData = try coreCipher?.encrypt(data: dataToEncrypt)
-			return finalData
+			if let finalData = try coreCipher?.encrypt(data: dataToEncrypt) {
+				return finalData
+			}
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherEncryption)
 		}
 		catch let error {
 			throw error
 		}
 	}
 	
-	public func decrypt(data dataToDecrypt: Data) throws -> Data? {
+	public func decrypt(data dataToDecrypt: Data) throws -> Data {
 		do {
-			let finalData = try coreCipher?.decrypt(data: dataToDecrypt)
-			return finalData
+			if let finalData = try coreCipher?.decrypt(data: dataToDecrypt) {
+				return finalData
+			}
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherDecryption)
 		}
 		catch let error {
 			throw error
@@ -203,24 +207,6 @@ class RSACoreCipher: NSObject {
 		return Data(bytes: UnsafePointer<UInt8>(decryptedPointer), count: Int(decryptedSize))
 	}
 	
-	/*
-	func verifySignature(_ signature:Data, textMessage:String, publicKey: String)->Bool {
-	
-	let shaTextData = applySHA1OnString(textMessage)
-	
-	let signaturePointer = UnsafeMutablePointer<UInt8>(mutating: (signature as NSData).bytes.bindMemory(to: UInt8.self, capacity: signature.count))
-	let rsaKeyPair = TCPPKeyManager.sharedInstance.rsaFromPublicKeyString(publicKey)
-	
-	let status = RSA_verify(NID_sha1, shaTextData, UInt32(SHA_DIGEST_LENGTH), signaturePointer, 256, rsaKeyPair)
-	
-	return status == 1
-	
-	
-	
-	}
-	
-	*/
-	
 	fileprivate func sign(data toSign: Data, type: RSASignatureType) -> Data? {
 		if let rsaKey = self.keychain?.rsaKeyPair {
 			let toSignPoiner = toSign.makeUInt8DataPointer()
@@ -242,7 +228,6 @@ class RSACoreCipher: NSObject {
 	
 	fileprivate func verify(data toVerify: Data, signature: Data, type: RSASignatureType) -> Bool {
 		if let rsaKey = self.keychain?.rsaKeyPair {
-			//let ver = SHA1Hash().hash(data: toVerify)
 			let signaturePointer = signature.makeUInt8DataPointer()
 			let status = RSA_verify(type.signatureType(), toVerify.makeUInt8DataPointer(), UInt32(toVerify.count), signaturePointer, UInt32(signature.count), rsaKey)
 			

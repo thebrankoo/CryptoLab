@@ -41,7 +41,84 @@ public enum DESBlockCipherMode {
 	}
 }
 
-public class DESCoreCipher: NSObject {
+public class DESCipher: NSObject, Cryptor, BlockCryptor {
+	fileprivate let coreCipher: DESCoreCipher
+	
+	init(key: Data, iv: Data, blockMode: DESBlockCipherMode) throws {
+		do {
+			coreCipher = try DESCoreCipher(key: key, iv: iv, blockMode: blockMode)
+			super.init()
+		}
+		catch let err {
+			throw err
+		}
+	}
+	
+	//MARK: Cryptor
+	
+	public func encrypt(data dataToEncrypt: Data) throws -> Data {
+		do {
+			let encrypted = try coreCipher.encrypt(data: dataToEncrypt)
+			return encrypted
+		}
+		catch let err {
+			throw err
+		}
+	}
+	
+	public func decrypt(data dataToDecrypt: Data) throws -> Data {
+		do {
+			let decrypted = try coreCipher.decrypt(data: dataToDecrypt)
+			return decrypted
+		}
+		catch let err {
+			throw err
+		}
+	}
+	
+	//MARK: Block Cryptor
+	
+	public func updateEncryption(withDataBlock data: Data) throws {
+		do {
+			try coreCipher.updateEncryption(withData: data)
+		}
+		catch let err {
+			throw err
+		}
+	}
+	
+	public func finishEncryption() throws -> Data {
+		do {
+			let finished = try coreCipher.finishEncryption()
+			return finished
+		}
+		catch let err {
+			throw err
+		}
+	}
+	
+	public func updateDecryption(withDataBlock data: Data) throws {
+		do {
+			try coreCipher.updateDecryption(withData: data)
+		}
+		catch let err {
+			throw err
+		}
+	}
+	
+	public func finishDecryption() throws -> Data {
+		do {
+			let finished = try coreCipher.finishDecryption()
+			return finished
+		}
+		catch let err {
+			throw err
+		}
+	}
+}
+
+
+class DESCoreCipher: NSObject {
 	static let ivSize = 16
 	fileprivate let key: Data?
 	fileprivate let iv: Data?
@@ -65,7 +142,7 @@ public class DESCoreCipher: NSObject {
 	public func encrypt(data: Data) throws -> Data {
 		
 		do {
-			try updateEncryption(data: data)
+			try updateEncryption(withData: data)
 			let finalData = try finishEncryption()
 			return finalData
 		}
@@ -105,7 +182,7 @@ public class DESCoreCipher: NSObject {
 		}
 	}
 	
-	fileprivate func updateEncryption(data toUpdate: Data) throws {
+	fileprivate func updateEncryption(withData toUpdate: Data) throws {
 		if let key = key, let iv = iv {
 			
 			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (toUpdate as NSData).bytes.bindMemory(to: UInt8.self, capacity: toUpdate.count))

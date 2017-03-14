@@ -105,7 +105,7 @@ class DSACore: NSObject {
 	
 	fileprivate func generateDSAKeyWithParameters() -> UnsafeMutablePointer<DSA>? {
 		let bits = 1024
-		let des = DSA_generate_parameters(Int32(bits), nil, 0, nil, nil, nil, nil)
+		let des = DSA_generate_parameters(Int32(bits), nil, Int32(0), nil, nil, nil, nil)
 		return des
 
 	}

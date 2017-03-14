@@ -24,10 +24,10 @@ class CipherTests: XCTestCase {
 	func testGeneral() {
 		let digest = "neki test za potpis".data(using: .utf8)!
 		let dsa = DSAAuth()
-		let dsa1 = DSAAuth()
+		let dsa1 = DSAAuth(publicKey: dsa.publicKey!.data(using: .utf8)!, privateKey: dsa.privateKey!.data(using: .utf8)!)
 		
 		if let sig = dsa.sign(data: digest) {
-			let verify = dsa.verify(signature: sig, digest: digest)
+			let verify = dsa1.verify(signature: sig, digest: digest)
 			XCTAssert(verify)
 		}
 		else {

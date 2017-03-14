@@ -51,7 +51,7 @@ public enum AESBlockCipherMode {
 	}
 }
 
-public class AESCipher: NSObject {
+public class AESCipher: NSObject, Cryptor, BlockCryptor {
 	
 	public var iv: Data? {
 		return coreCipher.iv
@@ -74,13 +74,11 @@ public class AESCipher: NSObject {
 		super.init()
 	}
 	
-	public func makeBlockEncryptor() -> AESBlockEncryption {
-		return AESBlockEncryption(aesCipher: self)
-	}
+	//MARK: Cryptor
 	
-	public func encrypt (data toEncrypt: Data) throws -> Data {
+	public func encrypt (data dataToEncrypt: Data) throws -> Data {
 		do {
-			let data: Data = try coreCipher.encrypt(data: toEncrypt)
+			let data: Data = try coreCipher.encrypt(data: dataToEncrypt)
 			return data
 		}
 		catch let error {
@@ -88,41 +86,53 @@ public class AESCipher: NSObject {
 		}
 	}
 	
-	public func decrypt(data toDecrypt: Data) throws -> Data {
+	public func decrypt(data dataToDecrypt: Data) throws -> Data {
 		do {
-			let data: Data = try coreCipher.decrypt(data: toDecrypt)
+			let data: Data = try coreCipher.decrypt(data: dataToDecrypt)
 			return data
 		}
 		catch let error {
 			throw error
 		}
 	}
-}
-
-public class AESBlockEncryption: NSObject {
-	fileprivate let aesCipher: AESCipher
 	
-	init(aesCipher cipher: AESCipher) {
-		aesCipher = cipher
-		super.init()
-	}
+	//MARK: Block Cryptor
 	
-	public func update(withDataBlock data: Data) throws {
+	public func updateEncryption(withDataBlock data: Data) throws {
 		do {
-			try aesCipher.coreCipher.updateEncryption(data: data)
+			try coreCipher.updateEncryption(data: data)
 		}
 		catch let error {
 			throw error
 		}
 	}
-
-	public func finish() throws -> Data {
+	
+	public func finishEncryption() throws -> Data {
 		do {
-			let finalData = try aesCipher.coreCipher.finishEncryption()
+			let finalData = try coreCipher.finishEncryption()
 			return finalData
 		}
 		catch let error{
 			throw error
+		}
+	}
+	
+	public func updateDecryption(withDataBlock data: Data) throws {
+		do {
+			try coreCipher.updateDecryption(withData: data)
+		}
+		catch let err {
+			throw err
+		}
+	}
+	
+	public func finishDecryption() throws -> Data {
+		do {
+			let finished = try coreCipher.finishDecryption()
+			return finished
+		}
+		catch let err {
+			throw err
 		}
 	}
 }
