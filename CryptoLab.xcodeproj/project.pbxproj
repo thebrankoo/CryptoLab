@@ -11,10 +11,12 @@
 		193BEEB61E46342900383028 /* HashFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB51E46342900383028 /* HashFunctionsTests.swift */; };
 		194C6F441E61AE83001C4047 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C6F431E61AE83001C4047 /* Extensions.swift */; };
 		1975BFEF1E769AC3001D0944 /* CryptoErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFEE1E769AC3001D0944 /* CryptoErrors.swift */; };
+		1975BFF21E76E1DB001D0944 /* HashExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFF11E76E1DB001D0944 /* HashExtensions.swift */; };
+		1975BFF41E76E262001D0944 /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFF31E76E262001D0944 /* AuthExtensions.swift */; };
+		1975BFF61E76E297001D0944 /* DSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFF51E76E297001D0944 /* DSA.swift */; };
 		198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */; };
 		19BF47601E4F21DF00310164 /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF475F1E4F21DF00310164 /* RSA.swift */; };
 		19DEAF741E6EB7060054BB97 /* DES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DEAF731E6EB7060054BB97 /* DES.swift */; };
-		19DEAF761E6EE9700054BB97 /* DSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DEAF751E6EE9700054BB97 /* DSA.swift */; };
 		19E3DF3F1E66C25F00DFEAD2 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */; };
 		19F9B1431E3E33CA007CE1BD /* CryptoLab.h in Headers */ = {isa = PBXBuildFile; fileRef = 19F9B1411E3E33CA007CE1BD /* CryptoLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19F9B14F1E3E3463007CE1BD /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B14E1E3E3463007CE1BD /* openssl.framework */; };
@@ -40,11 +42,13 @@
 		193BEEB51E46342900383028 /* HashFunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctionsTests.swift; sourceTree = "<group>"; };
 		194C6F431E61AE83001C4047 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1975BFEE1E769AC3001D0944 /* CryptoErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CryptoErrors.swift; path = Other/CryptoErrors.swift; sourceTree = "<group>"; };
+		1975BFF11E76E1DB001D0944 /* HashExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashExtensions.swift; path = "Hash Functions/HashExtensions.swift"; sourceTree = "<group>"; };
+		1975BFF31E76E262001D0944 /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthExtensions.swift; path = "Message Auth/AuthExtensions.swift"; sourceTree = "<group>"; };
+		1975BFF51E76E297001D0944 /* DSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DSA.swift; path = "Message Auth/DSA.swift"; sourceTree = "<group>"; };
 		198A32901E427AFD000E5370 /* CryptoLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		198A32941E427AFD000E5370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19BF475F1E4F21DF00310164 /* RSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RSA.swift; path = Cipher/RSA.swift; sourceTree = "<group>"; };
 		19DEAF731E6EB7060054BB97 /* DES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DES.swift; path = Cipher/DES.swift; sourceTree = "<group>"; };
-		19DEAF751E6EE9700054BB97 /* DSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DSA.swift; path = "Hash Functions/DSA.swift"; sourceTree = "<group>"; };
 		19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HMAC.swift; path = "Message Auth/HMAC.swift"; sourceTree = "<group>"; };
 		19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CryptoLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F9B1411E3E33CA007CE1BD /* CryptoLab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CryptoLab.h; sourceTree = "<group>"; };
@@ -103,7 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */,
-				19DEAF751E6EE9700054BB97 /* DSA.swift */,
+				1975BFF51E76E297001D0944 /* DSA.swift */,
+				1975BFF31E76E262001D0944 /* AuthExtensions.swift */,
 			);
 			name = "Message Auth";
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 			children = (
 				19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */,
 				19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */,
+				1975BFF11E76E1DB001D0944 /* HashExtensions.swift */,
 			);
 			name = "Hash functions";
 			sourceTree = "<group>";
@@ -299,14 +305,16 @@
 				19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */,
 				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
 				19E3DF3F1E66C25F00DFEAD2 /* HMAC.swift in Sources */,
+				1975BFF41E76E262001D0944 /* AuthExtensions.swift in Sources */,
 				19DEAF741E6EB7060054BB97 /* DES.swift in Sources */,
 				1975BFEF1E769AC3001D0944 /* CryptoErrors.swift in Sources */,
-				19DEAF761E6EE9700054BB97 /* DSA.swift in Sources */,
 				19BF47601E4F21DF00310164 /* RSA.swift in Sources */,
 				194C6F441E61AE83001C4047 /* Extensions.swift in Sources */,
+				1975BFF61E76E297001D0944 /* DSA.swift in Sources */,
 				19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */,
 				19FB5FE91E4C6E1C00F6212E /* AES.swift in Sources */,
 				1910DA6C1E53422E0050C78C /* Blowfish.swift in Sources */,
+				1975BFF21E76E1DB001D0944 /* HashExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

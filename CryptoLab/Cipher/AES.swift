@@ -51,28 +51,6 @@ public enum AESBlockCipherMode {
 	}
 }
 
-struct AESErrorReason {
-	static var openSSLError: String {
-		return "OpenSSL Error: " + cryptoOpenSSLError()
-	}
-	
-	static let cipherEncryption = "AES Encryption Error - " + openSSLError
-	
-	static let cipherInit = "AES Init Error - " + openSSLError
-	static let cipherUpdate = "AES Update Error - " + openSSLError
-	static let cipherFinish = "AES Finish Error - " + openSSLError
-	
-	static func cryptoOpenSSLError() -> String {
-		ERR_load_CRYPTO_strings()
-		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
-		ERR_error_string(ERR_get_error(), err)
-		//print("ENC ERROR \(String(cString: err))")
-		err.deinitialize()
-		err.deallocate(capacity: 130)
-		return String(cString: err)
-	}
-}
-
 public class AESCipher: NSObject {
 	
 	public var iv: Data? {
@@ -179,7 +157,7 @@ class AESCoreCipher: NSObject {
 			return finalData
 		}
 		catch {
-			throw  CipherError.cipherProcessFail(reason: AESErrorReason.cipherEncryption)
+			throw  CipherError.cipherProcessFail(reason: CipherErrorReason.cipherEncryption)
 		}
 	}
 	
@@ -203,7 +181,7 @@ class AESCoreCipher: NSObject {
 				
 				let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(toUpdate.count))
 				if updateCheck == 0 {
-					throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherUpdate)
+					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 				}
 			}
 			
@@ -218,7 +196,7 @@ class AESCoreCipher: NSObject {
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
 		if initCheck == 0 {
-			throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherUpdate)
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 		}
 	}
 	
@@ -228,7 +206,7 @@ class AESCoreCipher: NSObject {
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
 			if finalCheck == 0 {
-				throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherFinish)
+				throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 			}
 			
 			let result = Data(resultData)
@@ -274,7 +252,7 @@ class AESCoreCipher: NSObject {
 		
 		let initStatus = EVP_DecryptInit(self.decContext!, self.aesCipher, keyPointer, ivPointer)
 		if initStatus == 0 {
-			throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherInit)
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherInit)
 		}
 	}
 	
@@ -290,7 +268,7 @@ class AESCoreCipher: NSObject {
 				let updateStatus = EVP_DecryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(data.count))
 				decryptionResultSize += resultSize.pointee
 				if updateStatus == 0 {
-					throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherUpdate)
+					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 				}
 			}
 	}
@@ -307,15 +285,14 @@ class AESCoreCipher: NSObject {
 				finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize)
 				
 				if finishStatus == 0 {
-					printCryptoError()
-					throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherFinish)
+					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 				}
 			}
 			self.context = nil
 			return Data(resultData)
 		}
 		else {
-			throw CipherError.cipherProcessFail(reason: AESErrorReason.cipherFinish)
+			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 		}
 	}
 	
@@ -372,14 +349,5 @@ class AESCoreCipher: NSObject {
 	fileprivate func isValid(cipherKey key: Data) -> Bool {
 		if let _ = AESKeySize(rawValue: key.count) { return true}
 		return false
-	}
-	
-	fileprivate func printCryptoError(){
-		ERR_load_CRYPTO_strings()
-		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
-		ERR_error_string(ERR_get_error(), err)
-		print("ENC ERROR \(String(cString: err))")
-		err.deinitialize()
-		err.deallocate(capacity: 130)
 	}
 }
