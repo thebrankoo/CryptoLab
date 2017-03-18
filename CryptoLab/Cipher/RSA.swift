@@ -195,7 +195,7 @@ class RSACoreCipher: NSObject {
 	private func decrypt(data dataToDecode:Data, rsaKey: UnsafeMutablePointer<RSA>) throws -> Data {
 		let rsaStruct = rsaKey
 		let dataPointer = (dataToDecode as NSData).bytes.bindMemory(to: UInt8.self, capacity: dataToDecode.count)
-		let dataSize = 11//4098 //dataToDecode.count
+		let dataSize = dataToDecode.count
 		let decryptedPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: dataSize)
 		
 		let decryptedSize = RSA_private_decrypt(Int32(dataSize), dataPointer, decryptedPointer, rsaStruct, padding)

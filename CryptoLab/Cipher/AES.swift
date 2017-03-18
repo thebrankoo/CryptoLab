@@ -201,7 +201,7 @@ class AESCoreCipher: NSObject {
 
 	fileprivate func initEncryption(withKey key: Data, andIV iv: Data) throws {
 		self.context = EVP_CIPHER_CTX_new()
-//		EVP_CIPHER_CTX_set_padding(self.context!, PKCS5)
+
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
@@ -211,8 +211,8 @@ class AESCoreCipher: NSObject {
 	}
 	
 	fileprivate func finishEncryption() throws -> Data {
-		if let ctx = context, let key = key {
-			var resultData = [UInt8](repeating: UInt8(), count: key.count)
+		if let ctx = context {
+			var resultData = [UInt8](repeating: UInt8(), count: 16)//key.count)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
 			if finalCheck == 0 {
@@ -297,9 +297,12 @@ class AESCoreCipher: NSObject {
 				if finishStatus == 0 {
 					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 				}
+				self.context = nil
+				return Data(resultData)
 			}
-			self.context = nil
-			return Data(resultData)
+			else {
+				throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)	
+			}
 		}
 		else {
 			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)

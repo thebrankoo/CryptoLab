@@ -15,6 +15,7 @@
 		1975BFF41E76E262001D0944 /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFF31E76E262001D0944 /* AuthExtensions.swift */; };
 		1975BFF61E76E297001D0944 /* DSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFF51E76E297001D0944 /* DSA.swift */; };
 		198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */; };
+		19A8E8911E7D6DE100EB6590 /* RSATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A8E8901E7D6DE100EB6590 /* RSATests.swift */; };
 		19BF47601E4F21DF00310164 /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF475F1E4F21DF00310164 /* RSA.swift */; };
 		19DEAF741E6EB7060054BB97 /* DES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DEAF731E6EB7060054BB97 /* DES.swift */; };
 		19E13F391E780AA30057F7ED /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E13F381E780AA30057F7ED /* Protocols.swift */; };
@@ -26,6 +27,7 @@
 		19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */; };
 		19FB5FE91E4C6E1C00F6212E /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE81E4C6E1C00F6212E /* AES.swift */; };
 		19FB5FEB1E4C73EF00F6212E /* CipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */; };
+		19FCCD651E7BDCEE00F6DACD /* AESTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FCCD641E7BDCEE00F6DACD /* AESTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		1975BFF51E76E297001D0944 /* DSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DSA.swift; path = "Message Auth/DSA.swift"; sourceTree = "<group>"; };
 		198A32901E427AFD000E5370 /* CryptoLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		198A32941E427AFD000E5370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19A8E8901E7D6DE100EB6590 /* RSATests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSATests.swift; sourceTree = "<group>"; };
 		19BF475F1E4F21DF00310164 /* RSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RSA.swift; path = Cipher/RSA.swift; sourceTree = "<group>"; };
 		19DEAF731E6EB7060054BB97 /* DES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DES.swift; path = Cipher/DES.swift; sourceTree = "<group>"; };
 		19E13F381E780AA30057F7ED /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashFunctions.swift; path = "Hash Functions/HashFunctions.swift"; sourceTree = "<group>"; };
 		19FB5FE81E4C6E1C00F6212E /* AES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AES.swift; path = Cipher/AES.swift; sourceTree = "<group>"; };
 		19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherTests.swift; sourceTree = "<group>"; };
+		19FCCD641E7BDCEE00F6DACD /* AESTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AESTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 				198A32941E427AFD000E5370 /* Info.plist */,
 				193BEEB51E46342900383028 /* HashFunctionsTests.swift */,
 				19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */,
+				19FCCD641E7BDCEE00F6DACD /* AESTests.swift */,
+				19A8E8901E7D6DE100EB6590 /* RSATests.swift */,
 			);
 			path = CryptoLabTests;
 			sourceTree = "<group>";
@@ -297,6 +303,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				19FB5FEB1E4C73EF00F6212E /* CipherTests.swift in Sources */,
+				19FCCD651E7BDCEE00F6DACD /* AESTests.swift in Sources */,
+				19A8E8911E7D6DE100EB6590 /* RSATests.swift in Sources */,
 				193BEEB61E46342900383028 /* HashFunctionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

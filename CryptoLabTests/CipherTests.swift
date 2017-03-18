@@ -21,115 +21,115 @@ class CipherTests: XCTestCase {
         super.tearDown()
     }
 	
-	func testGeneral() {
-		let digest = "neki test za potpis".data(using: .utf8)!
-		let dsa = DSAAuth()
-		let dsa1 = DSAAuth(publicKey: dsa.publicKey!.data(using: .utf8)!, privateKey: dsa.privateKey!.data(using: .utf8)!)
-		
-		if let sig = dsa.sign(data: digest) {
-			let verify = dsa1.verify(signature: sig, digest: digest)
-			XCTAssert(verify)
-		}
-		else {
-			XCTAssert(false)
-		}
-		
-	}
+//	func testGeneral() {
+//		let digest = "neki test za potpis".data(using: .utf8)!
+//		let dsa = DSAAuth()
+//		let dsa1 = DSAAuth(publicKey: dsa.publicKey!.data(using: .utf8)!, privateKey: dsa.privateKey!.data(using: .utf8)!)
+//		
+//		if let sig = dsa.sign(data: digest) {
+//			let verify = dsa1.verify(signature: sig, digest: digest)
+//			XCTAssert(verify)
+//		}
+//		else {
+//			XCTAssert(false)
+//		}
+//		
+//	}
+//	
+//	func testBlowfish() {
+//		let bf = BlowfishCipher(key: "neki key proizvoljni".data(using: .utf8)!)
+//		let data = bf.encrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8), mode: .ofb64)!  //cbcEncrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8)!)
+//		let decData = bf.decrypt(data: data, withIV: "12345678".data(using: .utf8), mode: .ofb64)!
+//		
+//		print("BF \(data.hexEncodedString())")
+//		print("BF Dec \(String(data: decData, encoding: .utf8))")
+//		
+//	}
+//	
+//	func testExample() {
+//		//let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
+//		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
+//		let keyData = Data(bytes: keyArray)
+//		let ivData = Data(bytes: keyArray)
+//		
+//		do {
+//			let aesEnc = try AESCipher(key: keyData, iv: ivData, blockMode: .cbc)
+//			
+//			do {
+//				let result = try aesEnc.encrypt(data: "Neki test".data(using: .utf8)!)
+//				let aesDec = try aesEnc.decrypt(data: result)
+//				print("AES Test \(result.hexEncodedString())")
+//				print("AES Dec \(String(data: aesDec, encoding: .utf8))")
+//				XCTAssert(String(data: aesDec, encoding: .utf8) == "Neki test", "AES Strings are not the same")
+//			}
+//			catch let error {
+//				print("AES Enc \(error)")
+//				XCTAssert(false)
+//			}
+//		}
+//		catch let error {
+//			print("AES Init \(error)")
+//			XCTAssert(false)
+//		}
+//		
+//	}
+//	
+//	func testDES() {
+//		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
+//		let keyData = Data(bytes: keyArray)
+//		let ivData = Data(bytes: keyArray)
+//		let toEnc = "to enc string".data(using: .utf8)
+//		
+//		let desEnc = try? DESCoreCipher(key: keyData, iv: ivData, blockMode: .cbc)
+//		let r1 = try? desEnc?.encrypt(data: toEnc!)
+//		let r2 = try? desEnc?.decrypt(data: r1!!)
+//		
+//		XCTAssert(r2!! == toEnc, "DES TEST FAILED")
+//	}
+//	
+//	func testRSA() {
+//		let testString = "test string"
+//		let rsa = RSACipher(padding: .sslv23)
+//		
+//		do {
+//		if let ecrypt = try rsa.encrypt(data: testString.data(using: .utf8)!) {
+//			if let decrypt = try rsa.decrypt(data: ecrypt) {
+//				XCTAssert(testString.data(using: .utf8)! == decrypt)
+//				return
+//			}
+//		}
+//		}
+//		catch let err {
+//			XCTAssert(false, err.localizedDescription)
+//		}
+//		
+//		XCTAssert(false)
+//	}
+//	
+//	func testRSASign()  {
+//		let rsa = RSACipher(padding: .sslv23)
+//		
+//		let data = rsa.sign(data: "neki data to sign".data(using: .utf8)!, type: .ripemd160)
+//		let verif = rsa.verify(data: "neki data to sign".data(using: .utf8)!, signature: data!, type: .ripemd160)
+//		
+//		XCTAssert(verif)
+//	}
+//	
+//	func testHMAC() {
+//		
+//		let toHmac = "neki data".data(using: .utf8)!
+//		let key = "neki key".data(using: .utf8)!
+//		
+//		let hmac = HMACAuth(key: key, hashFunction: .md5)
+//		
+//		let data = hmac.authenticationCode(forData: toHmac)
+//		print("FIrst Hash Data \(data?.hexEncodedString())")
+//		
+//		hmac.update(withData: toHmac)
+//		let data2 = hmac.finish()
+//		print("Second Hash Data \(data2?.hexEncodedString())")
+//	}
 	
-	func testBlowfish() {
-		let bf = BlowfishCipher(key: "neki key proizvoljni".data(using: .utf8)!)
-		let data = bf.encrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8), mode: .ofb64)!  //cbcEncrypt(data: "1234567891011121314".data(using: .utf8)!, withIV: "12345678".data(using: .utf8)!)
-		let decData = bf.decrypt(data: data, withIV: "12345678".data(using: .utf8), mode: .ofb64)!
-		
-		print("BF \(data.hexEncodedString())")
-		print("BF Dec \(String(data: decData, encoding: .utf8))")
-		
-	}
-	
-	func testExample() {
-		//let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
-		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
-		let keyData = Data(bytes: keyArray)
-		let ivData = Data(bytes: keyArray)
-		
-		do {
-			let aesEnc = try AESCipher(key: keyData, iv: ivData, blockMode: .cbc)
-			
-			do {
-				let result = try aesEnc.encrypt(data: "Neki test".data(using: .utf8)!)
-				let aesDec = try aesEnc.decrypt(data: result)
-				print("AES Test \(result.hexEncodedString())")
-				print("AES Dec \(String(data: aesDec, encoding: .utf8))")
-				XCTAssert(String(data: aesDec, encoding: .utf8) == "Neki test", "AES Strings are not the same")
-			}
-			catch let error {
-				print("AES Enc \(error)")
-				XCTAssert(false)
-			}
-		}
-		catch let error {
-			print("AES Init \(error)")
-			XCTAssert(false)
-		}
-		
-	}
-	
-	func testDES() {
-		let keyArray = [UInt8]([0x4e, 0x72, 0xac, 0x09, 0xbc, 0x65, 0x6e, 0x4c, 0xf3, 0xe2, 0xea, 0x61, 0x0e, 0x57, 0x7f, 0xee])
-		let keyData = Data(bytes: keyArray)
-		let ivData = Data(bytes: keyArray)
-		let toEnc = "to enc string".data(using: .utf8)
-		
-		let desEnc = try? DESCoreCipher(key: keyData, iv: ivData, blockMode: .cbc)
-		let r1 = try? desEnc?.encrypt(data: toEnc!)
-		let r2 = try? desEnc?.decrypt(data: r1!!)
-		
-		XCTAssert(r2!! == toEnc, "DES TEST FAILED")
-	}
-	
-	func testRSA() {
-		let testString = "test string"
-		let rsa = RSACipher(padding: .sslv23)
-		
-		do {
-		if let ecrypt = try rsa.encrypt(data: testString.data(using: .utf8)!) {
-			if let decrypt = try rsa.decrypt(data: ecrypt) {
-				XCTAssert(testString.data(using: .utf8)! == decrypt)
-				return
-			}
-		}
-		}
-		catch let err {
-			XCTAssert(false, err.localizedDescription)
-		}
-		
-		XCTAssert(false)
-	}
-	
-	func testRSASign()  {
-		let rsa = RSACipher(padding: .sslv23)
-		
-		let data = rsa.sign(data: "neki data to sign".data(using: .utf8)!, type: .ripemd160)
-		let verif = rsa.verify(data: "neki data to sign".data(using: .utf8)!, signature: data!, type: .ripemd160)
-		
-		XCTAssert(verif)
-	}
-	
-	func testHMAC() {
-		
-		let toHmac = "neki data".data(using: .utf8)!
-		let key = "neki key".data(using: .utf8)!
-		
-		let hmac = HMACAuth(key: key, hashFunction: .md5)
-		
-		let data = hmac.authenticationCode(forData: toHmac)
-		print("FIrst Hash Data \(data?.hexEncodedString())")
-		
-		hmac.update(withData: toHmac)
-		let data2 = hmac.finish()
-		print("Second Hash Data \(data2?.hexEncodedString())")
-	}
-		
 }
 
 //extension Data {
