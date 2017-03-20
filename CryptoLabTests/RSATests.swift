@@ -17,6 +17,8 @@ class RSATests: XCTestCase {
         super.setUp()
     }
 	
+	//MARK: Encryption/Decryption
+	
 	func testRSA_PKCS1() {
 		let decryptor = RSACipher(padding: .pkcs1)
 		
@@ -57,15 +59,15 @@ class RSATests: XCTestCase {
 		}
 	}
 	
-	func testRSA_SSLV23() {
-		let decryptor = RSACipher(padding: .sslv23)
+	func testRSA_None() {
+		let decryptor = RSACipher(padding: .none)
 		
 		guard let pubK = decryptor.publicKey?.data(using: .utf8) else {
 			XCTFail("RSA Can't get public key")
 			return
 		}
 		
-		let encryptor = RSACipher(publicKey: pubK, padding: .sslv23)
+		let encryptor = RSACipher(publicKey: pubK, padding: .none)
 		
 		do {
 			let encryptedData = try encryptor.encrypt(data: testData)
@@ -75,5 +77,34 @@ class RSATests: XCTestCase {
 		catch let err {
 			XCTFail("RSA Error: \(err)")
 		}
+	}
+	
+	//MARK: Sign/Verify
+	
+	func testRSASignVerifyMD5() {
+		let signer = RSACipher()
+		
+		let signature = signer.sign(data: testData, type: .md5)
+		let verify = signer.verify(data: testData, signature: signature!, type: .md5)
+		
+		XCTAssert(verify, "")
+	}
+	
+	func testRSASignVerifySHA1() {
+		let signer = RSACipher()
+		
+		let signature = signer.sign(data: testData, type: .sha1)
+		let verify = signer.verify(data: testData, signature: signature!, type: .sha1)
+		
+		XCTAssert(verify)
+	}
+	
+	func testRSASignVerifyRIPEMD160() {
+		let signer = RSACipher()
+		
+		let signature = signer.sign(data: testData, type: .ripemd160)
+		let verify = signer.verify(data: testData, signature: signature!, type: .ripemd160)
+		
+		XCTAssert(verify)
 	}
 }

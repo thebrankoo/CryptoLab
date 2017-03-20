@@ -12,7 +12,6 @@ import OpenSSL
 public enum RSAPadding {
 	case pkcs1 //PKCS #1 v1.5 padding
 	case pkcs1_oaep //EME-OAEP as defined in PKCS #1 v2.0 with SHA-1, MGF1 and an empty encoding parameter
-	case sslv23 //PKCS #1 v1.5 padding with an SSL-specific modification that denotes that the server is SSL3 capable
 	case none //Raw RSA encryption
 	
 	fileprivate func openSSLPadding() -> Int32 {
@@ -21,8 +20,6 @@ public enum RSAPadding {
 			return RSA_PKCS1_PADDING
 		case .pkcs1_oaep:
 			return RSA_PKCS1_OAEP_PADDING
-		case .sslv23:
-			return RSA_SSLV23_PADDING
 		case .none:
 			return RSA_NO_PADDING
 		}
