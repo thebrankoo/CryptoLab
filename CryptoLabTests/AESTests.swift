@@ -21,6 +21,8 @@ class AESTests: XCTestCase {
 	
 	var genericIV =		Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81, 0x65, 0xf8, 0x1b, 0x53, 0x3d, 0xd6, 0xd9, 0x1f])
 	
+	let test8ByteData =	Data(bytes: [0xf1, 0x48, 0x3a, 0x13, 0x7a, 0x00, 0x6e, 0x99])
+	
     override func setUp() {
         super.setUp()
 		testData = testString.data(using: .utf8)
@@ -124,13 +126,15 @@ class AESTests: XCTestCase {
 	
 	func testAES_CFB_128() {
 		do {
-			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .cfb)
-			let encrypted = try cryptorEnc.encrypt(data: testData)
+			
+			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb)
+			
+			let encrypted = try cryptorEnc.encrypt(data: test8ByteData)
 			
 			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .cfb)
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
-			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
+			XCTAssert(test8ByteData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
 		}
 		catch let err {
 			XCTAssert(false, "AES Test Error: \(err)")

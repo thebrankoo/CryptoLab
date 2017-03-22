@@ -59,26 +59,6 @@ class RSATests: XCTestCase {
 		}
 	}
 	
-	func testRSA_None() {
-		let decryptor = RSACipher(padding: .none)
-		
-		guard let pubK = decryptor.publicKey?.data(using: .utf8) else {
-			XCTFail("RSA Can't get public key")
-			return
-		}
-		
-		let encryptor = RSACipher(publicKey: pubK, padding: .none)
-		
-		do {
-			let encryptedData = try encryptor.encrypt(data: testData)
-			let decryptedData = try decryptor.decrypt(data: encryptedData)
-			XCTAssert(testData == decryptedData, "RSA original data and decrypted data don't match")
-		}
-		catch let err {
-			XCTFail("RSA Error: \(err)")
-		}
-	}
-	
 	//MARK: Sign/Verify
 	
 	func testRSASignVerifyMD5() {
