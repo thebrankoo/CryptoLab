@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1910DA6C1E53422E0050C78C /* Blowfish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1910DA6B1E53422E0050C78C /* Blowfish.swift */; };
 		193BEEB61E46342900383028 /* HashFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB51E46342900383028 /* HashFunctionsTests.swift */; };
+		194C08CB1E8530AF00DB6E6F /* BlowfishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C08CA1E8530AF00DB6E6F /* BlowfishTests.swift */; };
 		194C6F441E61AE83001C4047 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C6F431E61AE83001C4047 /* Extensions.swift */; };
 		1975BFEF1E769AC3001D0944 /* CryptoErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFEE1E769AC3001D0944 /* CryptoErrors.swift */; };
 		1975BFF21E76E1DB001D0944 /* HashExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFF11E76E1DB001D0944 /* HashExtensions.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		1910DA6B1E53422E0050C78C /* Blowfish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Blowfish.swift; path = Cipher/Blowfish.swift; sourceTree = "<group>"; };
 		193BEEB51E46342900383028 /* HashFunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctionsTests.swift; sourceTree = "<group>"; };
+		194C08CA1E8530AF00DB6E6F /* BlowfishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlowfishTests.swift; sourceTree = "<group>"; };
 		194C6F431E61AE83001C4047 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1975BFEE1E769AC3001D0944 /* CryptoErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CryptoErrors.swift; path = Other/CryptoErrors.swift; sourceTree = "<group>"; };
 		1975BFF11E76E1DB001D0944 /* HashExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashExtensions.swift; path = "Hash Functions/HashExtensions.swift"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				198A32941E427AFD000E5370 /* Info.plist */,
 				193BEEB51E46342900383028 /* HashFunctionsTests.swift */,
 				19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */,
+				194C08CA1E8530AF00DB6E6F /* BlowfishTests.swift */,
 				19FCCD641E7BDCEE00F6DACD /* AESTests.swift */,
 				19A8E8901E7D6DE100EB6590 /* RSATests.swift */,
 			);
@@ -302,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194C08CB1E8530AF00DB6E6F /* BlowfishTests.swift in Sources */,
 				19FB5FEB1E4C73EF00F6212E /* CipherTests.swift in Sources */,
 				19FCCD651E7BDCEE00F6DACD /* AESTests.swift in Sources */,
 				19A8E8911E7D6DE100EB6590 /* RSATests.swift in Sources */,

@@ -133,10 +133,10 @@ class BlowfishCoreCipher: NSObject {
 	*/
 	fileprivate func cbcEncrypt(data toEncrypt: Data, withIV initv: Data) -> Data {
 		var outArray = Data.makeUInt8EmptyArray(ofSize: toEncrypt.count)
-		let inArray = toEncrypt.makeUInt8DataPointer()
+		let inArray = toEncrypt.makeUInt8DataPointer() 
 		let iv = initv.makeUInt8DataPointer()
 		
-		BF_cbc_encrypt(inArray, &outArray, initv.count, blowfishKey, iv, BF_ENCRYPT)
+		BF_cbc_encrypt(inArray, &outArray, toEncrypt.count, blowfishKey, iv, BF_ENCRYPT)
 		
 		return Data(outArray)
 	}
@@ -145,8 +145,8 @@ class BlowfishCoreCipher: NSObject {
 		var outArray = Data.makeUInt8EmptyArray(ofSize: toDecrypt.count)
 		let inArray = toDecrypt.makeUInt8DataPointer()
 		let iv = initv.makeUInt8DataPointer()
-		
-		BF_cbc_encrypt(inArray, &outArray, initv.count, blowfishKey, iv, BF_DECRYPT)
+	
+		BF_cbc_encrypt(inArray, &outArray, toDecrypt.count, blowfishKey, iv, BF_DECRYPT)
 		
 		return Data(outArray)
 	}
@@ -161,7 +161,7 @@ class BlowfishCoreCipher: NSObject {
 		let iv = initv.makeUInt8DataPointer()
 		var num: Int32 = 0
 		
-		BF_cfb64_encrypt(inArray, &outArray, initv.count, blowfishKey, iv, &num, BF_ENCRYPT)
+		BF_cfb64_encrypt(inArray, &outArray, toEncrypt.count, blowfishKey, iv, &num, BF_ENCRYPT)
 		
 		return Data(outArray)
 	}
@@ -172,7 +172,7 @@ class BlowfishCoreCipher: NSObject {
 		let iv = initv.makeUInt8DataPointer()
 		var num: Int32 = 0
 		
-		BF_cfb64_encrypt(inArray, &outArray, initv.count, blowfishKey, iv, &num, BF_DECRYPT)
+		BF_cfb64_encrypt(inArray, &outArray, toDecrypt.count, blowfishKey, iv, &num, BF_DECRYPT)
 		
 		return Data(outArray)
 	}

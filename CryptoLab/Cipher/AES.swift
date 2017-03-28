@@ -201,7 +201,6 @@ class AESCoreCipher: NSObject {
 
 	fileprivate func initEncryption(withKey key: Data, andIV iv: Data) throws {
 		self.context = EVP_CIPHER_CTX_new()
-
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
@@ -256,7 +255,6 @@ class AESCoreCipher: NSObject {
 	fileprivate func initDecryption(withKey key: Data, andIV iv: Data) throws {
 		
 		self.decContext = EVP_CIPHER_CTX_new()
-		
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
 		
@@ -271,7 +269,7 @@ class AESCoreCipher: NSObject {
 	fileprivate func updateDecryption(withData data: Data) throws {
 			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 
-			var resultData = [UInt8](repeating: UInt8(), count: 32)
+			var resultData = [UInt8](repeating: UInt8(), count: key!.count)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			
 			if let ctx = self.decContext {
@@ -286,7 +284,7 @@ class AESCoreCipher: NSObject {
 	fileprivate func finishDecryption() throws -> Data {
 		
 		if let ctx = decContext {
-			var resultData = [UInt8]()
+			var resultData = [UInt8](repeating: UInt8(), count: Int(32)) //[UInt8]()
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			var finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize) //EVP_DecryptFinal(ctx, &resultData, resultSize)
 			
@@ -297,7 +295,7 @@ class AESCoreCipher: NSObject {
 				if finishStatus == 0 {
 					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 				}
-				self.context = nil
+				self.decContext = nil
 				return Data(resultData)
 			}
 			else {
@@ -318,7 +316,7 @@ class AESCoreCipher: NSObject {
 				aesCipher = EVP_aes_128_ecb()
 			}
 			else if AESKeySize.isAES128(keySize: keySize) && AESBlockCipherMode.isBlockModeCFB(blockMode: bcm) {
-				aesCipher = EVP_aes_128_cfb1()
+				aesCipher = EVP_aes_128_cfb128()
 			}
 			else if AESKeySize.isAES128(keySize: keySize) && AESBlockCipherMode.isBlockModeOFB(blockMode: bcm) {
 				aesCipher = EVP_aes_128_ofb()
@@ -333,7 +331,7 @@ class AESCoreCipher: NSObject {
 				aesCipher = EVP_aes_256_ecb()
 			}
 			else if AESKeySize.isAES256(keySize: keySize) && AESBlockCipherMode.isBlockModeCFB(blockMode: bcm) {
-				aesCipher = EVP_aes_256_cfb1()
+				aesCipher = EVP_aes_256_cfb128()
 			}
 			else if AESKeySize.isAES256(keySize: keySize) && AESBlockCipherMode.isBlockModeOFB(blockMode: bcm) {
 				aesCipher = EVP_aes_256_ofb()
@@ -348,7 +346,7 @@ class AESCoreCipher: NSObject {
 				aesCipher = EVP_aes_192_ecb()
 			}
 			else if AESKeySize.isAES192(keySize: keySize) && AESBlockCipherMode.isBlockModeCFB(blockMode: bcm) {
-				aesCipher = EVP_aes_192_cfb1()
+				aesCipher = EVP_aes_192_cfb128()
 			}
 			else if AESKeySize.isAES192(keySize: keySize) && AESBlockCipherMode.isBlockModeOFB(blockMode: bcm) {
 				aesCipher = EVP_aes_192_ofb()
