@@ -26,6 +26,11 @@ public class DSAAuth: NSObject {
 		super.init()
 	}
 	
+	public init(publicKey: Data) {
+		dsaCore = DSACore(publicKey: publicKey)
+		super.init()
+	}
+	
 	public init(publicKey: Data, privateKey: Data) {
 		dsaCore = DSACore(publicKey: publicKey, privateKey: privateKey)
 		super.init()
@@ -53,6 +58,13 @@ class DSACore: NSObject {
 		self.privKey = privateKey
 		super.init()
 		dsaKey = generateDSA(fromPublicKey: publicKey, andPrivateKey: privateKey)
+	}
+	
+	init(publicKey: Data) {
+		self.pubKey = publicKey
+		self.privKey = nil
+		super.init()
+		dsaKey = generateDSA(fromPublicKey: publicKey)
 	}
 	
 	override init() {
