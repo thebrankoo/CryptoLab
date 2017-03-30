@@ -131,18 +131,17 @@ class AESTests: XCTestCase {
 			
 			let encIV = Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81, 0x65, 0xf8, 0x1b, 0x53, 0x3d, 0xd6, 0xd9, 0x1f])
 			let decIV = Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81, 0x65, 0xf8, 0x1b, 0x53, 0x3d, 0xd6, 0xd9, 0x1f])
-			
-			//cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb)
+			let toEnc = "1234567813".data(using: .utf8)!
 			
 			let enc = try AESCipher(key: key16Byte, iv: encIV, blockMode: .cfb)
 			let dec = try AESCipher(key: key16Byte, iv: decIV, blockMode: .cfb)
 			
-			let encrypted = try enc.encrypt(data: test8ByteData)
+			let encrypted = try enc.encrypt(data: toEnc)
 			
-			//cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .cfb)
+			
 			let decrypted = try dec.decrypt(data: encrypted)
 			
-			XCTAssert(test16ByteData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
+			XCTAssert(toEnc == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
 		}
 		catch let err {
 			XCTAssert(false, "AES Test Error: \(err)")

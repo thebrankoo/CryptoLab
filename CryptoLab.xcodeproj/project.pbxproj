@@ -30,7 +30,6 @@
 		19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */; };
 		19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */; };
 		19FB5FE91E4C6E1C00F6212E /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE81E4C6E1C00F6212E /* AES.swift */; };
-		19FB5FEB1E4C73EF00F6212E /* CipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */; };
 		19FCCD651E7BDCEE00F6DACD /* AESTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FCCD641E7BDCEE00F6DACD /* AESTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +71,6 @@
 		19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreHashFunctions.swift; path = "Hash Functions/CoreHashFunctions.swift"; sourceTree = "<group>"; };
 		19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashFunctions.swift; path = "Hash Functions/HashFunctions.swift"; sourceTree = "<group>"; };
 		19FB5FE81E4C6E1C00F6212E /* AES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AES.swift; path = Cipher/AES.swift; sourceTree = "<group>"; };
-		19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherTests.swift; sourceTree = "<group>"; };
 		19FCCD641E7BDCEE00F6DACD /* AESTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AESTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,7 +110,6 @@
 			children = (
 				198A32941E427AFD000E5370 /* Info.plist */,
 				193BEEB51E46342900383028 /* HashFunctionsTests.swift */,
-				19FB5FEA1E4C73EF00F6212E /* CipherTests.swift */,
 				19FA87A81E8BBD43008C3495 /* DESTests.swift */,
 				194C08CA1E8530AF00DB6E6F /* BlowfishTests.swift */,
 				19FCCD641E7BDCEE00F6DACD /* AESTests.swift */,
@@ -316,7 +313,6 @@
 			files = (
 				19FA87A91E8BBD43008C3495 /* DESTests.swift in Sources */,
 				194C08CB1E8530AF00DB6E6F /* BlowfishTests.swift in Sources */,
-				19FB5FEB1E4C73EF00F6212E /* CipherTests.swift in Sources */,
 				19FCCD651E7BDCEE00F6DACD /* AESTests.swift in Sources */,
 				1939C39F1E8D133A0035B313 /* DSATests.swift in Sources */,
 				19A8E8911E7D6DE100EB6590 /* RSATests.swift in Sources */,

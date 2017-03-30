@@ -171,6 +171,8 @@ class AESCoreCipher: NSObject {
 		}
 	}
 	
+	var currentEncryptedData: Data = Data()
+	
 	fileprivate func updateEncryption(data toUpdate: Data) throws {
 		if let key = key, let iv = iv {
 			
@@ -186,7 +188,7 @@ class AESCoreCipher: NSObject {
 			}
 			
 			if let ctx = context {
-				var resultData = [UInt8](repeating: UInt8(), count: key.count)
+				var resultData = [UInt8](repeating: UInt8(), count: toUpdate.count)
 				let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 				
 				let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(toUpdate.count))
@@ -194,6 +196,8 @@ class AESCoreCipher: NSObject {
 				if updateCheck == 0 {
 					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 				}
+				
+				currentEncryptedData.append(Data(bytes: resultData))
 			}
 			
 		}
@@ -213,7 +217,7 @@ class AESCoreCipher: NSObject {
 	
 	fileprivate func finishEncryption() throws -> Data {
 		if let ctx = context {
-			var resultData = [UInt8](repeating: UInt8(), count: 16)//key.count)
+			var resultData = [UInt8](repeating: UInt8(), count: (key?.count)!)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			let finalCheck = EVP_EncryptFinal_ex(ctx, &resultData, resultSize)
 			
@@ -222,9 +226,9 @@ class AESCoreCipher: NSObject {
 			}
 			
 			let result = Data(resultData)
-			EVP_CIPHER_CTX_cleanup(self.context)
-			self.context = nil
-			return result
+			/*EVP_CIPHER_CTX_cleanup(self.context)
+			self.context = nil*/
+			return currentEncryptedData //result //
 		}
 		else {
 			throw CipherError.cipherProcessFail(reason: "AES Encryption invalid or missing parameters")
@@ -237,6 +241,9 @@ class AESCoreCipher: NSObject {
 	}
 	
 	//MARK: Decryption
+	
+	var currentDecryptedData = Data()
+	
 	fileprivate func decrypt(data: Data) throws -> Data {
 		
 		if let iv = self.iv, let key = self.key {
@@ -272,7 +279,7 @@ class AESCoreCipher: NSObject {
 	fileprivate func updateDecryption(withData data: Data) throws {
 			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 
-			var resultData = [UInt8](repeating: UInt8(), count: key!.count)
+			var resultData = [UInt8](repeating: UInt8(), count: data.count)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			
 			if let ctx = self.decContext {
@@ -281,6 +288,8 @@ class AESCoreCipher: NSObject {
 				if updateStatus == 0 {
 					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 				}
+				
+				currentDecryptedData.append(Data(bytes: resultData))
 			}
 	}
 
@@ -299,7 +308,7 @@ class AESCoreCipher: NSObject {
 					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 				}
 				self.decContext = nil
-				return Data(resultData)
+				return currentDecryptedData //Data(resultData)
 			}
 			else {
 				throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)	
