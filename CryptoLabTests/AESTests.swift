@@ -129,12 +129,18 @@ class AESTests: XCTestCase {
 	func testAES_CFB_128() {
 		do {
 			
-			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb)
+			let encIV = Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81, 0x65, 0xf8, 0x1b, 0x53, 0x3d, 0xd6, 0xd9, 0x1f])
+			let decIV = Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81, 0x65, 0xf8, 0x1b, 0x53, 0x3d, 0xd6, 0xd9, 0x1f])
 			
-			let encrypted = try cryptorEnc.encrypt(data: test8ByteData)
+			//cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb)
 			
-			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .cfb)
-			let decrypted = try cryptorDec.decrypt(data: encrypted)
+			let enc = try AESCipher(key: key16Byte, iv: encIV, blockMode: .cfb)
+			let dec = try AESCipher(key: key16Byte, iv: decIV, blockMode: .cfb)
+			
+			let encrypted = try enc.encrypt(data: test8ByteData)
+			
+			//cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .cfb)
+			let decrypted = try dec.decrypt(data: encrypted)
 			
 			XCTAssert(test16ByteData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
 		}

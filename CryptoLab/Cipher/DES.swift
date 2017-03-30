@@ -44,7 +44,7 @@ public enum DESBlockCipherMode {
 public class DESCipher: NSObject, Cryptor, BlockCryptor {
 	fileprivate let coreCipher: DESCoreCipher
 	
-	init(key: Data, iv: Data, blockMode: DESBlockCipherMode) throws {
+	public init(key: Data, iv: Data, blockMode: DESBlockCipherMode) throws {
 		do {
 			coreCipher = try DESCoreCipher(key: key, iv: iv, blockMode: blockMode)
 			super.init()
@@ -165,7 +165,7 @@ class DESCoreCipher: NSObject {
 			}
 		}
 		else {
-			throw CipherError.cipherProcessFail(reason: "Decrypt AES No key or iv")
+			throw CipherError.cipherProcessFail(reason: "Decrypt DES No key or iv")
 		}
 	}
 	
@@ -211,7 +211,7 @@ class DESCoreCipher: NSObject {
 
 	fileprivate func finishEncryption() throws -> Data {
 		if let ctx = context, let key = key {
-			var resultData = [UInt8](repeating: UInt8(), count: key.count)
+			var resultData = [UInt8](repeating: UInt8(), count: 8)//key.count)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
 			if finalCheck == 0 {

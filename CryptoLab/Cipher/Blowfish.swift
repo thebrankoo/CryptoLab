@@ -44,13 +44,16 @@ public class BlowfishCipher: NSObject, Cryptor {
 class BlowfishCoreCipher: NSObject {
 	private let blowfishKey: UnsafeMutablePointer<BF_KEY>
 	fileprivate let key: Data
-	fileprivate let iv: Data?
+	
+	fileprivate let originalIV: Data?
+	fileprivate var iv: Data?
+	
 	fileprivate let mode: BlowfishEncryptMode
 	
 	fileprivate init(key: Data, iv: Data?, encryptionMode: BlowfishEncryptMode) {
 		self.key = key
 		self.blowfishKey = UnsafeMutablePointer<BF_KEY>.allocate(capacity: MemoryLayout<BF_KEY>.size)
-		self.iv = iv
+		self.originalIV = iv
 		self.mode = encryptionMode
 		
 		BF_set_key(blowfishKey, Int32(key.count), key.makeUInt8DataPointer())
@@ -58,6 +61,8 @@ class BlowfishCoreCipher: NSObject {
 	}
 	
 	fileprivate func encrypt(data toEncrypt: Data) -> Data? {
+		resetIV()
+		
 		switch mode {
 		case .ecb:
 			return ecbEncrypt(data: toEncrypt)
@@ -81,6 +86,8 @@ class BlowfishCoreCipher: NSObject {
 	}
 	
 	fileprivate func decrypt(data toDecrypt: Data) -> Data? {
+		resetIV()
+		
 		switch mode {
 		case .ecb:
 			return ecbDecrypt(data: toDecrypt)
@@ -203,5 +210,9 @@ class BlowfishCoreCipher: NSObject {
 		let data = cfb64Decrypt(data: toDecrypt, withIV: initv)
 		
 		return data
+	}
+	
+	fileprivate func resetIV() {
+		self.iv = self.originalIV
 	}
 }

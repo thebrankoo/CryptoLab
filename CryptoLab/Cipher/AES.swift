@@ -190,6 +190,7 @@ class AESCoreCipher: NSObject {
 				let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 				
 				let updateCheck = EVP_EncryptUpdate(ctx, &resultData, resultSize, dataPointer, Int32(toUpdate.count))
+				
 				if updateCheck == 0 {
 					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 				}
@@ -203,7 +204,8 @@ class AESCoreCipher: NSObject {
 		self.context = EVP_CIPHER_CTX_new()
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
-		let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
+		//let initCheck = EVP_EncryptInit(context!, self.aesCipher, keyPointer, ivPointer)
+		let initCheck = EVP_EncryptInit_ex(context!, self.aesCipher, nil, keyPointer, ivPointer)
 		if initCheck == 0 {
 			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherUpdate)
 		}
@@ -213,7 +215,8 @@ class AESCoreCipher: NSObject {
 		if let ctx = context {
 			var resultData = [UInt8](repeating: UInt8(), count: 16)//key.count)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-			let finalCheck = EVP_EncryptFinal(ctx, &resultData, resultSize)
+			let finalCheck = EVP_EncryptFinal_ex(ctx, &resultData, resultSize)
+			
 			if finalCheck == 0 {
 				throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 			}
