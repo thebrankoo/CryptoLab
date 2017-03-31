@@ -31,6 +31,7 @@ struct CipherErrorReason {
 		let err = UnsafeMutablePointer<CChar>.allocate(capacity: 130)
 		ERR_error_string(ERR_get_error(), err)
 		//print("ENC ERROR \(String(cString: err))")
+	
 		err.deinitialize()
 		err.deallocate(capacity: 130)
 		return String(cString: err)
