@@ -248,7 +248,7 @@ class DESCoreCipher: NSObject {
 	fileprivate func updateDecryption(withData data: Data) throws {
 		let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 		
-		var resultData = [UInt8](repeating: UInt8(), count: 32)
+		var resultData = [UInt8](repeating: UInt8(), count: 8)
 		let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
 		
 		if let ctx = self.decContext {
@@ -265,15 +265,18 @@ class DESCoreCipher: NSObject {
 		if let ctx = decContext {
 			var resultData = [UInt8]()
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
-			var finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize) //EVP_DecryptFinal(ctx, &resultData, resultSize)
+			var finishStatus = EVP_DecryptFinal(ctx, &resultData, resultSize) //EVP_DecryptFinal(ctx, &resultData, resultSize)
 			
 			if finishStatus == 1 {
 				resultData = [UInt8](repeating: UInt8(), count: Int(resultSize.pointee))
-				finishStatus = EVP_DecryptFinal_ex(ctx, &resultData, resultSize)
+				finishStatus = EVP_DecryptFinal(ctx, &resultData, resultSize)
 				
 				if finishStatus == 0 {
 					throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 				}
+			}
+			else {
+				throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherFinish)
 			}
 			self.context = nil
 			return Data(resultData)

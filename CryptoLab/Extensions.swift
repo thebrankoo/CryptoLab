@@ -19,6 +19,11 @@ extension Data {
 		return dataPointer
 	}
 	
+	func makeInt8DataPointer() -> UnsafeMutablePointer<Int8> {
+		let dataPointer = UnsafeMutablePointer<Int8>(mutating: (self as NSData).bytes.bindMemory(to: Int8.self, capacity: self.count))
+		return dataPointer
+	}
+	
 	public func hexEncodedString() -> String {
 		return map { String(format: "%02hhx", $0) }.joined()
 	}

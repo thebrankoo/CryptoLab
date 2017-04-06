@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1905F7AF1E924B7D006CC553 /* DH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905F7AE1E924B7D006CC553 /* DH.swift */; };
+		1905F7B11E924CFF006CC553 /* DHTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905F7B01E924CFF006CC553 /* DHTests.swift */; };
 		1910DA6C1E53422E0050C78C /* Blowfish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1910DA6B1E53422E0050C78C /* Blowfish.swift */; };
 		1939C39D1E8D09D20035B313 /* HMACTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1939C39C1E8D09D20035B313 /* HMACTests.swift */; };
 		1939C39F1E8D133A0035B313 /* DSATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1939C39E1E8D133A0035B313 /* DSATests.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1905F7AE1E924B7D006CC553 /* DH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DH.swift; path = "Message Auth/DH.swift"; sourceTree = "<group>"; };
+		1905F7B01E924CFF006CC553 /* DHTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DHTests.swift; sourceTree = "<group>"; };
 		1910DA6B1E53422E0050C78C /* Blowfish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Blowfish.swift; path = Cipher/Blowfish.swift; sourceTree = "<group>"; };
 		1939C39C1E8D09D20035B313 /* HMACTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMACTests.swift; sourceTree = "<group>"; };
 		1939C39E1E8D133A0035B313 /* DSATests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSATests.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				19A8E8901E7D6DE100EB6590 /* RSATests.swift */,
 				1939C39C1E8D09D20035B313 /* HMACTests.swift */,
 				1939C39E1E8D133A0035B313 /* DSATests.swift */,
+				1905F7B01E924CFF006CC553 /* DHTests.swift */,
 			);
 			path = CryptoLabTests;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */,
 				1975BFF51E76E297001D0944 /* DSA.swift */,
 				1975BFF31E76E262001D0944 /* AuthExtensions.swift */,
+				1905F7AE1E924B7D006CC553 /* DH.swift */,
 			);
 			name = "Message Auth";
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 				19A8E8911E7D6DE100EB6590 /* RSATests.swift in Sources */,
 				1939C39D1E8D09D20035B313 /* HMACTests.swift in Sources */,
 				193BEEB61E46342900383028 /* HashFunctionsTests.swift in Sources */,
+				1905F7B11E924CFF006CC553 /* DHTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +340,7 @@
 				1975BFEF1E769AC3001D0944 /* CryptoErrors.swift in Sources */,
 				19BF47601E4F21DF00310164 /* RSA.swift in Sources */,
 				194C6F441E61AE83001C4047 /* Extensions.swift in Sources */,
+				1905F7AF1E924B7D006CC553 /* DH.swift in Sources */,
 				1975BFF61E76E297001D0944 /* DSA.swift in Sources */,
 				19E13F391E780AA30057F7ED /* Protocols.swift in Sources */,
 				19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */,
