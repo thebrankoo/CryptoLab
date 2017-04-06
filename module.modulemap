@@ -18,5 +18,6 @@ module OpenSSL [system][extern_c] {
 	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/hmac.h"
 	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/dsa.h"
 	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/des.h"
+	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/rand.h"
 	export *
 }

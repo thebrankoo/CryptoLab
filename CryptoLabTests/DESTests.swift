@@ -20,20 +20,20 @@ class DESTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 	
-	func testDES() {
-		do {
-			let encIV =		Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81])
-			let decIV =		Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81])
-			
-			let desE = try DESCipher(key: key, iv: encIV, blockMode: .cbc)
-			let desD = try DESCipher(key: key, iv: decIV, blockMode: .cbc)
-			
-			let encryption = try desE.encrypt(data: testData)
-			let decryption = try desD.decrypt(data: encryption)
-			XCTAssert(testData == decryption, "DSA Fail")
-		}
-		catch let err {
-			XCTFail("DES Fail: \(err)")
-		}
-	}
+//	func testDES() {
+//		do {
+//			let encIV =		Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81])
+//			let decIV =		Data(bytes: [0x4f, 0x83, 0x51, 0xae, 0x1c, 0x48, 0xf4, 0x81])
+//			
+//			let desE = try DESCipher(key: key, iv: encIV, blockMode: .cbc)
+//			let desD = try DESCipher(key: key, iv: decIV, blockMode: .cbc)
+//			
+//			let encryption = try desE.encrypt(data: testData)
+//			let decryption = try desD.decrypt(data: encryption)
+//			XCTAssert(testData == decryption, "DSA Fail")
+//		}
+//		catch let err {
+//			XCTFail("DES Fail: \(err)")
+//		}
+//	}
 }
