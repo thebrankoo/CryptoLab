@@ -56,4 +56,20 @@ class DHTests: XCTestCase {
 		}
 		XCTAssert(false)
 	}
+	
+	func testDHFail() {
+		let dh1 = DiffieHellman(primeLength: 512)
+		let falseDH = DiffieHellman(primeLength: 512)
+		
+		let dh2 = DiffieHellman(p: falseDH.p!, g: dh1.g!)
+		
+		if let secret1 = dh1.computeSharedSecret(withPublicKey: dh2.publicKey!.data(using: .utf8)!) {
+			if let secret2 = dh2.computeSharedSecret(withPublicKey: dh1.publicKey!.data(using: .utf8)!) {
+				XCTAssert(secret1 != secret2, "Shared secret should be different")
+				return
+			}
+		}
+		XCTAssert(false)
+	}
+
 }
