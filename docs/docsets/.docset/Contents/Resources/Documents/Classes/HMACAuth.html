@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HMACAuth Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/HMACAuth" class="dashAnchor"></a>
+    <a title="HMACAuth Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (4% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        HMACAuth Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AESCipher.html">AESCipher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BlowfishCipher.html">BlowfishCipher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DESCipher.html">DESCipher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DSAAuth.html">DSAAuth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DemoClass.html">DemoClass</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffieHellman.html">DiffieHellman</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HMACAuth.html">HMACAuth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MD5Hash.html">MD5Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RSACipher.html">RSACipher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RandomCore.html">RandomCore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SHA1Hash.html">SHA1Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SHA224Hash.html">SHA224Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SHA256Hash.html">SHA256Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SHA384Hash.html">SHA384Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SHA512Hash.html">SHA512Hash</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AESBlockCipherMode.html">AESBlockCipherMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AuthHashFunction.html">AuthHashFunction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BlowfishEncryptMode.html">BlowfishEncryptMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CipherError.html">CipherError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/DESBlockCipherMode.html">DESBlockCipherMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RSAPadding.html">RSAPadding</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RSASignatureType.html">RSASignatureType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BlockCryptor.html">BlockCryptor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Cryptor.html">Cryptor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/HashingFunction.html">HashingFunction</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>HMACAuth</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HMACAuth</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>Computing HMAC auth codes</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9CryptoLab8HMACAuthcFT3keyV10Foundation4Data12hashFunctionOS_16AuthHashFunction_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(key:hashFunction:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9CryptoLab8HMACAuthcFT3keyV10Foundation4Data12hashFunctionOS_16AuthHashFunction_S0_">init(key:hashFunction:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates new HMACAuth object with key and hash function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">hashFunction</span><span class="p">:</span> <span class="kt"><a href="../Enums/AuthHashFunction.html">AuthHashFunction</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>key</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Key that will be used</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hashFunction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Hash function that will be used</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9CryptoLab8HMACAuth18authenticationCodeFT7forDataV10Foundation4Data_GSqS2__"></a>
+                    <a name="//apple_ref/swift/Method/authenticationCode(forData:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9CryptoLab8HMACAuth18authenticationCodeFT7forDataV10Foundation4Data_GSqS2__">authenticationCode(forData:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Computes authentication code of data using the hash function provided in init </p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">authenticationCode</span><span class="p">(</span><span class="n">forData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data authentication code is computed for</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Authentication code for provided data</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9CryptoLab8HMACAuth6updateFT8withDataV10Foundation4Data_T_"></a>
+                    <a name="//apple_ref/swift/Method/update(withData:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9CryptoLab8HMACAuth6updateFT8withDataV10Foundation4Data_T_">update(withData:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates current data with new data chunk.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="n">withData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data chunk that is added to current data</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9CryptoLab8HMACAuth6finishFT_GSqV10Foundation4Data_"></a>
+                    <a name="//apple_ref/swift/Method/finish()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9CryptoLab8HMACAuth6finishFT_GSqV10Foundation4Data_">finish()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Finishes computing authentication code of data chunks provided in update function</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Authentication code for provided data chunks or nil if authentication code can’t be computed</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-07)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

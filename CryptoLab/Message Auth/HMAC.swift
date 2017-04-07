@@ -57,6 +57,8 @@ public enum AuthHashFunction {
 	}
 }
 
+/// Computing HMAC auth codes
+
 public class HMACAuth: NSObject {
 	fileprivate let coreHMAC: HMACCoreAuth
 	
