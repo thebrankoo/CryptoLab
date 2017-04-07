@@ -60,11 +60,24 @@ public enum AuthHashFunction {
 public class HMACAuth: NSObject {
 	fileprivate let coreHMAC: HMACCoreAuth
 	
+	/**
+	Creates new HMACAuth object with key and hash function.
+	
+	- parameter key: Key that will be used
+	- parameter hashFunction: Hash function that will be used
+	*/
 	public init(key: Data, hashFunction: AuthHashFunction) {
 		coreHMAC = HMACCoreAuth(key: key, hashFunction: hashFunction)
 		super.init()
 	}
 	
+	/**
+	Computes authentication code of data using the hash function provided in init 
+	
+	- parameter data: Data authentication code is computed for
+	
+	- returns: Authentication code for provided data
+	*/
 	public func authenticationCode(forData data: Data) -> Data? {
 		let result = coreHMAC.authenticationCode(forData: data)
 		if let rawData = result.result {
@@ -73,6 +86,11 @@ public class HMACAuth: NSObject {
 		return nil
 	}
 	
+	/**
+	Updates current data with new data chunk.
+	
+	- parameter data: Data chunk that is added to current data
+	*/
 	public func update(withData data: Data) {
 		if !isUpdateInProcess() {
 			coreHMAC.authCodeInit()
@@ -80,6 +98,11 @@ public class HMACAuth: NSObject {
 		coreHMAC.authCodeUpdate(withData: data)
 	}
 	
+	/**
+	Finishes computing authentication code of data chunks provided in update function
+	
+	- returns: Authentication code for provided data chunks or nil if authentication code can't be computed
+	*/
 	public func finish() -> Data? {
 		let result = coreHMAC.authCodeFinish()
 		
