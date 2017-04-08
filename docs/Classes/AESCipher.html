@@ -14,7 +14,7 @@
     <a title="AESCipher Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (4% documented)</p>
+        <p><a href="../index.html"> Docs</a> (54% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -41,9 +41,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/DSAAuth.html">DSAAuth</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/DemoClass.html">DemoClass</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/DiffieHellman.html">DiffieHellman</a>
@@ -153,8 +150,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initialization vector (get only)</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">iv</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -172,8 +177,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Encryption key (get only)</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -191,8 +204,62 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates new AESCipher object with encryption key, initialization vector and block cipher mode</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">iv</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">blockMode</span><span class="p">:</span> <span class="kt"><a href="../Enums/AESBlockCipherMode.html">AESBlockCipherMode</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>key</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Encryption/decryption key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>iv</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Initialization vector</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>blockMode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>AES block mode</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -211,9 +278,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9AESCipher7encryptFzT4dataV10Foundation4Data_S2_"></a>
+                    <a name="/s:FP9CryptoLab7Cryptor7encryptFzT4dataV10Foundation4Data_S2_"></a>
                     <a name="//apple_ref/swift/Method/encrypt(data:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9AESCipher7encryptFzT4dataV10Foundation4Data_S2_">encrypt(data:)</a>
+                    <a class="token" href="#/s:FP9CryptoLab7Cryptor7encryptFzT4dataV10Foundation4Data_S2_">encrypt(data:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -221,7 +288,39 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encrypt</span> <span class="p">(</span><span class="n">data</span> <span class="nv">dataToEncrypt</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dataToEncrypt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data to encrypt</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Encrypted data</p>
 
                       </div>
                     </section>
@@ -230,9 +329,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9AESCipher7decryptFzT4dataV10Foundation4Data_S2_"></a>
+                    <a name="/s:FP9CryptoLab7Cryptor7decryptFzT4dataV10Foundation4Data_S2_"></a>
                     <a name="//apple_ref/swift/Method/decrypt(data:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9AESCipher7decryptFzT4dataV10Foundation4Data_S2_">decrypt(data:)</a>
+                    <a class="token" href="#/s:FP9CryptoLab7Cryptor7decryptFzT4dataV10Foundation4Data_S2_">decrypt(data:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -240,7 +339,39 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">data</span> <span class="nv">dataToDecrypt</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dataToDecrypt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data to decrypt</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Decrypted data</p>
 
                       </div>
                     </section>
@@ -260,9 +391,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9AESCipher16updateEncryptionFzT13withDataBlockV10Foundation4Data_T_"></a>
+                    <a name="/s:FP9CryptoLab12BlockCryptor16updateEncryptionFzT13withDataBlockV10Foundation4Data_T_"></a>
                     <a name="//apple_ref/swift/Method/updateEncryption(withDataBlock:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9AESCipher16updateEncryptionFzT13withDataBlockV10Foundation4Data_T_">updateEncryption(withDataBlock:)</a>
+                    <a class="token" href="#/s:FP9CryptoLab12BlockCryptor16updateEncryptionFzT13withDataBlockV10Foundation4Data_T_">updateEncryption(withDataBlock:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -270,8 +401,35 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateEncryption</span><span class="p">(</span><span class="n">withDataBlock</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New data to encrypt</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -279,9 +437,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9AESCipher16finishEncryptionFzT_V10Foundation4Data"></a>
+                    <a name="/s:FP9CryptoLab12BlockCryptor16finishEncryptionFzT_V10Foundation4Data"></a>
                     <a name="//apple_ref/swift/Method/finishEncryption()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9AESCipher16finishEncryptionFzT_V10Foundation4Data">finishEncryption()</a>
+                    <a class="token" href="#/s:FP9CryptoLab12BlockCryptor16finishEncryptionFzT_V10Foundation4Data">finishEncryption()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -289,7 +447,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finishEncryption</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Final encrypted data</p>
 
                       </div>
                     </section>
@@ -298,9 +468,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9AESCipher16updateDecryptionFzT13withDataBlockV10Foundation4Data_T_"></a>
+                    <a name="/s:FP9CryptoLab12BlockCryptor16updateDecryptionFzT13withDataBlockV10Foundation4Data_T_"></a>
                     <a name="//apple_ref/swift/Method/updateDecryption(withDataBlock:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9AESCipher16updateDecryptionFzT13withDataBlockV10Foundation4Data_T_">updateDecryption(withDataBlock:)</a>
+                    <a class="token" href="#/s:FP9CryptoLab12BlockCryptor16updateDecryptionFzT13withDataBlockV10Foundation4Data_T_">updateDecryption(withDataBlock:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -308,8 +478,35 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateDecryption</span><span class="p">(</span><span class="n">withDataBlock</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New data to decrypt</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -317,9 +514,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9AESCipher16finishDecryptionFzT_V10Foundation4Data"></a>
+                    <a name="/s:FP9CryptoLab12BlockCryptor16finishDecryptionFzT_V10Foundation4Data"></a>
                     <a name="//apple_ref/swift/Method/finishDecryption()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9AESCipher16finishDecryptionFzT_V10Foundation4Data">finishDecryption()</a>
+                    <a class="token" href="#/s:FP9CryptoLab12BlockCryptor16finishDecryptionFzT_V10Foundation4Data">finishDecryption()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -327,7 +524,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finishDecryption</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Final decrypted data</p>
 
                       </div>
                     </section>
@@ -338,7 +547,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-07)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

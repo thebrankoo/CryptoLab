@@ -14,7 +14,7 @@
     <a title="Data Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (4% documented)</p>
+        <p><a href="../index.html"> Docs</a> (54% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -41,9 +41,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/DSAAuth.html">DSAAuth</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/DemoClass.html">DemoClass</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/DiffieHellman.html">DiffieHellman</a>
@@ -153,7 +150,53 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Generates HMAC auth code form data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hmacAuthCode</span><span class="p">(</span><span class="n">withKey</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">hashFunction</span><span class="p">:</span> <span class="kt"><a href="../Enums/AuthHashFunction.html">AuthHashFunction</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>key</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Auth code generation key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hasFunction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Auth code generation hash funcion</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Generated HMAC auth code</p>
 
                       </div>
                     </section>
@@ -172,7 +215,53 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>DSA signature of data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">dsaSign</span><span class="p">(</span><span class="n">publicKey</span> <span class="nv">pubK</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="n">privateKey</span> <span class="nv">privK</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pubK</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Public key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>privK</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Private key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Generated DSA signature of data</p>
 
                       </div>
                     </section>
@@ -181,9 +270,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE9CryptoLabV10Foundation4Data9dsaVerifyFT13withSignatureS1_9publicKeyS1_10privateKeyS1__Sb"></a>
-                    <a name="//apple_ref/swift/Method/dsaVerify(withSignature:publicKey:privateKey:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data9dsaVerifyFT13withSignatureS1_9publicKeyS1_10privateKeyS1__Sb">dsaVerify(withSignature:publicKey:privateKey:)</a>
+                    <a name="/s:FE9CryptoLabV10Foundation4Data9dsaVerifyFT13withSignatureS1_9publicKeyS1__Sb"></a>
+                    <a name="//apple_ref/swift/Method/dsaVerify(withSignature:publicKey:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data9dsaVerifyFT13withSignatureS1_9publicKeyS1__Sb">dsaVerify(withSignature:publicKey:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -191,7 +280,53 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>DSA public key verification of data with signature</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">dsaVerify</span><span class="p">(</span><span class="n">withSignature</span> <span class="nv">signature</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="n">publicKey</span> <span class="nv">pubK</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>signature</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>DSA generated signature</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pubK</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Public key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Bool that indicates if verification passed</p>
 
                       </div>
                     </section>
@@ -222,10 +357,206 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9CryptoLabV10Foundation4Data3md5FT_S1_"></a>
+                    <a name="//apple_ref/swift/Method/md5()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data3md5FT_S1_">md5()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>MD5 hash of data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">md5</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>MD5 data</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9CryptoLabV10Foundation4Data4sha1FT_S1_"></a>
+                    <a name="//apple_ref/swift/Method/sha1()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data4sha1FT_S1_">sha1()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SHA1 hash of data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sha1</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>SHA1 data</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9CryptoLabV10Foundation4Data6sha224FT_S1_"></a>
+                    <a name="//apple_ref/swift/Method/sha224()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data6sha224FT_S1_">sha224()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SHA224 hash of data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sha224</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>SHA224 data</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9CryptoLabV10Foundation4Data6sha256FT_S1_"></a>
+                    <a name="//apple_ref/swift/Method/sha256()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data6sha256FT_S1_">sha256()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SHA256 hash of data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sha256</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>SHA256 data</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9CryptoLabV10Foundation4Data6sha384FT_S1_"></a>
+                    <a name="//apple_ref/swift/Method/sha384()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data6sha384FT_S1_">sha384()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SHA384 hash of data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sha384</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>SHA384 data</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9CryptoLabV10Foundation4Data6sha512FT_S1_"></a>
+                    <a name="//apple_ref/swift/Method/sha512()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9CryptoLabV10Foundation4Data6sha512FT_S1_">sha512()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SHA512 hash of data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sha512</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>SHA512 data</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-07)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

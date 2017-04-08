@@ -29,7 +29,6 @@
 		19E3DF3F1E66C25F00DFEAD2 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */; };
 		19F9B1431E3E33CA007CE1BD /* CryptoLab.h in Headers */ = {isa = PBXBuildFile; fileRef = 19F9B1411E3E33CA007CE1BD /* CryptoLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19F9B14F1E3E3463007CE1BD /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B14E1E3E3463007CE1BD /* openssl.framework */; };
-		19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F9B1521E3E3569007CE1BD /* DemoClass.swift */; };
 		19FA87A91E8BBD43008C3495 /* DESTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA87A81E8BBD43008C3495 /* DESTests.swift */; };
 		19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */; };
 		19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */; };
@@ -74,7 +73,6 @@
 		19F9B1421E3E33CA007CE1BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19F9B14E1E3E3463007CE1BD /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = Frameworks/openssl.framework; sourceTree = SOURCE_ROOT; };
 		19F9B1501E3E349C007CE1BD /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = SOURCE_ROOT; };
-		19F9B1521E3E3569007CE1BD /* DemoClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoClass.swift; sourceTree = "<group>"; };
 		19FA87A81E8BBD43008C3495 /* DESTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DESTests.swift; sourceTree = "<group>"; };
 		19FB5FE21E4C6D9700F6212E /* CoreHashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreHashFunctions.swift; path = "Hash Functions/CoreHashFunctions.swift"; sourceTree = "<group>"; };
 		19FB5FE31E4C6D9700F6212E /* HashFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashFunctions.swift; path = "Hash Functions/HashFunctions.swift"; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 				19F657BD1E3FD71F00271872 /* Hash functions */,
 				19E3DF401E66C26500DFEAD2 /* Message Auth */,
 				1975BFF01E769AD0001D0944 /* Other */,
-				19F9B1511E3E355B007CE1BD /* Demo class */,
 				19F9B1491E3E33E5007CE1BD /* Frameworks */,
 				19E13F381E780AA30057F7ED /* Protocols.swift */,
 			);
@@ -191,14 +188,6 @@
 				19F9B14E1E3E3463007CE1BD /* openssl.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		19F9B1511E3E355B007CE1BD /* Demo class */ = {
-			isa = PBXGroup;
-			children = (
-				19F9B1521E3E3569007CE1BD /* DemoClass.swift */,
-			);
-			name = "Demo class";
 			sourceTree = "<group>";
 		};
 		19FB5FE11E4C6CF600F6212E /* Cipher */ = {
@@ -340,7 +329,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */,
-				19F9B1531E3E3569007CE1BD /* DemoClass.swift in Sources */,
 				19E3DF3F1E66C25F00DFEAD2 /* HMAC.swift in Sources */,
 				1975BFF41E76E262001D0944 /* AuthExtensions.swift in Sources */,
 				19DEAF741E6EB7060054BB97 /* DES.swift in Sources */,

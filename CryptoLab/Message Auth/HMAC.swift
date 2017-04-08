@@ -1,3 +1,8 @@
+/**
+- Author: Branko Popovic
+*/
+
+
 //
 //  HMAC.swift
 //  CryptoLab
@@ -56,8 +61,6 @@ public enum AuthHashFunction {
 		}
 	}
 }
-
-/// Computing HMAC auth codes
 
 public class HMACAuth: NSObject {
 	fileprivate let coreHMAC: HMACCoreAuth

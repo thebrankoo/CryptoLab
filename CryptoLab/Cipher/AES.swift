@@ -34,35 +34,48 @@ public enum AESBlockCipherMode {
 	case ofb //dont reuse iv
 	case ctr //dont reuse iv
 	
-	public static func isBlockModeCBC(blockMode: AESBlockCipherMode) -> Bool {
+	static func isBlockModeCBC(blockMode: AESBlockCipherMode) -> Bool {
 		return .cbc == blockMode
 	}
-	public static func isBlockModeECB(blockMode: AESBlockCipherMode) -> Bool {
+	static func isBlockModeECB(blockMode: AESBlockCipherMode) -> Bool {
 		return .ecb == blockMode
 	}
-	public static func isBlockModeCFB(blockMode: AESBlockCipherMode) -> Bool {
+	static func isBlockModeCFB(blockMode: AESBlockCipherMode) -> Bool {
 		return .cfb == blockMode
 	}
-	public static func isBlockModeOFB(blockMode: AESBlockCipherMode) -> Bool {
+	static func isBlockModeOFB(blockMode: AESBlockCipherMode) -> Bool {
 		return .ofb == blockMode
 	}
-	public static func isBlockModeCTR(blockMode: AESBlockCipherMode) -> Bool {
+	static func isBlockModeCTR(blockMode: AESBlockCipherMode) -> Bool {
 		return .ctr == blockMode
 	}
 }
 
 public class AESCipher: NSObject, Cryptor, BlockCryptor {
 	
+	/**
+	Initialization vector (get only)
+	*/
 	public var iv: Data? {
 		return coreCipher.iv
 	}
 	
+	/**
+	Encryption key (get only)
+	*/
 	public var key: Data? {
 		return coreCipher.key
 	}
 	
 	fileprivate let coreCipher: AESCoreCipher
 	
+	/**
+	Creates new AESCipher object with encryption key, initialization vector and block cipher mode
+	
+	- parameter key: Encryption/decryption key
+	- parameter iv: Initialization vector
+	- parameter blockMode: AES block mode
+	*/
 	public init(key: Data, iv: Data, blockMode: AESBlockCipherMode) throws {
 		do {
 			coreCipher = try AESCoreCipher(key: key, iv: iv, blockMode: blockMode)

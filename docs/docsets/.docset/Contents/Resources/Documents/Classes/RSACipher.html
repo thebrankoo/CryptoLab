@@ -14,7 +14,7 @@
     <a title="RSACipher Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (4% documented)</p>
+        <p><a href="../index.html"> Docs</a> (54% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -41,9 +41,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/DSAAuth.html">DSAAuth</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/DemoClass.html">DemoClass</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/DiffieHellman.html">DiffieHellman</a>
@@ -153,8 +150,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>RSA private key (get only)</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">privateKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -172,8 +177,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>RSA public key (get only)</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">publicKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -191,8 +204,36 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates new RSACipher object using desired padding (set to none if not specified).</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">padding</span><span class="p">:</span> <span class="kt"><a href="../Enums/RSAPadding.html">RSAPadding</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>padding</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>RSA padding. Default value is none.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -210,8 +251,49 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates new RSACipher object using public key and padding (set to none if not specified).</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">publicKey</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">padding</span><span class="p">:</span> <span class="kt"><a href="../Enums/RSAPadding.html">RSAPadding</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>publicKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>RSA public key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>padding</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>RSA padding. Default value is none.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -229,18 +311,83 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates new RSACipher object using public key, private key and padding (set to none if not specified).</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">publicKey</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">privateKey</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">padding</span><span class="p">:</span> <span class="kt"><a href="../Enums/RSAPadding.html">RSAPadding</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>publicKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>RSA public key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>privateKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>RSA private key</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>padding</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>RSA padding. Default value is none.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Cryptor%20protocol"></a>
+                <a name="//apple_ref/swift/Section/Cryptor protocol" class="dashAnchor"></a>
+                <a href="#/Cryptor%20protocol">
+                  <h3 class="section-name">Cryptor protocol</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9RSACipher7encryptFzT4dataV10Foundation4Data_S2_"></a>
+                    <a name="/s:FP9CryptoLab7Cryptor7encryptFzT4dataV10Foundation4Data_S2_"></a>
                     <a name="//apple_ref/swift/Method/encrypt(data:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9RSACipher7encryptFzT4dataV10Foundation4Data_S2_">encrypt(data:)</a>
+                    <a class="token" href="#/s:FP9CryptoLab7Cryptor7encryptFzT4dataV10Foundation4Data_S2_">encrypt(data:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -248,7 +395,39 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">data</span> <span class="nv">dataToEncrypt</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dataToEncrypt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data to encrypt</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Encrypted data</p>
 
                       </div>
                     </section>
@@ -257,9 +436,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9CryptoLab9RSACipher7decryptFzT4dataV10Foundation4Data_S2_"></a>
+                    <a name="/s:FP9CryptoLab7Cryptor7decryptFzT4dataV10Foundation4Data_S2_"></a>
                     <a name="//apple_ref/swift/Method/decrypt(data:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9RSACipher7decryptFzT4dataV10Foundation4Data_S2_">decrypt(data:)</a>
+                    <a class="token" href="#/s:FP9CryptoLab7Cryptor7decryptFzT4dataV10Foundation4Data_S2_">decrypt(data:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,12 +446,55 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">data</span> <span class="nv">dataToDecrypt</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dataToDecrypt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data to decrypt</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Decrypted data</p>
 
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Sign/Verify"></a>
+                <a name="//apple_ref/swift/Section/Sign/Verify" class="dashAnchor"></a>
+                <a href="#/Sign/Verify">
+                  <h3 class="section-name">Sign/Verify</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -286,8 +508,49 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Signs data using the RSA private key</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sign</span><span class="p">(</span><span class="n">data</span> <span class="nv">toSign</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/RSASignatureType.html">RSASignatureType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>toSign</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data to sign</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Message digest algorithm</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -305,8 +568,62 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Verifies data metches given signature</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verify</span><span class="p">(</span><span class="n">data</span> <span class="nv">toVerify</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">signature</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/RSASignatureType.html">RSASignatureType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>toVerify</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data to verify</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>signature</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Given signature</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Message digest algorithm</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -316,7 +633,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-07)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

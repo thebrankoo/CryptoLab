@@ -13,34 +13,65 @@ public class DSAAuth: NSObject {
 	
 	fileprivate let dsaCore: DSACore
 	
+	/**
+	DSA private key (fetch only)
+	*/
 	public var privateKey: String? {
 		return dsaCore.extractPrivateKey()
 	}
 	
+	/**
+	DSA public key (fetch only)
+	*/
 	public var publicKey: String? {
 		return dsaCore.extractPublicKey()
 	}
 	
+	/**
+	Creates new DSA Object and generates key pair.
+	*/
 	public override init() {
 		dsaCore = DSACore()
 		super.init()
 	}
 	
+	/**
+	Creates new DSA Object with public key.
+	
+	- parameter publicKey: Custom public key
+	*/
 	public init(publicKey: Data) {
 		dsaCore = DSACore(publicKey: publicKey)
 		super.init()
 	}
 	
+	/**
+	Creates new DSA Object with public and private key.
+	
+	- parameter publicKey: Custom public key
+	- parameter privateKey: Custom private key
+	*/
 	public init(publicKey: Data, privateKey: Data) {
 		dsaCore = DSACore(publicKey: publicKey, privateKey: privateKey)
 		super.init()
 	}
 	
+	/**
+	Signs data with private key
+	
+	- parameter data: Data to sign
+	*/
 	public func sign(data: Data) -> Data? {
 		let signature = dsaCore.sign(data: data)
 		return signature
 	}
 	
+	/**
+	Verifies digest with signature
+	
+	- parameter signature: Valid signature
+	- parameter digest: Digest to verify
+	*/
 	public func verify(signature: Data, digest: Data) -> Bool {
 		let verifyResult = dsaCore.verify(signature: signature, digest: digest)
 		return verifyResult

@@ -47,27 +47,54 @@ public class RSACipher: NSObject, Cryptor {
 	
 	private let coreCipher: RSACoreCipher?
 	
+	/**
+	RSA private key (get only)
+	*/
 	public var privateKey: String? {
 		return coreCipher?.privateKey
 	}
+	
+	/**
+	RSA public key (get only)
+	*/
 	public var publicKey: String? {
 		return coreCipher?.publicKey
 	}
 	
+	/**
+	Creates new RSACipher object using desired padding (set to none if not specified).
+	
+	- parameter padding: RSA padding. Default value is none.
+	*/
 	public init(padding: RSAPadding = .none) {
 		coreCipher = RSACoreCipher(padding: padding)
 		super.init()
 	}
 	
+	/**
+	Creates new RSACipher object using public key and padding (set to none if not specified).
+	
+	- parameter publicKey: RSA public key
+	- parameter padding: RSA padding. Default value is none.
+	*/
 	public init(publicKey: Data, padding: RSAPadding = .none) {
 		coreCipher = RSACoreCipher(publicKey: publicKey, padding: padding)
 		super.init()
 	}
 	
+	/**
+	Creates new RSACipher object using public key, private key and padding (set to none if not specified).
+	
+	- parameter publicKey: RSA public key
+	- parameter privateKey: RSA private key
+	- parameter padding: RSA padding. Default value is none.
+	*/
 	public init(publicKey: Data, privateKey: Data, padding: RSAPadding = .none) {
 		coreCipher = RSACoreCipher(publicKey: publicKey, privateKey: privateKey, padding: padding)
 		super.init()
 	}
+	
+	//MARK: Cryptor protocol
 	
 	public func encrypt(data dataToEncrypt: Data) throws -> Data {
 		do {
@@ -93,10 +120,25 @@ public class RSACipher: NSObject, Cryptor {
 		}
 	}
 	
+	//MARK: Sign/Verify
+	
+	/**
+	Signs data using the RSA private key
+	
+	- parameter toSign: Data to sign
+	- parameter type: Message digest algorithm
+	*/
 	public func sign(data toSign: Data, type: RSASignatureType) -> Data? {
 		return coreCipher?.sign(data: toSign, type: type)
 	}
 	
+	/**
+	Verifies data metches given signature
+ 
+	- parameter toVerify: Data to verify
+	- parameter signature: Given signature
+	- parameter type: Message digest algorithm
+	*/
 	public func verify(data toVerify: Data, signature: Data, type: RSASignatureType) -> Bool {
 		if let coreCipher = coreCipher {return coreCipher.verify(data: toVerify, signature: signature, type: type)}
 		return false

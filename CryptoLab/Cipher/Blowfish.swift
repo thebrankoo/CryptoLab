@@ -18,13 +18,26 @@ public enum BlowfishEncryptMode {
 
 public class BlowfishCipher: NSObject, Cryptor {
 	fileprivate let coreCipher: BlowfishCoreCipher
+	
+	/**
+	Encryption key
+	*/
 	public let key: Data
 	
+	/**
+	Creates new BlowfishCipher object with key, initialization vector and enceyption mode
+	
+	- parameters key: Encryption/decryption key
+	- parameters iv: Initialization vector
+	- parameters encryptionMode: Blowfish cipher mode
+	*/
 	public init(key: Data, iv: Data?, encryptionMode: BlowfishEncryptMode) {
 		coreCipher = BlowfishCoreCipher(key: key, iv: iv, encryptionMode: encryptionMode)
 		self.key = key
 		super.init()
 	}
+	
+	//MARK: Cryptor protocol
 	
 	public func encrypt(data dataToEncrypt: Data) throws -> Data {
 		if let encrypted = coreCipher.encrypt(data: dataToEncrypt) {
