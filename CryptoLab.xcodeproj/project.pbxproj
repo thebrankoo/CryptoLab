@@ -15,7 +15,6 @@
 		193BEEB61E46342900383028 /* HashFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BEEB51E46342900383028 /* HashFunctionsTests.swift */; };
 		194C08CB1E8530AF00DB6E6F /* BlowfishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C08CA1E8530AF00DB6E6F /* BlowfishTests.swift */; };
 		194C6F441E61AE83001C4047 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C6F431E61AE83001C4047 /* Extensions.swift */; };
-		196B2BB41E964F8F00786F51 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B2BB31E964F8F00786F51 /* Random.swift */; };
 		196B2BB61E9653C800786F51 /* OtherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B2BB51E9653C800786F51 /* OtherTests.swift */; };
 		1975BFEF1E769AC3001D0944 /* CryptoErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFEE1E769AC3001D0944 /* CryptoErrors.swift */; };
 		1975BFF21E76E1DB001D0944 /* HashExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975BFF11E76E1DB001D0944 /* HashExtensions.swift */; };
@@ -24,7 +23,6 @@
 		198A32951E427AFD000E5370 /* CryptoLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */; };
 		19A8E8911E7D6DE100EB6590 /* RSATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A8E8901E7D6DE100EB6590 /* RSATests.swift */; };
 		19BF47601E4F21DF00310164 /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF475F1E4F21DF00310164 /* RSA.swift */; };
-		19DEAF741E6EB7060054BB97 /* DES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DEAF731E6EB7060054BB97 /* DES.swift */; };
 		19E13F391E780AA30057F7ED /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E13F381E780AA30057F7ED /* Protocols.swift */; };
 		19E3DF3F1E66C25F00DFEAD2 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */; };
 		19F9B1431E3E33CA007CE1BD /* CryptoLab.h in Headers */ = {isa = PBXBuildFile; fileRef = 19F9B1411E3E33CA007CE1BD /* CryptoLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -55,7 +53,6 @@
 		193BEEB51E46342900383028 /* HashFunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctionsTests.swift; sourceTree = "<group>"; };
 		194C08CA1E8530AF00DB6E6F /* BlowfishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlowfishTests.swift; sourceTree = "<group>"; };
 		194C6F431E61AE83001C4047 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		196B2BB31E964F8F00786F51 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Random.swift; path = Other/Random.swift; sourceTree = "<group>"; };
 		196B2BB51E9653C800786F51 /* OtherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherTests.swift; sourceTree = "<group>"; };
 		1975BFEE1E769AC3001D0944 /* CryptoErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CryptoErrors.swift; path = Other/CryptoErrors.swift; sourceTree = "<group>"; };
 		1975BFF11E76E1DB001D0944 /* HashExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashExtensions.swift; path = "Hash Functions/HashExtensions.swift"; sourceTree = "<group>"; };
@@ -65,7 +62,6 @@
 		198A32941E427AFD000E5370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19A8E8901E7D6DE100EB6590 /* RSATests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSATests.swift; sourceTree = "<group>"; };
 		19BF475F1E4F21DF00310164 /* RSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RSA.swift; path = Cipher/RSA.swift; sourceTree = "<group>"; };
-		19DEAF731E6EB7060054BB97 /* DES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DES.swift; path = Cipher/DES.swift; sourceTree = "<group>"; };
 		19E13F381E780AA30057F7ED /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HMAC.swift; path = "Message Auth/HMAC.swift"; sourceTree = "<group>"; };
 		19F9B13E1E3E33CA007CE1BD /* CryptoLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CryptoLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +103,6 @@
 				19F9B1421E3E33CA007CE1BD /* Info.plist */,
 				194C6F431E61AE83001C4047 /* Extensions.swift */,
 				1975BFEE1E769AC3001D0944 /* CryptoErrors.swift */,
-				196B2BB31E964F8F00786F51 /* Random.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -196,7 +191,6 @@
 				19FB5FE81E4C6E1C00F6212E /* AES.swift */,
 				19BF475F1E4F21DF00310164 /* RSA.swift */,
 				1910DA6B1E53422E0050C78C /* Blowfish.swift */,
-				19DEAF731E6EB7060054BB97 /* DES.swift */,
 			);
 			name = Cipher;
 			sourceTree = "<group>";
@@ -331,11 +325,9 @@
 				19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */,
 				19E3DF3F1E66C25F00DFEAD2 /* HMAC.swift in Sources */,
 				1975BFF41E76E262001D0944 /* AuthExtensions.swift in Sources */,
-				19DEAF741E6EB7060054BB97 /* DES.swift in Sources */,
 				1975BFEF1E769AC3001D0944 /* CryptoErrors.swift in Sources */,
 				19BF47601E4F21DF00310164 /* RSA.swift in Sources */,
 				194C6F441E61AE83001C4047 /* Extensions.swift in Sources */,
-				196B2BB41E964F8F00786F51 /* Random.swift in Sources */,
 				1905F7AF1E924B7D006CC553 /* DH.swift in Sources */,
 				1975BFF61E76E297001D0944 /* DSA.swift in Sources */,
 				19E13F391E780AA30057F7ED /* Protocols.swift in Sources */,
