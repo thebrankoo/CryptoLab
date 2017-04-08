@@ -1,8 +1,3 @@
-/**
-- Author: Branko Popovic
-*/
-
-
 //
 //  HMAC.swift
 //  CryptoLab
@@ -14,6 +9,9 @@
 import Foundation
 import OpenSSL
 
+/**
+Hash function for DSA authentication code generation
+*/
 public enum AuthHashFunction {
 	case md4
 	case md5
@@ -62,6 +60,9 @@ public enum AuthHashFunction {
 	}
 }
 
+/**
+HMAC auth code generation calss
+*/
 public class HMACAuth: NSObject {
 	fileprivate let coreHMAC: HMACCoreAuth
 	

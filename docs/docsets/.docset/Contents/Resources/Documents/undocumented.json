@@ -2,156 +2,58 @@
   "warnings": [
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
-      "line": 30,
-      "symbol": "AESBlockCipherMode",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
-      "line": 31,
+      "line": 33,
       "symbol": "AESBlockCipherMode.cbc",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
-      "line": 32,
+      "line": 34,
       "symbol": "AESBlockCipherMode.ecb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
-      "line": 33,
+      "line": 35,
       "symbol": "AESBlockCipherMode.cfb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
-      "line": 34,
+      "line": 36,
       "symbol": "AESBlockCipherMode.ofb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
-      "line": 35,
+      "line": 37,
       "symbol": "AESBlockCipherMode.ctr",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
-      "line": 54,
-      "symbol": "AESCipher",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/Blowfish.swift",
-      "line": 12,
-      "symbol": "BlowfishEncryptMode",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/Blowfish.swift",
-      "line": 13,
-      "symbol": "BlowfishEncryptMode.ecb",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/Blowfish.swift",
-      "line": 14,
-      "symbol": "BlowfishEncryptMode.cbc",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/Blowfish.swift",
-      "line": 15,
-      "symbol": "BlowfishEncryptMode.ofb64",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/Blowfish.swift",
-      "line": 16,
-      "symbol": "BlowfishEncryptMode.cfb64",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/Blowfish.swift",
-      "line": 19,
-      "symbol": "BlowfishCipher",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 12,
-      "symbol": "RSAPadding",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 13,
-      "symbol": "RSAPadding.pkcs1",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 14,
-      "symbol": "RSAPadding.pkcs1_oaep",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 15,
-      "symbol": "RSAPadding.none",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 29,
-      "symbol": "RSASignatureType",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 30,
+      "line": 47,
       "symbol": "RSASignatureType.md5",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 31,
+      "line": 48,
       "symbol": "RSASignatureType.sha1",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 32,
+      "line": 49,
       "symbol": "RSASignatureType.ripemd160",
       "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 46,
-      "symbol": "RSACipher",
-      "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
@@ -169,157 +71,52 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": null,
-      "symbol": "HashingFunction",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
       "line": 16,
-      "symbol": "HashingFunction",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 17,
-      "symbol": "HashingFunction.hash(data:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 18,
-      "symbol": "HashingFunction.update(withData:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 19,
-      "symbol": "HashingFunction.finishBlock()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 53,
-      "symbol": "MD5Hash",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 65,
-      "symbol": "SHA1Hash",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 77,
-      "symbol": "SHA224Hash",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 89,
-      "symbol": "SHA256Hash",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 101,
-      "symbol": "SHA384Hash",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Hash Functions/HashFunctions.swift",
-      "line": 113,
-      "symbol": "SHA512Hash",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/DH.swift",
-      "line": 12,
-      "symbol": "DiffieHellman",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/DSA.swift",
-      "line": 12,
-      "symbol": "DSAAuth",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 17,
-      "symbol": "AuthHashFunction",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 18,
       "symbol": "AuthHashFunction.md4",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 19,
+      "line": 17,
       "symbol": "AuthHashFunction.md5",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 20,
+      "line": 18,
       "symbol": "AuthHashFunction.sha1",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 21,
+      "line": 19,
       "symbol": "AuthHashFunction.sha224",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 22,
+      "line": 20,
       "symbol": "AuthHashFunction.sha256",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 23,
+      "line": 21,
       "symbol": "AuthHashFunction.sha384",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 24,
+      "line": 22,
       "symbol": "AuthHashFunction.sha512",
       "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
-      "line": 65,
-      "symbol": "HMACAuth",
-      "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
@@ -341,20 +138,6 @@
       "line": 14,
       "symbol": "CipherError.invalidKey",
       "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Protocols.swift",
-      "line": 11,
-      "symbol": "Cryptor",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Protocols.swift",
-      "line": 31,
-      "symbol": "BlockCryptor",
-      "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     }
   ],

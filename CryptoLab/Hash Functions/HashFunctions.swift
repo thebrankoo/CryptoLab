@@ -13,13 +13,10 @@ protocol CoreHashUser {
 	var coreHash: CoreHashingFunction {set get}
 }
 
+/**
+Protocol with default hash function implementation
+*/
 public protocol HashingFunction {
-	func hash(data dataToHash: Data) -> Data
-	func update(withData data: Data)
-	func finishBlock() -> Data
-}
-
-extension HashingFunction {
 	/**
 	Hash data
 	
@@ -27,29 +24,40 @@ extension HashingFunction {
 	
 	- returns: Hashed data
 	*/
-	public func hash(data dataToHash: Data) -> Data {
-		return (self as! CoreHashUser).coreHash.hash(data: dataToHash)
-	}
+	func hash(data dataToHash: Data) -> Data
 	
 	/**
 	Updates current data with new data
 	
 	- parameter data: New data
 	*/
-	public func update(withData data: Data) {
-		return (self as! CoreHashUser).coreHash.update(withData: data)
-	}
+	func update(withData data: Data)
 	
 	/**
 	Finishes hashing of all data added with update function
 	
 	- returns: Hashed data
 	*/
+	func finishBlock() -> Data
+}
+
+extension HashingFunction {
+	public func hash(data dataToHash: Data) -> Data {
+		return (self as! CoreHashUser).coreHash.hash(data: dataToHash)
+	}
+	
+	public func update(withData data: Data) {
+		return (self as! CoreHashUser).coreHash.update(withData: data)
+	}
+	
 	public func finishBlock() -> Data {
 		return (self as! CoreHashUser).coreHash.finishBlock()
 	}
 }
 
+/**
+MD5 hash class (check protocols it implements)
+*/
 public class MD5Hash: NSObject, HashingFunction, CoreHashUser {
 	var coreHash: CoreHashingFunction
 	
@@ -62,6 +70,9 @@ public class MD5Hash: NSObject, HashingFunction, CoreHashUser {
 	}
 }
 
+/**
+SHA1 hash class (check protocols it implements)
+*/
 public class SHA1Hash: NSObject, HashingFunction, CoreHashUser {
 	var coreHash: CoreHashingFunction
 	
@@ -74,6 +85,9 @@ public class SHA1Hash: NSObject, HashingFunction, CoreHashUser {
 	}
 }
 
+/**
+SHA224 hash class (check protocols it implements)
+*/
 public class SHA224Hash: NSObject, HashingFunction, CoreHashUser {
 	var coreHash: CoreHashingFunction
 	
@@ -86,6 +100,9 @@ public class SHA224Hash: NSObject, HashingFunction, CoreHashUser {
 	}
 }
 
+/**
+SHA256 hash class (check protocols it implements)
+*/
 public class SHA256Hash: NSObject, HashingFunction, CoreHashUser {
 	var coreHash: CoreHashingFunction
 	
@@ -98,6 +115,9 @@ public class SHA256Hash: NSObject, HashingFunction, CoreHashUser {
 	}
 }
 
+/**
+SHA384 hash class (check protocols it implements)
+*/
 public class SHA384Hash: NSObject, HashingFunction, CoreHashUser {
 	var coreHash: CoreHashingFunction
 	
@@ -110,6 +130,9 @@ public class SHA384Hash: NSObject, HashingFunction, CoreHashUser {
 	}
 }
 
+/**
+SHA512 hash class (check protocols it implements)
+*/
 public class SHA512Hash: NSObject, HashingFunction, CoreHashUser {
 	var coreHash: CoreHashingFunction
 	

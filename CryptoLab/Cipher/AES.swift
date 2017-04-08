@@ -26,7 +26,9 @@ enum AESKeySize: Int {
 		return AESKeySize(rawValue: key) == AESKeySize.aes192
 	}
 }
-
+/**
+Block modes for AES Cipher
+*/
 public enum AESBlockCipherMode {
 	case cbc
 	case ecb
@@ -51,6 +53,9 @@ public enum AESBlockCipherMode {
 	}
 }
 
+/**
+AES encryption/decryption class
+*/
 public class AESCipher: NSObject, Cryptor, BlockCryptor {
 	
 	/**

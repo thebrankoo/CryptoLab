@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+Protocol for ciphers that work with single data chunk
+*/
 public protocol Cryptor {
 	/**
 	Encrypts data.
@@ -28,6 +31,9 @@ public protocol Cryptor {
 	func decrypt(data dataToDecrypt: Data) throws -> Data
 }
 
+/**
+Protocol for ciphers that work with multiple data chunks
+*/
 public protocol BlockCryptor {
 	/**
 	Updates current encrypted data with new data. 

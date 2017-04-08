@@ -9,6 +9,9 @@
 import Foundation
 import OpenSSL
 
+/**
+Diffie-Hellman key exchange class
+*/
 public class DiffieHellman: NSObject {
 	private let dhCore: DiffieHellmanCore
 	

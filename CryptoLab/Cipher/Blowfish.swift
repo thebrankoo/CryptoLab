@@ -9,13 +9,34 @@
 import Foundation
 import OpenSSL
 
+/**
+Blowfish specific encryption mode
+*/
 public enum BlowfishEncryptMode {
+	/**
+	Encrypts or decrypts the first 64 bits of data. If larger, everything after the first 64 bits is ignored.
+	*/
 	case ecb
+	
+	/**
+	Encrypts or decrypts the 64 bits chunks. Initialization vector must be 8 byte long.
+	*/
 	case cbc
+	
+	/**
+	Mode for Blowfish with 64 bit feedback. It uses the same parameters as  CFB64.
+	*/
 	case ofb64
+	
+	/**
+	Mode for Blowfish with 64 bit feedback. Initialization vector must be 8 byte long.
+	*/
 	case cfb64
 }
 
+/**
+Blowfish encryption/decryption class
+*/
 public class BlowfishCipher: NSObject, Cryptor {
 	fileprivate let coreCipher: BlowfishCoreCipher
 	

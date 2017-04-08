@@ -9,10 +9,24 @@
 import Foundation
 import OpenSSL
 
+/**
+RSA Padding used in RSA encrypt, decrypt, sign and verify functions
+*/
 public enum RSAPadding {
-	case pkcs1 //PKCS #1 v1.5 padding
-	case pkcs1_oaep //EME-OAEP as defined in PKCS #1 v2.0 with SHA-1, MGF1 and an empty encoding parameter
-	case none //Raw RSA encryption
+	/**
+	PKCS #1 v1.5 padding
+	*/
+	case pkcs1
+	
+	/**
+	EME-OAEP as defined in PKCS #1 v2.0 with SHA-1, MGF1 and an empty encoding parameter
+	*/
+	case pkcs1_oaep
+	
+	/**
+	Raw RSA encryption
+	*/
+	case none
 	
 	fileprivate func openSSLPadding() -> Int32 {
 		switch self {
@@ -26,6 +40,9 @@ public enum RSAPadding {
 	}
 }
 
+/**
+Digest algorithm that is used to generate RSA signature.
+*/
 public enum RSASignatureType {
 	case md5
 	case sha1
@@ -43,6 +60,9 @@ public enum RSASignatureType {
 	}
 }
 
+/**
+RSA encryption/decryption and sign/verifiy class.
+*/
 public class RSACipher: NSObject, Cryptor {
 	
 	private let coreCipher: RSACoreCipher?

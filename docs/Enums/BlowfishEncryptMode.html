@@ -14,7 +14,7 @@
     <a title="BlowfishEncryptMode Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (58% documented)</p>
+        <p><a href="../index.html"> Docs</a> (83% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -122,7 +122,13 @@
         <section>
           <section class="section">
             <h1>BlowfishEncryptMode</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">BlowfishEncryptMode</span></code></pre>
+
+                </div>
+              </div>
+            <p>Blowfish specific encryption mode</p>
 
           </section>
           <section class="section task-group-section">
@@ -141,8 +147,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Encrypts or decrypts the first 64 bits of data. If larger, everything after the first 64 bits is ignored.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">ecb</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -164,8 +178,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Encrypts or decrypts the 64 bits chunks. Initialization vector must be 8 byte long.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">cbc</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -187,8 +209,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Mode for Blowfish with 64 bit feedback. It uses the same parameters as  CFB64.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">ofb64</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -210,8 +240,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Mode for Blowfish with 64 bit feedback. Initialization vector must be 8 byte long.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">cfb64</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>

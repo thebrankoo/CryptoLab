@@ -9,6 +9,9 @@
 import Foundation
 import OpenSSL
 
+/**
+DSA sign/verify class
+*/
 public class DSAAuth: NSObject {
 	
 	fileprivate let dsaCore: DSACore
