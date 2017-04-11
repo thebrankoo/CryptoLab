@@ -1,4 +1,4 @@
-- [CryotoLab](#CryotoLab)
+- [CryotoLab](#cryotolab)
 	- [Features](#features)
 		- [Hash functions](#hash-functions)
 		- [Encryption/Decryption](#encryptiondecryption)
