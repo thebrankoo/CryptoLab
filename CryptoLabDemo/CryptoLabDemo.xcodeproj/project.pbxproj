@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1926DCCF1E9CD455004F7319 /* HashFunctionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926DCCE1E9CD455004F7319 /* HashFunctionsViewController.swift */; };
 		19B147161E3E36960077162C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B147151E3E36960077162C /* AppDelegate.swift */; };
 		19B147181E3E36960077162C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B147171E3E36960077162C /* ViewController.swift */; };
 		19B1471B1E3E36960077162C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B147191E3E36960077162C /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1926DCCE1E9CD455004F7319 /* HashFunctionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashFunctionsViewController.swift; sourceTree = "<group>"; };
 		19B147121E3E36960077162C /* CryptoLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B147151E3E36960077162C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19B147171E3E36960077162C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				19B1471C1E3E36960077162C /* Assets.xcassets */,
 				19B1471E1E3E36960077162C /* LaunchScreen.storyboard */,
 				19B147211E3E36960077162C /* Info.plist */,
+				1926DCCE1E9CD455004F7319 /* HashFunctionsViewController.swift */,
 			);
 			path = CryptoLabDemo;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19B147181E3E36960077162C /* ViewController.swift in Sources */,
+				1926DCCF1E9CD455004F7319 /* HashFunctionsViewController.swift in Sources */,
 				19B147161E3E36960077162C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +313,7 @@
 				19B147261E3E36960077162C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -84,7 +84,7 @@ import Foundation
 	*/
 	public func sha1() -> Data? {
 		if let selfData = self.data(using: .utf8) {
-			return MD5Hash().hash(data: selfData)
+			return SHA1Hash().hash(data: selfData)
 		}
 		return nil
 	}
