@@ -271,5 +271,27 @@ class AESTests: XCTestCase {
 			XCTAssert(false, "AES Test Error: \(err)")
 		}
 	}
+	
+	func testAES_block() {
+		let block1 = "block1 ".data(using: .utf8)!
+		let block2 = "block2 ".data(using: .utf8)!
+		let block3 = "block3".data(using: .utf8)!
+		let block = block1 + block2 + block3
+		
+		do {
+			let aes = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ctr)
+			let aes1 = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ctr)
+			try aes.updateEncryption(withDataBlock: block1)
+			try aes.updateEncryption(withDataBlock: block2)
+			try aes.updateEncryption(withDataBlock: block3)
+			let enc = try aes.finishEncryption()
+			let enc1 = try aes1.encrypt(data: block)
+			XCTAssert(enc == enc1)
+		}
+		catch let err {
+			XCTAssert(false, "\(err)")
+		}
+		
+	}
 
 }

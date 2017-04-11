@@ -2,6 +2,7 @@
 Cryptolab is swift wrapper around OpenSSL Crypto toolkit.
 
 ## Features
+- Swift implementation
 - Intuitive use
 - OpenSSL Wrapper
 - Data and String extensions
@@ -37,7 +38,7 @@ let testData = "Test string".data(using: .utf8)!
 let hashFunc = MD5Hash()
 let hashCode = hashFunc.hash(data: testData)
 ```
-Or you can use data extension.
+Or you can use data/string extension.
 
 ```swift
 let testData = "Test string".data(using: .utf8)!
@@ -62,5 +63,86 @@ do {
 	let decrypted = try cryptorDec.decrypt(data: encrypted)
 }
 catch let err {
+	//handle error
 }
+```
+You can use AES in blocks
+
+```swift
+	let block1 = "block1 ".data(using: .utf8)!
+	let block2 = "block2 ".data(using: .utf8)!
+	let block3 = "block3".data(using: .utf8)!
+
+	do {
+		let aes = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ctr)
+		
+		try aes.updateEncryption(withDataBlock: block1)
+		try aes.updateEncryption(withDataBlock: block2)
+		try aes.updateEncryption(withDataBlock: block3)
+		let encryptedData = try aes.finishEncryption()
+	}
+	catch let err {
+		//handle error
+	}
+```
+
+### RSA
+
+```swift
+	let testData = Data(bytes: [0x50, 0xb7, 0x73, 0xc8, 0x42, 0x1e, 0x3d, 0x1a, 0x5e, 0xc4, 0x48, 0x50, 0x80, 0x03, 0x03, 0x66])
+
+	let decryptor = RSACipher(padding: .pkcs1)
+
+	guard let pubK = decryptor.publicKey?.data(using: .utf8) else {
+		return
+	}
+
+	let encryptor = RSACipher(publicKey: pubK, padding: .pkcs1)
+
+	do {
+		let encryptedData = try encryptor.encrypt(data: testData)
+		let decryptedData = try decryptor.decrypt(data: encryptedData)
+	}
+	catch let err {
+		//handle error
+	}
+```
+
+Sign/Verify
+
+```swift
+	let testData = Data(bytes: [0x50, 0xb7, 0x73, 0xc8, 0x42, 0x1e, 0x3d, 0x1a, 0x5e, 0xc4, 0x48, 0x50, 0x80, 0x03, 0x03, 0x66])
+
+	let signer = RSACipher()
+	let signature = signer.sign(data: testData, type: .md5)
+	let verify = signer.verify(data: testData, signature: signature!, type: .md5)
+
+```
+
+### HMAC
+
+```swift
+	let testData = "some test data".data(using: .utf8)!
+	let key = "some test key".data(using: .utf8)!
+
+	let hmac = HMACAuth(key: key, hashFunction: .md5)
+
+	let code = hmac.authenticationCode(forData: testData) 
+```
+Or you can use data/string extension
+
+```swift
+	let codeFromData = testData.hmacAuthCode(withKey: key, hashFunction: .md5)
+	let codeFromString = "some test string".hmacAuthCode(withKey: key, hashFunction: .md5)
+```
+
+### Diffie-Hellman
+
+```swift
+	let dhClient1 = DiffieHellman(primeLength: 512)
+	let dhClient2 = DiffieHellman(p: dhClient1.p!, g: dhClient1.g!)
+
+	//shared secrets are the same
+	let sharedSecret1 = dhClient1.computeSharedSecret(withPublicKey: dhClient2.publicKey!.data(using: .utf8)!)
+	let sharedSecret2 = dhClient2.computeSharedSecret(withPublicKey: dhClient1.publicKey!.data(using: .utf8)!)
 ```
