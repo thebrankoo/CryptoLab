@@ -198,5 +198,5 @@ Any kind of contribution is more than welcome (bug reporting, bug fixing, new fe
 - Open new github issue for feature/bug you are working on or pick the existing one
 - Fork the repository
 - Do your magic
-- Do proper documentation and cover basic unit tests
+- Do a proper documentation and cover basic unit tests
 - Submit a pull request when done
