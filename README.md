@@ -30,7 +30,9 @@ Cryptolab is swift wrapper around OpenSSL Crypto toolkit.
 - HMAC
 - Diffie-Hellman
 
-## Basics
+## Basic Examples 
+
+(For more examples check out unit tests.)
 
 ### MD5 
 ```swift
@@ -86,6 +88,25 @@ You can use AES in blocks
 	}
 ```
 
+### Blowfish
+
+```swift
+	let key	= "secret".data(using: .utf8)!
+	let genericIV =	"12345678".data(using: .utf8)!
+	let testData = "12345678".data(using: .utf8)!
+
+	let blowfishEnc = BlowfishCipher(key: key, iv: genericIV, encryptionMode: .ecb)
+	let blowfishDec = BlowfishCipher(key: key, iv: genericIV, encryptionMode: .ecb)
+
+	do {
+		let encrypted = try blowfishEnc.encrypt(data: testData)
+		let decrypted = try blowfishDec.decrypt(data: encrypted)
+	}
+	catch let err {
+		//handle error
+	}
+```
+
 ### RSA
 
 ```swift
@@ -119,6 +140,14 @@ Sign/Verify
 
 ```
 
+### DSA
+
+```swift
+	let dsa = DSAAuth()
+	let signature = dsa.sign(data: toSign)! 
+	let verified = dsa.verify(signature: signature, digest: toSign)
+```
+
 ### HMAC
 
 ```swift
@@ -146,3 +175,13 @@ Or you can use data/string extension
 	let sharedSecret1 = dhClient1.computeSharedSecret(withPublicKey: dhClient2.publicKey!.data(using: .utf8)!)
 	let sharedSecret2 = dhClient2.computeSharedSecret(withPublicKey: dhClient1.publicKey!.data(using: .utf8)!)
 ```
+
+## Contribution 
+
+Any kind of contribution is more than welcome (bug reporting, bug fixing, new feature implementation etc.).
+
+- Open new github issue for feature/bug you are working on or pick existing one
+- Fork the repository
+- Do your magic
+- Do proper documentation and cover basic unit tests
+- Submit a pull request when done
