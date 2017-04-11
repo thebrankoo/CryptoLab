@@ -1,3 +1,18 @@
+- [CryotoLab](#)
+	- [Features](#)
+		- [Hash functions](#)
+		- [Encryption/Decryption](#)
+		- [Authentication/Key exchange](#)
+	- [Basic Examples](#)
+		- [MD5](#)
+		- [AES](#)
+		- [Blowfish](#)
+		- [RSA](#)
+		- [DSA](#)
+		- [HMAC](#)
+		- [Diffie-Hellman](#)
+	- [Contribution](#)
+
 # CryotoLab
 Cryptolab is swift wrapper around OpenSSL Crypto toolkit.
 
@@ -180,7 +195,7 @@ Or you can use data/string extension
 
 Any kind of contribution is more than welcome (bug reporting, bug fixing, new feature implementation etc.).
 
-- Open new github issue for feature/bug you are working on or pick existing one
+- Open new github issue for feature/bug you are working on or pick the existing one
 - Fork the repository
 - Do your magic
 - Do proper documentation and cover basic unit tests
