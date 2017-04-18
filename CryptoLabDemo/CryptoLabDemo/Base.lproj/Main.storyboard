@@ -25,7 +25,6 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xwD-VM-xzr">
                                 <rect key="frame" x="16" y="20" width="343" height="146"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -70,7 +69,6 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YbJ-A4-jPy">
                                 <rect key="frame" x="16" y="356" width="343" height="254"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -111,7 +109,95 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7p-D3-Xj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="725.60000000000002" y="529.38530734632684"/>
+            <point key="canvasLocation" x="689" y="-59"/>
+        </scene>
+        <!--Blowfish-->
+        <scene sceneID="354-H5-vBH">
+            <objects>
+                <viewController id="h3N-9N-4ke" customClass="BlowfishViewController" customModule="CryptoLabDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6jn-AM-nbr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z5E-gl-o4V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EVz-F3-fhU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CRA-Mz-zjS">
+                                <rect key="frame" x="16" y="20" width="343" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="nGA-y4-RKF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zcK-HM-exK">
+                                <rect key="frame" x="16" y="314" width="343" height="296"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="IV" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4aj-ea-Df2">
+                                <rect key="frame" x="16" y="231" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Key" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3II-CU-4nF">
+                                <rect key="frame" x="16" y="185" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pyb-EB-NNh">
+                                <rect key="frame" x="16" y="276" width="53" height="30"/>
+                                <state key="normal" title="Encrypt"/>
+                                <connections>
+                                    <action selector="encryptAction:" destination="h3N-9N-4ke" eventType="touchUpInside" id="try-vU-bgZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vL7-g6-fX3">
+                                <rect key="frame" x="305" y="276" width="55" height="30"/>
+                                <state key="normal" title="Decrypt"/>
+                                <connections>
+                                    <action selector="decryptAction:" destination="h3N-9N-4ke" eventType="touchUpInside" id="x63-HG-J7N"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3II-CU-4nF" firstAttribute="trailing" secondItem="EVz-F3-fhU" secondAttribute="trailingMargin" id="0rJ-4G-Wec"/>
+                            <constraint firstItem="3II-CU-4nF" firstAttribute="leading" secondItem="EVz-F3-fhU" secondAttribute="leadingMargin" id="32J-8F-7Av"/>
+                            <constraint firstItem="vL7-g6-fX3" firstAttribute="top" secondItem="4aj-ea-Df2" secondAttribute="bottom" constant="15" id="Rve-GW-cml"/>
+                            <constraint firstItem="Pyb-EB-NNh" firstAttribute="top" secondItem="4aj-ea-Df2" secondAttribute="bottom" constant="15" id="SSI-OS-3KF"/>
+                            <constraint firstItem="zcK-HM-exK" firstAttribute="top" secondItem="Pyb-EB-NNh" secondAttribute="bottom" constant="8" id="TFO-mP-wvl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vL7-g6-fX3" secondAttribute="trailing" constant="-1" id="UfD-WC-tub"/>
+                            <constraint firstItem="zcK-HM-exK" firstAttribute="leading" secondItem="EVz-F3-fhU" secondAttribute="leadingMargin" id="V96-Iq-cCH"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Pyb-EB-NNh" secondAttribute="leading" id="VwI-v5-cjl"/>
+                            <constraint firstItem="4aj-ea-Df2" firstAttribute="leading" secondItem="EVz-F3-fhU" secondAttribute="leadingMargin" id="X5w-QN-mmy"/>
+                            <constraint firstItem="4aj-ea-Df2" firstAttribute="top" secondItem="3II-CU-4nF" secondAttribute="bottom" constant="16" id="YVL-5K-KkX"/>
+                            <constraint firstItem="CRA-Mz-zjS" firstAttribute="leading" secondItem="EVz-F3-fhU" secondAttribute="leadingMargin" id="cfc-eP-z1F"/>
+                            <constraint firstItem="Z5E-gl-o4V" firstAttribute="top" secondItem="zcK-HM-exK" secondAttribute="bottom" constant="8" id="hah-Ju-1CG"/>
+                            <constraint firstItem="3II-CU-4nF" firstAttribute="top" secondItem="CRA-Mz-zjS" secondAttribute="bottom" constant="37" id="hky-Vb-7Z4"/>
+                            <constraint firstItem="CRA-Mz-zjS" firstAttribute="trailing" secondItem="EVz-F3-fhU" secondAttribute="trailingMargin" id="nE5-iT-Nx1"/>
+                            <constraint firstItem="4aj-ea-Df2" firstAttribute="trailing" secondItem="EVz-F3-fhU" secondAttribute="trailingMargin" id="nkl-DF-EAC"/>
+                            <constraint firstItem="CRA-Mz-zjS" firstAttribute="top" secondItem="6jn-AM-nbr" secondAttribute="bottom" id="ozL-sv-qwo"/>
+                            <constraint firstItem="zcK-HM-exK" firstAttribute="top" secondItem="vL7-g6-fX3" secondAttribute="bottom" constant="8" id="uag-0D-qmB"/>
+                            <constraint firstItem="zcK-HM-exK" firstAttribute="trailing" secondItem="EVz-F3-fhU" secondAttribute="trailingMargin" id="zwI-Db-n1O"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Blowfish" id="0Yx-O5-AaP"/>
+                    <connections>
+                        <outlet property="input" destination="CRA-Mz-zjS" id="Ocv-lB-ebo"/>
+                        <outlet property="ivField" destination="4aj-ea-Df2" id="xAP-WY-iiv"/>
+                        <outlet property="keyField" destination="3II-CU-4nF" id="Nzv-jJ-qRw"/>
+                        <outlet property="output" destination="zcK-HM-exK" id="quk-Xi-KLD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W2e-TW-6g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="688.79999999999995" y="612.14392803598207"/>
         </scene>
         <!--Hash Functions-->
         <scene sceneID="Ds1-AQ-QRk">
@@ -180,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIM-eO-UtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="725.60000000000002" y="-125.4872563718141"/>
+            <point key="canvasLocation" x="689" y="-714"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ylf-hA-ueL">
@@ -194,6 +280,7 @@
                     <connections>
                         <segue destination="TCP-Ab-H23" kind="relationship" relationship="viewControllers" id="tPl-Kq-3Sh"/>
                         <segue destination="KeV-3A-tBc" kind="relationship" relationship="viewControllers" id="Zit-Jw-FzH"/>
+                        <segue destination="h3N-9N-4ke" kind="relationship" relationship="viewControllers" id="Slw-dy-XxA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jpm-38-kLE" userLabel="First Responder" sceneMemberID="firstResponder"/>

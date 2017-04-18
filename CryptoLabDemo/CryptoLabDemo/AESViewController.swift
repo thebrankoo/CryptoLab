@@ -75,7 +75,7 @@ class AESViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
 		do {
 			let aes = createAES()
 			let encrypted = try aes?.encrypt(data: toEncrypt.data(using: .utf8)!)
-			outputField.text = encrypted?.hexEncodedString()
+			outputField.text = encrypted?.base64EncodedString()
 		}
 		catch let err {
 			print("AES Error \(err)")
@@ -87,8 +87,8 @@ class AESViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
 		
 		do {
 			let aes = createAES()
-			let decrypted = try aes?.decrypt(data: toDecrypt.data(using: .utf8)!)
-			outputField.text = decrypted?.hexEncodedString()
+			let decrypted = try aes?.decrypt(data: Data(base64Encoded: toDecrypt)!)
+			outputField.text =  String(data: decrypted!, encoding: .utf8) //decrypted?.hexEncodedString()
 		}
 		catch let err {
 			print("AES Error \(err)")
