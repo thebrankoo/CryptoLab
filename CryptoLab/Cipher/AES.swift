@@ -56,7 +56,7 @@ public enum AESBlockCipherMode {
 /**
 AES encryption/decryption class
 */
-public class AESCipher: NSObject, Cryptor, BlockCryptor {
+public class AESCipher: NSObject, BlockCryptor {
 	
 	/**
 	Initialization vector (get only)

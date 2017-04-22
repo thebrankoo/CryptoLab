@@ -34,7 +34,7 @@ public protocol Cryptor {
 /**
 Protocol for ciphers that work with multiple data chunks
 */
-public protocol BlockCryptor {
+public protocol BlockCryptor: Cryptor {
 	/**
 	Updates current encrypted data with new data. 
 	
