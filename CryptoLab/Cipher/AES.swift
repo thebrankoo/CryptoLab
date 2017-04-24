@@ -58,21 +58,23 @@ AES encryption/decryption class
 */
 public class AESCipher: NSObject, BlockCryptor {
 	
+	public var coreCryptor: CoreCryptor
+	
 	/**
 	Initialization vector (get only)
 	*/
 	public var iv: Data? {
-		return coreCipher.iv
+		return (coreCryptor as! AESCoreCipher).iv
 	}
 	
 	/**
 	Encryption key (get only)
 	*/
 	public var key: Data? {
-		return coreCipher.key
+		return (coreCryptor as! AESCoreCipher).key
 	}
 	
-	fileprivate let coreCipher: AESCoreCipher
+//	fileprivate let coreCipher: AESCoreCipher
 	
 	/**
 	Creates new AESCipher object with encryption key, initialization vector and block cipher mode
@@ -83,7 +85,7 @@ public class AESCipher: NSObject, BlockCryptor {
 	*/
 	public init(key: Data, iv: Data, blockMode: AESBlockCipherMode) throws {
 		do {
-			coreCipher = try AESCoreCipher(key: key, iv: iv, blockMode: blockMode)
+			coreCryptor = try AESCoreCipher(key: key, iv: iv, blockMode: blockMode)
 		}
 		catch let error {
 			throw error
@@ -91,71 +93,9 @@ public class AESCipher: NSObject, BlockCryptor {
 		
 		super.init()
 	}
-	
-	//MARK: Cryptor
-	
-	public func encrypt (data dataToEncrypt: Data) throws -> Data {
-		do {
-			let data: Data = try coreCipher.encrypt(data: dataToEncrypt)
-			return data
-		}
-		catch let error {
-			throw error
-		}
-	}
-	
-	public func decrypt(data dataToDecrypt: Data) throws -> Data {
-		do {
-			let data: Data = try coreCipher.decrypt(data: dataToDecrypt)
-			return data
-		}
-		catch let error {
-			throw error
-		}
-	}
-	
-	//MARK: Block Cryptor
-	
-	public func updateEncryption(withDataBlock data: Data) throws {
-		do {
-			try coreCipher.updateEncryption(data: data)
-		}
-		catch let error {
-			throw error
-		}
-	}
-	
-	public func finishEncryption() throws -> Data {
-		do {
-			let finalData = try coreCipher.finishEncryption()
-			return finalData
-		}
-		catch let error{
-			throw error
-		}
-	}
-	
-	public func updateDecryption(withDataBlock data: Data) throws {
-		do {
-			try coreCipher.updateDecryption(withData: data)
-		}
-		catch let err {
-			throw err
-		}
-	}
-	
-	public func finishDecryption() throws -> Data {
-		do {
-			let finished = try coreCipher.finishDecryption()
-			return finished
-		}
-		catch let err {
-			throw err
-		}
-	}
 }
 
-class AESCoreCipher: NSObject {
+class AESCoreCipher: NSObject, CoreBlockCryptor {
 	static let ivSize = 16
 	fileprivate let key: Data?
 	fileprivate let iv: Data?
@@ -177,10 +117,10 @@ class AESCoreCipher: NSObject {
 		decideAESCipher()
 	}
 	
-	fileprivate func encrypt(data: Data) throws -> Data {
+	func encrypt(data toEncrypt: Data) throws -> Data {
 		
 		do {
-			try updateEncryption(data: data)
+			try updateEncryption(data: toEncrypt)
 			let finalData = try finishEncryption()
 			return finalData
 		}
@@ -191,7 +131,7 @@ class AESCoreCipher: NSObject {
 	
 	var currentEncryptedData: Data = Data()
 	
-	fileprivate func updateEncryption(data toUpdate: Data) throws {
+	func updateEncryption(data toUpdate: Data) throws {
 		if let key = key, let iv = iv {
 			
 			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (toUpdate as NSData).bytes.bindMemory(to: UInt8.self, capacity: toUpdate.count))
@@ -222,7 +162,7 @@ class AESCoreCipher: NSObject {
 		
 	}
 
-	fileprivate func initEncryption(withKey key: Data, andIV iv: Data) throws {
+	func initEncryption(withKey key: Data, andIV iv: Data) throws {
 		self.context = EVP_CIPHER_CTX_new()
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
 		let ivPointer = UnsafeMutablePointer<UInt8>(mutating: (iv as NSData).bytes.bindMemory(to: UInt8.self, capacity: iv.count))
@@ -233,7 +173,7 @@ class AESCoreCipher: NSObject {
 		}
 	}
 	
-	fileprivate func finishEncryption() throws -> Data {
+	func finishEncryption() throws -> Data {
 		if let ctx = context {
 			var resultData = [UInt8](repeating: UInt8(), count: 16) //(key?.count)!)
 			let resultSize = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32.Stride>.size)
@@ -266,12 +206,12 @@ class AESCoreCipher: NSObject {
 	
 	var currentDecryptedData = Data()
 	
-	fileprivate func decrypt(data: Data) throws -> Data {
+	func decrypt(data toDecrypt: Data) throws -> Data {
 		
 		if let iv = self.iv, let key = self.key {
 			do {
 				try initDecryption(withKey: key, andIV: iv)
-				try updateDecryption(withData: data)
+				try updateDecryption(withData: toDecrypt)
 				let finishData = try finishDecryption()
 				return finishData
 			}
@@ -284,7 +224,7 @@ class AESCoreCipher: NSObject {
 		}
 	}
 	
-	fileprivate func initDecryption(withKey key: Data, andIV iv: Data) throws {
+	func initDecryption(withKey key: Data, andIV iv: Data) throws {
 		
 		self.decContext = EVP_CIPHER_CTX_new()
 		let keyPointer = UnsafeMutablePointer<UInt8>(mutating: (key as NSData).bytes.bindMemory(to: UInt8.self, capacity: key.count))
@@ -298,7 +238,7 @@ class AESCoreCipher: NSObject {
 	
 	fileprivate var decryptionResultSize: Int32 = 0
 	
-	fileprivate func updateDecryption(withData data: Data) throws {
+	func updateDecryption(withData data: Data) throws {
 			let dataPointer = UnsafeMutablePointer<UInt8>(mutating: (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count))
 
 			var resultData = [UInt8](repeating: UInt8(), count: data.count)
@@ -315,7 +255,7 @@ class AESCoreCipher: NSObject {
 			}
 	}
 
-	fileprivate func finishDecryption() throws -> Data {
+	func finishDecryption() throws -> Data {
 		
 		if let ctx = decContext {
 			var resultData = [UInt8](repeating: UInt8(), count: Int(32)) //[UInt8]()

@@ -12,8 +12,8 @@ import CryptoLab
 class AESTests: XCTestCase {
 	let testString = "test string"
 	var testData: Data!
-	var cryptorEnc: Cryptor!
-	var cryptorDec: Cryptor!
+	var cryptorEnc: AESCipher!
+	var cryptorDec: AESCipher!
 	
 	var key16Byte		=			Data(bytes: [0x5f, 0xf5, 0x0c, 0x5b, 0x60, 0x96, 0x84, 0xa2, 0x35, 0xd5, 0xc5, 0xbf, 0x24, 0x69, 0x40, 0x8a])
 	var key24Byte		=			Data(bytes: [0x84, 0x20, 0x72, 0xa3, 0x17, 0x8b, 0x4f, 0xc0, 0xb5, 0x49, 0x78, 0x12, 0x44, 0x46, 0xf8, 0x94, 0x84, 0xde, 0x30, 0xb3, 0x7f, 0x1a, 0xc6, 0x1e])
@@ -49,10 +49,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_CBC_192() {
 		do {
-			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cbc)
+			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cbc) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cbc)
+			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cbc) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -64,10 +64,10 @@ class AESTests: XCTestCase {
 	
 	func testAESCBC_CBC_256() {
 		do {
-			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cbc)
+			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cbc) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cbc)
+			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cbc) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -81,10 +81,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_ECB_128() {
 		do {
-			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb)
+			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb) 
 			let encrypted = try cryptorEnc.encrypt(data: test8ByteData)
 			
-			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb)
+			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ecb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 
 			XCTAssert(test8ByteData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -96,10 +96,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_ECB_192() {
 		do {
-			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ecb)
+			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ecb) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ecb)
+			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ecb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -111,10 +111,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_ECB_256() {
 		do {
-			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ecb)
+			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ecb) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ecb)
+			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ecb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -150,10 +150,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_CFB_192() {
 		do {
-			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cfb)
+			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cfb) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cfb)
+			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .cfb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -165,10 +165,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_CFB_256() {
 		do {
-			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cfb)
+			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cfb) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cfb)
+			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .cfb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -182,10 +182,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_OFB_128() {
 		do {
-			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ofb)
+			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ofb) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ofb)
+			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ofb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -197,10 +197,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_OFB_192() {
 		do {
-			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ofb)
+			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ofb) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ofb)
+			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ofb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -212,10 +212,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_OFB_256() {
 		do {
-			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ofb)
+			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ofb) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ofb)
+			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ofb) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -229,10 +229,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_CTR_128() {
 		do {
-			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ctr)
+			cryptorEnc = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ctr) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ctr)
+			cryptorDec = try AESCipher(key: key16Byte, iv: genericIV, blockMode: .ctr) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -244,10 +244,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_CTR_192() {
 		do {
-			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ctr)
+			cryptorEnc = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ctr) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ctr)
+			cryptorDec = try AESCipher(key: key24Byte, iv: genericIV, blockMode: .ctr) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")
@@ -259,10 +259,10 @@ class AESTests: XCTestCase {
 	
 	func testAES_CTR_256() {
 		do {
-			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ctr)
+			cryptorEnc = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ctr) 
 			let encrypted = try cryptorEnc.encrypt(data: testData)
 			
-			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ctr)
+			cryptorDec = try AESCipher(key: key32Byte, iv: genericIV, blockMode: .ctr) 
 			let decrypted = try cryptorDec.decrypt(data: encrypted)
 			
 			XCTAssert(testData == decrypted, "AES Failed: Decrypted data is not the same as data that is encrypted")

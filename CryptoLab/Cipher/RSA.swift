@@ -63,7 +63,7 @@ public enum RSASignatureType {
 /**
 RSA encryption/decryption and sign/verifiy class.
 */
-public class RSACipher: NSObject, Cryptor {
+public class RSACipher: NSObject {
 	
 	private let coreCipher: RSACoreCipher?
 	
