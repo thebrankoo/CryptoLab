@@ -63,22 +63,22 @@ public enum RSASignatureType {
 /**
 RSA encryption/decryption and sign/verifiy class.
 */
-public class RSACipher: NSObject {
+public class RSACipher: NSObject, Cryptor {
 	
-	private let coreCipher: RSACoreCipher?
+	public var coreCryptor: CoreCryptor
 	
 	/**
 	RSA private key (get only)
 	*/
 	public var privateKey: String? {
-		return coreCipher?.privateKey
+		return (coreCryptor as? RSACoreCipher)?.privateKey
 	}
 	
 	/**
 	RSA public key (get only)
 	*/
 	public var publicKey: String? {
-		return coreCipher?.publicKey
+		return (coreCryptor as? RSACoreCipher)?.publicKey
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class RSACipher: NSObject {
 	- parameter padding: RSA padding. Default value is none.
 	*/
 	public init(padding: RSAPadding = .none) {
-		coreCipher = RSACoreCipher(padding: padding)
+		coreCryptor = RSACoreCipher(padding: padding)
 		super.init()
 	}
 	
@@ -98,7 +98,7 @@ public class RSACipher: NSObject {
 	- parameter padding: RSA padding. Default value is none.
 	*/
 	public init(publicKey: Data, padding: RSAPadding = .none) {
-		coreCipher = RSACoreCipher(publicKey: publicKey, padding: padding)
+		coreCryptor = RSACoreCipher(publicKey: publicKey, padding: padding)
 		super.init()
 	}
 	
@@ -110,74 +110,46 @@ public class RSACipher: NSObject {
 	- parameter padding: RSA padding. Default value is none.
 	*/
 	public init(publicKey: Data, privateKey: Data, padding: RSAPadding = .none) {
-		coreCipher = RSACoreCipher(publicKey: publicKey, privateKey: privateKey, padding: padding)
+		coreCryptor = RSACoreCipher(publicKey: publicKey, privateKey: privateKey, padding: padding)
 		super.init()
-	}
-	
-	//MARK: Cryptor protocol
-	
-	public func encrypt(data dataToEncrypt: Data) throws -> Data {
-		do {
-			if let finalData = try coreCipher?.encrypt(data: dataToEncrypt) {
-				return finalData
-			}
-			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherEncryption)
-		}
-		catch let error {
-			throw error
-		}
-	}
-	
-	public func decrypt(data dataToDecrypt: Data) throws -> Data {
-		do {
-			if let finalData = try coreCipher?.decrypt(data: dataToDecrypt) {
-				return finalData
-			}
-			throw CipherError.cipherProcessFail(reason: CipherErrorReason.cipherDecryption)
-		}
-		catch let error {
-			throw error
-		}
-	}
-	
-	//MARK: Sign/Verify
-	
-	/**
-	Signs data using the RSA private key
-	
-	- parameter toSign: Data to sign
-	- parameter type: Message digest algorithm
-	*/
-	public func sign(data toSign: Data, type: RSASignatureType) -> Data? {
-		return coreCipher?.sign(data: toSign, type: type)
-	}
-	
-	/**
-	Verifies data metches given signature
- 
-	- parameter toVerify: Data to verify
-	- parameter signature: Given signature
-	- parameter type: Message digest algorithm
-	*/
-	public func verify(data toVerify: Data, signature: Data, type: RSASignatureType) -> Bool {
-		if let coreCipher = coreCipher {return coreCipher.verify(data: toVerify, signature: signature, type: type)}
-		return false
 	}
 }
 
-class RSACoreCipher: NSObject {
+public class RSASignature: NSObject, SignVerifier {
+	public var signVerifier: CoreSignVerifier
 	
-	private let keychain: RSAKeychain?
-	private let padding: Int32
+	public init(type: RSASignatureType) {
+		signVerifier = CoreRSASignVerifier(type: type)
+		super.init()
+	}
 	
+	public init(publicKey: Data, type: RSASignatureType) {
+		signVerifier = CoreRSASignVerifier(publicKey: publicKey, type: type)
+		super.init()
+	}
 	
+	public init(publicKey: Data, privateKey: Data, type: RSASignatureType) {
+		signVerifier = CoreRSASignVerifier(publicKey: publicKey, privateKey: privateKey, type: type)
+		super.init()
+	}
+}
+
+protocol RSACore {
+	var keychain: RSAKeychain? {get}
+	var privateKey: String? {get}
+	var publicKey: String? {get}
+}
+
+class RSACoreCipher: NSObject, RSACore, CoreCryptor {
+	var keychain: RSAKeychain?
 	var privateKey: String? {
 		return keychain?.privateKey
 	}
-	
 	var publicKey: String? {
 		return keychain?.publicKey
 	}
+	
+	private let padding: Int32
 	
 	public init(padding: RSAPadding = .none) {
 		keychain = RSAKeychain()
@@ -202,10 +174,10 @@ class RSACoreCipher: NSObject {
 	
 	//MARK: Core Cipher Interface
 	
-	func encrypt(data dataToEncode: Data) throws -> Data {
+	func encrypt(data toEncrypt: Data) throws -> Data {
 		if let rsaKey = self.keychain?.rsaKeyPair {
 			do {
-				let encData = try encrypt(data: dataToEncode, rsaKey: rsaKey)
+				let encData = try encrypt(data: toEncrypt, rsaKey: rsaKey)
 				return encData
 			}
 			catch let error {
@@ -217,10 +189,10 @@ class RSACoreCipher: NSObject {
 		}
 	}
 	
-	func decrypt(data dataToDecode:Data) throws -> Data {
+	func decrypt(data toDecrypt:Data) throws -> Data {
 		if let rsaKey = self.keychain?.rsaKeyPair {
 			do {
-				let decData = try decrypt(data: dataToDecode, rsaKey: rsaKey)
+				let decData = try decrypt(data: toDecrypt, rsaKey: rsaKey)
 				return decData
 			}
 			catch let error {
@@ -296,6 +268,67 @@ class RSACoreCipher: NSObject {
 		return false
 	}
 	
+}
+
+class CoreRSASignVerifier:NSObject,RSACore, CoreSignVerifier {
+	var keychain: RSAKeychain?
+	var privateKey: String? {
+		return keychain?.privateKey
+	}
+	var publicKey: String? {
+		return keychain?.publicKey
+	}
+	
+	private let type: RSASignatureType
+	
+	public init(type: RSASignatureType) {
+		keychain = RSAKeychain()
+		self.type = type
+		super.init()
+	}
+	
+	public init(publicKey: Data, type: RSASignatureType) {
+		keychain = RSAKeychain(publicKey: publicKey)
+		self.type = type
+		super.init()
+	}
+	
+	public init(publicKey: Data, privateKey: Data, type: RSASignatureType) {
+		keychain = RSAKeychain(publicKey: publicKey, privateKey: privateKey)
+		self.type = type
+		super.init()
+	}
+	
+	
+	func sign(data toSign: Data) -> Data? {
+		if let rsaKey = self.keychain?.rsaKeyPair {
+			let toSignPoiner = toSign.makeUInt8DataPointer()
+			let toSignSize = toSign.count
+			let rsaSize = RSA_size(rsaKey)
+			var signature = Data.makeUInt8EmptyArray(ofSize: Int(rsaSize))
+			let signatureSize = UnsafeMutablePointer<UInt32>.allocate(capacity: MemoryLayout<UInt32>.size)
+			
+			let error = RSA_sign(type.signatureType(), toSignPoiner, UInt32(toSignSize), &signature, signatureSize, rsaKey)
+			
+			if error != 1 {
+				return nil
+			}
+			
+			return Data(signature)
+		}
+		return nil
+	}
+	
+	func verify(data toVerify: Data, signature: Data) -> Bool {
+		if let rsaKey = self.keychain?.rsaKeyPair {
+			let signaturePointer = signature.makeUInt8DataPointer()
+			let status = RSA_verify(type.signatureType(), toVerify.makeUInt8DataPointer(), UInt32(toVerify.count), signaturePointer, UInt32(signature.count), rsaKey)
+			
+			return status == 1
+		}
+		
+		return false
+	}
 }
 
 class RSAKeychain: NSObject {

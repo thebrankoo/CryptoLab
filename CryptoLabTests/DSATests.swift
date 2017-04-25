@@ -21,7 +21,7 @@ class DSATests: XCTestCase {
 	func testBasicDSA() {
 		let dsa = DSAAuth()
 		if let signature = dsa.sign(data: toSign) {
-			let verified = dsa.verify(signature: signature, digest: toSign)
+			let verified = dsa.verify(data: toSign, signature: signature)
 			XCTAssert(verified)
 			return
 		}
@@ -34,7 +34,7 @@ class DSATests: XCTestCase {
 		if let publicKey = dsaSigner.publicKey?.data(using: .utf8) {
 			let dsaVerifier = DSAAuth(publicKey: publicKey)
 			if let signature = dsaSigner.sign(data: toSign) {
-				let verified = dsaVerifier.verify(signature: signature, digest: toSign)
+				let verified = dsaVerifier.verify(data: toSign, signature: signature)
 				XCTAssert(verified)
 				return
 			}
@@ -50,7 +50,7 @@ class DSATests: XCTestCase {
 		let dsa = DSAAuth(publicKey: publicKey.data(using: .utf8)!, privateKey: privateKey.data(using: .utf8)!)
 		
 		if let signature = dsa.sign(data: toSign) {
-			let verified = dsa.verify(signature: signature, digest: toSign)
+			let verified = dsa.verify(data: toSign, signature: signature)
 			XCTAssert(verified)
 			return
 		}

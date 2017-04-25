@@ -23,6 +23,37 @@ public protocol CoreBlockCryptor: CoreCryptor {
 	func finishDecryption() throws -> Data
 }
 
+public protocol CoreSignVerifier {
+	func sign(data toSign: Data) -> Data?
+	func verify(data toVerify: Data, signature: Data) -> Bool
+}
+
+
+public protocol SignVerifier {
+	var signVerifier: CoreSignVerifier {get}
+}
+
+extension SignVerifier {
+	/**
+	Signs data using the RSA private key
+	
+	- parameter toSign: Data to sign
+	- parameter type: Message digest algorithm
+	*/
+	public func sign(data toSign: Data) -> Data? {
+		return signVerifier.sign(data: toSign)
+	}
+	/**
+	Verifies data metches given signature
+ 
+	- parameter toVerify: Data to verify
+	- parameter signature: Given signature
+	- parameter type: Message digest algorithm
+	*/
+	public func verify(data toVerify: Data, signature: Data) -> Bool {
+		return signVerifier.verify(data: toVerify, signature: signature)
+	}
+}
 
 /**
 Protocol for ciphers that work with single data chunk

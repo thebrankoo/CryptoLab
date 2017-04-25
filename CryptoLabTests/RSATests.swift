@@ -62,28 +62,28 @@ class RSATests: XCTestCase {
 	//MARK: Sign/Verify
 	
 	func testRSASignVerifyMD5() {
-		let signer = RSACipher()
+		let signer = RSASignature(type: .md5)
 		
-		let signature = signer.sign(data: testData, type: .md5)
-		let verify = signer.verify(data: testData, signature: signature!, type: .md5)
+		let signature = signer.sign(data: testData)
+		let verify = signer.verify(data: testData, signature: signature!)
 		
 		XCTAssert(verify, "")
 	}
 	
 	func testRSASignVerifySHA1() {
-		let signer = RSACipher()
+		let signer = RSASignature(type: .sha1)
 		
-		let signature = signer.sign(data: testData, type: .sha1)
-		let verify = signer.verify(data: testData, signature: signature!, type: .sha1)
+		let signature = signer.sign(data: testData)
+		let verify = signer.verify(data: testData, signature: signature!)
 		
 		XCTAssert(verify)
 	}
 	
 	func testRSASignVerifyRIPEMD160() {
-		let signer = RSACipher()
+		let signer = RSASignature(type: .ripemd160)
 		
-		let signature = signer.sign(data: testData, type: .ripemd160)
-		let verify = signer.verify(data: testData, signature: signature!, type: .ripemd160)
+		let signature = signer.sign(data: testData)
+		let verify = signer.verify(data: testData, signature: signature!)
 		
 		XCTAssert(verify)
 	}

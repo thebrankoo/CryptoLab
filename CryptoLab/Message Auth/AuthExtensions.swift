@@ -47,7 +47,7 @@ extension Data {
 	*/
 	public func dsaVerify(withSignature signature: Data, publicKey pubK: Data) -> Bool {
 		let dsa = DSAAuth(publicKey: pubK)
-		let verify = dsa.verify(signature: signature, digest: self)
+		let verify = dsa.verify(data: self, signature: signature)
 		return verify
 	}
 }

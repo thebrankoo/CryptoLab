@@ -12,29 +12,29 @@ import OpenSSL
 /**
 DSA sign/verify class
 */
-public class DSAAuth: NSObject {
+public class DSAAuth: NSObject, SignVerifier {
 	
-	fileprivate let dsaCore: DSACore
+	public var signVerifier: CoreSignVerifier
 	
 	/**
 	DSA private key (fetch only)
 	*/
 	public var privateKey: String? {
-		return dsaCore.extractPrivateKey()
+		return (signVerifier as? DSACore)?.extractPrivateKey()
 	}
 	
 	/**
 	DSA public key (fetch only)
 	*/
 	public var publicKey: String? {
-		return dsaCore.extractPublicKey()
+		return (signVerifier as? DSACore)?.extractPublicKey()
 	}
 	
 	/**
 	Creates new DSA Object and generates key pair.
 	*/
 	public override init() {
-		dsaCore = DSACore()
+		signVerifier = DSACore()
 		super.init()
 	}
 	
@@ -44,7 +44,7 @@ public class DSAAuth: NSObject {
 	- parameter publicKey: Custom public key
 	*/
 	public init(publicKey: Data) {
-		dsaCore = DSACore(publicKey: publicKey)
+		signVerifier = DSACore(publicKey: publicKey)
 		super.init()
 	}
 	
@@ -55,7 +55,7 @@ public class DSAAuth: NSObject {
 	- parameter privateKey: Custom private key
 	*/
 	public init(publicKey: Data, privateKey: Data) {
-		dsaCore = DSACore(publicKey: publicKey, privateKey: privateKey)
+		signVerifier = DSACore(publicKey: publicKey, privateKey: privateKey)
 		super.init()
 	}
 	
@@ -64,24 +64,24 @@ public class DSAAuth: NSObject {
 	
 	- parameter data: Data to sign
 	*/
-	public func sign(data: Data) -> Data? {
-		let signature = dsaCore.sign(data: data)
-		return signature
-	}
-	
+//	public func sign(data: Data) -> Data? {
+//		let signature = dsaCore.sign(data: data)
+//		return signature
+//	}
+//	
 	/**
 	Verifies digest with signature
 	
 	- parameter signature: Valid signature
 	- parameter digest: Digest to verify
 	*/
-	public func verify(signature: Data, digest: Data) -> Bool {
-		let verifyResult = dsaCore.verify(signature: signature, digest: digest)
-		return verifyResult
-	}
+//	public func verify(signature: Data, digest: Data) -> Bool {
+//		let verifyResult = dsaCore.verify(signature: signature, digest: digest)
+//		return verifyResult
+//	}
 }
 
-class DSACore: NSObject {
+class DSACore: NSObject, CoreSignVerifier {
 	
 	fileprivate let pubKey: Data?
 	fileprivate let privKey: Data?
@@ -226,9 +226,9 @@ class DSACore: NSObject {
 	
 	//MARK: Sign/Verifiy
 	
-	fileprivate func sign(data: Data) -> Data? {
-		let dataPointer = data.makeUInt8DataPointer()
-		let dataSize = data.count
+	func sign(data toSign: Data) -> Data? {
+		let dataPointer = toSign.makeUInt8DataPointer()
+		let dataSize = toSign.count
 		let size = UInt32(DSA_size(self.dsaKey!))
 		let dsaSize = UnsafeMutablePointer<UInt32>.allocate(capacity: MemoryLayout<UInt32.Stride>.size)
 		//dsaSize.pointee = size
@@ -244,12 +244,12 @@ class DSACore: NSObject {
 		return Data(bytes: result, count: Int(dsaSize.pointee))
 	}
 	
-	fileprivate func verify(signature: Data, digest: Data) -> Bool {
+	func verify(data toVerify: Data, signature: Data) -> Bool {
 		let sigPointer = signature.makeUInt8DataPointer()
 		let sigSize = signature.count
 		
-		let digestPointer = digest.makeUInt8DataPointer()
-		let digestSize = digest.count
+		let digestPointer = toVerify.makeUInt8DataPointer()
+		let digestSize = toVerify.count
 	
 		let error = DSA_verify(1, digestPointer, Int32(digestSize), sigPointer, Int32(sigSize), dsaKey!)
 		
