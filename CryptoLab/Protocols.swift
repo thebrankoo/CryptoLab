@@ -8,34 +8,112 @@
 
 import Foundation
 
+/**
+Provides core crypting interface (for abstraction use Cryptor protocol)
+*/
 public protocol CoreCryptor {
+	/**
+	Encrypts data and throws error if needed
+	
+	- parameter toEncrypt: Data to encrypt
+	*/
 	func encrypt(data toEncrypt: Data) throws -> Data
+	
+	/**
+	Decrypts data and throws error if needed
+	
+	- parameter toDecrypt: Data to encrypt
+	*/
 	func decrypt(data toDecrypt: Data) throws -> Data
 }
 
+/**
+Provides core crypting interface for block encryption/decryption (for abstraction use BlockCryptor protocol)
+*/
 public protocol CoreBlockCryptor: CoreCryptor {
+	/**
+	Inits new block encryption and throws error if needed
+	
+	- parameter key: Encryption key
+	- parameter iv: Initialization vector
+	*/
 	func initEncryption(withKey key: Data, andIV iv: Data) throws
+	
+	/**
+	Updates new block encryption and throws error if needed
+	
+	- parameter data: Data block to update encryption with
+	- parameter iv: Initialization vector
+	*/
 	func updateEncryption(data toUpdate: Data) throws
+	
+	/**
+	Finishes block encryption and throws error if needed
+	
+	- returns: Encrypted data
+	*/
 	func finishEncryption() throws -> Data
 	
+	/**
+	Inits new block decryption and throws error if needed
+	
+	- parameter key: Decryption key
+	- parameter iv: Initialization vector
+	*/
 	func initDecryption(withKey key: Data, andIV iv: Data) throws
+	
+	/**
+	Updates new block encryption and throws error if needed
+	
+	- parameter key: Data block to update decryption with
+	*/
 	func updateDecryption(withData data: Data) throws
+	
+	/**
+	Finishes block decryption and throws error if needed
+	
+	- returns: Decrypted data
+	*/
 	func finishDecryption() throws -> Data
 }
 
+/**
+Provides core interface for message sign/verify (for abstraction use SignVerifier protocol)
+*/
 public protocol CoreSignVerifier {
+	/**
+	Sign message data
+	
+	- parameter toSign: Data to sign
+	
+	- returns: Data signature
+	*/
 	func sign(data toSign: Data) -> Data?
+	
+	/**
+	Verify message signature
+	
+	- paramter toVerify: Digest data 
+	- paramter signature: Original signature
+	
+	- returns: True if verification success, false otherwise
+	*/
 	func verify(data toVerify: Data, signature: Data) -> Bool
 }
 
-
+/**
+Provides interface for message sign/verify
+*/
 public protocol SignVerifier {
+	/**
+	Internal object
+	*/
 	var signVerifier: CoreSignVerifier {get}
 }
 
 extension SignVerifier {
 	/**
-	Signs data using the RSA private key
+	Signs data using the private key
 	
 	- parameter toSign: Data to sign
 	- parameter type: Message digest algorithm
@@ -59,6 +137,9 @@ extension SignVerifier {
 Protocol for ciphers that work with single data chunk
 */
 public protocol Cryptor {
+	/**
+	Internal object
+	*/
 	var coreCryptor: CoreCryptor {get}
 }
 

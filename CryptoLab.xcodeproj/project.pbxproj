@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19042EAE1EB08A2C009B7B8D /* CoreAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19042EAD1EB08A2C009B7B8D /* CoreAES.swift */; };
+		19042EB11EB08B2F009B7B8D /* CoreRSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19042EB01EB08B2F009B7B8D /* CoreRSA.swift */; };
+		19042EB41EB0931D009B7B8D /* CoreBlowfish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19042EB31EB0931D009B7B8D /* CoreBlowfish.swift */; };
+		19042EB71EB0940A009B7B8D /* CoreDSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19042EB61EB0940A009B7B8D /* CoreDSA.swift */; };
+		19042EBA1EB0949C009B7B8D /* CoreHMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19042EB91EB0949C009B7B8D /* CoreHMAC.swift */; };
+		19042EBC1EB09512009B7B8D /* CoreDH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19042EBB1EB09512009B7B8D /* CoreDH.swift */; };
 		1905F7AF1E924B7D006CC553 /* DH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905F7AE1E924B7D006CC553 /* DH.swift */; };
 		1905F7B11E924CFF006CC553 /* DHTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905F7B01E924CFF006CC553 /* DHTests.swift */; };
 		1910DA6C1E53422E0050C78C /* Blowfish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1910DA6B1E53422E0050C78C /* Blowfish.swift */; };
@@ -45,6 +51,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19042EAD1EB08A2C009B7B8D /* CoreAES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreAES.swift; path = Cipher/CoreAES.swift; sourceTree = "<group>"; };
+		19042EB01EB08B2F009B7B8D /* CoreRSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreRSA.swift; path = Cipher/CoreRSA.swift; sourceTree = "<group>"; };
+		19042EB31EB0931D009B7B8D /* CoreBlowfish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreBlowfish.swift; path = Cipher/CoreBlowfish.swift; sourceTree = "<group>"; };
+		19042EB61EB0940A009B7B8D /* CoreDSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDSA.swift; path = "Message Auth/CoreDSA.swift"; sourceTree = "<group>"; };
+		19042EB91EB0949C009B7B8D /* CoreHMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreHMAC.swift; path = "Message Auth/CoreHMAC.swift"; sourceTree = "<group>"; };
+		19042EBB1EB09512009B7B8D /* CoreDH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDH.swift; path = "Message Auth/CoreDH.swift"; sourceTree = "<group>"; };
 		1905F7AE1E924B7D006CC553 /* DH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DH.swift; path = "Message Auth/DH.swift"; sourceTree = "<group>"; };
 		1905F7B01E924CFF006CC553 /* DHTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DHTests.swift; sourceTree = "<group>"; };
 		1910DA6B1E53422E0050C78C /* Blowfish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Blowfish.swift; path = Cipher/Blowfish.swift; sourceTree = "<group>"; };
@@ -96,6 +108,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19042EAF1EB08A8E009B7B8D /* AES */ = {
+			isa = PBXGroup;
+			children = (
+				19FB5FE81E4C6E1C00F6212E /* AES.swift */,
+				19042EAD1EB08A2C009B7B8D /* CoreAES.swift */,
+			);
+			name = AES;
+			sourceTree = "<group>";
+		};
+		19042EB21EB09303009B7B8D /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				19BF475F1E4F21DF00310164 /* RSA.swift */,
+				19042EB01EB08B2F009B7B8D /* CoreRSA.swift */,
+			);
+			name = RSA;
+			sourceTree = "<group>";
+		};
+		19042EB51EB09389009B7B8D /* Blowfish */ = {
+			isa = PBXGroup;
+			children = (
+				1910DA6B1E53422E0050C78C /* Blowfish.swift */,
+				19042EB31EB0931D009B7B8D /* CoreBlowfish.swift */,
+			);
+			name = Blowfish;
+			sourceTree = "<group>";
+		};
+		19042EB81EB09465009B7B8D /* DSA */ = {
+			isa = PBXGroup;
+			children = (
+				1975BFF51E76E297001D0944 /* DSA.swift */,
+				19042EB61EB0940A009B7B8D /* CoreDSA.swift */,
+			);
+			name = DSA;
+			sourceTree = "<group>";
+		};
 		1975BFF01E769AD0001D0944 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,9 +176,11 @@
 			isa = PBXGroup;
 			children = (
 				19E3DF3E1E66C25F00DFEAD2 /* HMAC.swift */,
-				1975BFF51E76E297001D0944 /* DSA.swift */,
+				19042EB91EB0949C009B7B8D /* CoreHMAC.swift */,
+				19042EB81EB09465009B7B8D /* DSA */,
 				1975BFF31E76E262001D0944 /* AuthExtensions.swift */,
 				1905F7AE1E924B7D006CC553 /* DH.swift */,
+				19042EBB1EB09512009B7B8D /* CoreDH.swift */,
 			);
 			name = "Message Auth";
 			sourceTree = "<group>";
@@ -188,9 +238,9 @@
 		19FB5FE11E4C6CF600F6212E /* Cipher */ = {
 			isa = PBXGroup;
 			children = (
-				19FB5FE81E4C6E1C00F6212E /* AES.swift */,
-				19BF475F1E4F21DF00310164 /* RSA.swift */,
-				1910DA6B1E53422E0050C78C /* Blowfish.swift */,
+				19042EAF1EB08A8E009B7B8D /* AES */,
+				19042EB21EB09303009B7B8D /* RSA */,
+				19042EB51EB09389009B7B8D /* Blowfish */,
 			);
 			name = Cipher;
 			sourceTree = "<group>";
@@ -324,13 +374,19 @@
 			files = (
 				19FB5FE51E4C6D9700F6212E /* CoreHashFunctions.swift in Sources */,
 				19E3DF3F1E66C25F00DFEAD2 /* HMAC.swift in Sources */,
+				19042EAE1EB08A2C009B7B8D /* CoreAES.swift in Sources */,
 				1975BFF41E76E262001D0944 /* AuthExtensions.swift in Sources */,
+				19042EB41EB0931D009B7B8D /* CoreBlowfish.swift in Sources */,
+				19042EB71EB0940A009B7B8D /* CoreDSA.swift in Sources */,
 				1975BFEF1E769AC3001D0944 /* CryptoErrors.swift in Sources */,
 				19BF47601E4F21DF00310164 /* RSA.swift in Sources */,
 				194C6F441E61AE83001C4047 /* Extensions.swift in Sources */,
+				19042EBA1EB0949C009B7B8D /* CoreHMAC.swift in Sources */,
 				1905F7AF1E924B7D006CC553 /* DH.swift in Sources */,
 				1975BFF61E76E297001D0944 /* DSA.swift in Sources */,
+				19042EBC1EB09512009B7B8D /* CoreDH.swift in Sources */,
 				19E13F391E780AA30057F7ED /* Protocols.swift in Sources */,
+				19042EB11EB08B2F009B7B8D /* CoreRSA.swift in Sources */,
 				19FB5FE61E4C6D9700F6212E /* HashFunctions.swift in Sources */,
 				19FB5FE91E4C6E1C00F6212E /* AES.swift in Sources */,
 				1910DA6C1E53422E0050C78C /* Blowfish.swift in Sources */,

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+CryptoLab Data extensions
+*/
 extension Data {
 	/**
 	Generates HMAC auth code form data
@@ -52,6 +55,9 @@ extension Data {
 	}
 }
 
+/**
+CryptoLab String extensions
+*/
 extension String {
 	/**
 	Generates HMAC auth code form string

@@ -1,59 +1,87 @@
 {
   "warnings": [
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreAES.swift",
       "line": 33,
       "symbol": "AESBlockCipherMode.cbc",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreAES.swift",
       "line": 34,
       "symbol": "AESBlockCipherMode.ecb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreAES.swift",
       "line": 35,
       "symbol": "AESBlockCipherMode.cfb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreAES.swift",
       "line": 36,
       "symbol": "AESBlockCipherMode.ofb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/AES.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreAES.swift",
       "line": 37,
       "symbol": "AESBlockCipherMode.ctr",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreRSA.swift",
       "line": 47,
       "symbol": "RSASignatureType.md5",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreRSA.swift",
       "line": 48,
       "symbol": "RSASignatureType.sha1",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/CoreRSA.swift",
       "line": 49,
       "symbol": "RSASignatureType.ripemd160",
       "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
+      "line": 67,
+      "symbol": "RSASignature",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
+      "line": 70,
+      "symbol": "RSASignature.init(type:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
+      "line": 75,
+      "symbol": "RSASignature.init(publicKey:type:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
+      "line": 80,
+      "symbol": "RSASignature.init(publicKey:privateKey:type:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {

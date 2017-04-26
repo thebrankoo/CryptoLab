@@ -14,7 +14,7 @@
     <a title="RSACipher Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (83% documented)</p>
+        <p><a href="../index.html"> Docs</a> (82% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -50,6 +50,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/RSACipher.html">RSACipher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RSASignature.html">RSASignature</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SHA1Hash.html">SHA1Hash</a>
@@ -109,10 +112,22 @@
                 <a href="../Protocols/BlockCryptor.html">BlockCryptor</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/CoreBlockCryptor.html">CoreBlockCryptor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CoreCryptor.html">CoreCryptor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CoreSignVerifier.html">CoreSignVerifier</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Cryptor.html">Cryptor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/HashingFunction.html">HashingFunction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SignVerifier.html">SignVerifier</a>
               </li>
             </ul>
           </li>
@@ -134,6 +149,33 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP9CryptoLab7Cryptor11coreCryptorPS_11CoreCryptor_"></a>
+                    <a name="//apple_ref/swift/Property/coreCryptor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP9CryptoLab7Cryptor11coreCryptorPS_11CoreCryptor_">coreCryptor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>RSA encryption/decryption and sign/verifiy class.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">coreCryptor</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CoreCryptor.html">CoreCryptor</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -370,267 +412,10 @@
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Cryptor%20protocol"></a>
-                <a name="//apple_ref/swift/Section/Cryptor protocol" class="dashAnchor"></a>
-                <a href="#/Cryptor%20protocol">
-                  <h3 class="section-name">Cryptor protocol</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FP9CryptoLab7Cryptor7encryptFzT4dataV10Foundation4Data_S2_"></a>
-                    <a name="//apple_ref/swift/Method/encrypt(data:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9CryptoLab7Cryptor7encryptFzT4dataV10Foundation4Data_S2_">encrypt(data:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">data</span> <span class="nv">dataToEncrypt</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>dataToEncrypt</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Data to encrypt</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Encrypted data</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FP9CryptoLab7Cryptor7decryptFzT4dataV10Foundation4Data_S2_"></a>
-                    <a name="//apple_ref/swift/Method/decrypt(data:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9CryptoLab7Cryptor7decryptFzT4dataV10Foundation4Data_S2_">decrypt(data:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">data</span> <span class="nv">dataToDecrypt</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>dataToDecrypt</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Data to decrypt</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Decrypted data</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Sign/Verify"></a>
-                <a name="//apple_ref/swift/Section/Sign/Verify" class="dashAnchor"></a>
-                <a href="#/Sign/Verify">
-                  <h3 class="section-name">Sign/Verify</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC9CryptoLab9RSACipher4signFT4dataV10Foundation4Data4typeOS_16RSASignatureType_GSqS2__"></a>
-                    <a name="//apple_ref/swift/Method/sign(data:type:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9RSACipher4signFT4dataV10Foundation4Data4typeOS_16RSASignatureType_GSqS2__">sign(data:type:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Signs data using the RSA private key</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sign</span><span class="p">(</span><span class="n">data</span> <span class="nv">toSign</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/RSASignatureType.html">RSASignatureType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>toSign</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Data to sign</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>type</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Message digest algorithm</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC9CryptoLab9RSACipher6verifyFT4dataV10Foundation4Data9signatureS2_4typeOS_16RSASignatureType_Sb"></a>
-                    <a name="//apple_ref/swift/Method/verify(data:signature:type:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9CryptoLab9RSACipher6verifyFT4dataV10Foundation4Data9signatureS2_4typeOS_16RSASignatureType_Sb">verify(data:signature:type:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Verifies data metches given signature</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verify</span><span class="p">(</span><span class="n">data</span> <span class="nv">toVerify</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">signature</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/RSASignatureType.html">RSASignatureType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>toVerify</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Data to verify</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>signature</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Given signature</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>type</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Message digest algorithm</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-14)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
