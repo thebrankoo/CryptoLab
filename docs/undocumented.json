@@ -58,28 +58,21 @@
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 67,
-      "symbol": "RSASignature",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 70,
+      "line": 73,
       "symbol": "RSASignature.init(type:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 75,
+      "line": 78,
       "symbol": "RSASignature.init(publicKey:type:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Cipher/RSA.swift",
-      "line": 80,
+      "line": 83,
       "symbol": "RSASignature.init(publicKey:privateKey:type:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -144,27 +137,6 @@
       "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Message Auth/HMAC.swift",
       "line": 22,
       "symbol": "AuthHashFunction.sha512",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Other/CryptoErrors.swift",
-      "line": 12,
-      "symbol": "CipherError",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Other/CryptoErrors.swift",
-      "line": 13,
-      "symbol": "CipherError.cipherProcessFail",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/branko/Documents/master/CryptoLab/CryptoLab/Other/CryptoErrors.swift",
-      "line": 14,
-      "symbol": "CipherError.invalidKey",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     }

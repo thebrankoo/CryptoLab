@@ -9,8 +9,22 @@
 import Foundation
 import OpenSSL
 
+/**
+Errors that can occure during cipher operations
+*/
 public enum CipherError: Error {
+	/**
+	Occurs when some part of cipher proces fails
+	
+	- parameters reason: Error description
+	*/
 	case cipherProcessFail(reason: String)
+	
+	/**
+	Occurs when cipher key is invalid
+	
+	- parameters reason: Error description
+	*/
 	case invalidKey(reason: String)
 }
 

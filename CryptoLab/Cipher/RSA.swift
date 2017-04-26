@@ -64,6 +64,9 @@ public class RSACipher: NSObject, Cryptor {
 	}
 }
 
+/**
+Class that handles RSA sign/verify
+*/
 public class RSASignature: NSObject, SignVerifier {
 	public var signVerifier: CoreSignVerifier
 	
