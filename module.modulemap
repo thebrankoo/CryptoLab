@@ -6,18 +6,17 @@ framework module CryptoLab {
 }
 
 module OpenSSL [system][extern_c] {
-//	header "/Users/branko/Documents/master/CryptoWrapper/include/openssl/md5.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/md5.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/sha.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/evp.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/rsa.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/bio.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/pem.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/err.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/blowfish.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/hmac.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/dsa.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/des.h"
-	header "/Users/branko/Documents/master/CryptoLab/Frameworks/openssl.framework/Headers/rand.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/md5.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/sha.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/evp.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/rsa.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/bio.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/pem.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/err.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/blowfish.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/hmac.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/dsa.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/des.h"
+	header "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/rand.h"
 	export *
 }
