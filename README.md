@@ -15,6 +15,7 @@
 
 # CryotoLab
 Cryptolab is swift wrapper around OpenSSL Crypto toolkit.
+To build it change module.modulemap header paths from "/Users/branko/CryptoLab/Frameworks/openssl.framework/Headers/.." to "yourAbsolutePathToCryptoLab/CryptoLab/Frameworks/openssl.framework/Headers/.." and build the framework.
 
 ## Features
 - Swift implementation
